@@ -28,6 +28,8 @@
 		79999ACC192E2F6E00F83B8F /* SCFT */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SCFT; sourceTree = BUILT_PRODUCTS_DIR; };
 		79999ACF192E2F6E00F83B8F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		79999AD1192E2F6E00F83B8F /* SCFT.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SCFT.1; sourceTree = "<group>"; };
+		79A955651933C2420044A006 /* Attemp1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Attemp1; sourceTree = "<group>"; };
+		79A955661933C9B00044A006 /* global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +63,9 @@
 			isa = PBXGroup;
 			children = (
 				79999ACF192E2F6E00F83B8F /* main.cpp */,
+				79A955651933C2420044A006 /* Attemp1 */,
 				79999AD1192E2F6E00F83B8F /* SCFT.1 */,
+				79A955661933C9B00044A006 /* global.h */,
 			);
 			path = SCFT;
 			sourceTree = "<group>";
@@ -227,6 +231,7 @@
 				79999AD7192E2F6E00F83B8F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

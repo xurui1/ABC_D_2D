@@ -1,0 +1,83 @@
+//
+//  main.cpp
+//  SCFT: Crank-Nicolson in 1D linear system
+//
+//  Created by Rui Xu on 2014-05-22.
+//  Copyright (c) 2014 McMaster. All rights reserved.
+//
+// Basic idea:
+/* 1. initialize w fields with random values
+   2. solve diffusion equation for the two end integrated propagators (q, q+)
+   3. determine monomer densities (Qalpha, Phialpha)
+   4. Find new omega field, determine free energy
+   5. Repeat steps 2-4 until free energy converges to a single value.
+*/
+
+
+
+
+#include <iostream>
+#include "NumMeth.h"
+
+using namespace std;
+
+void cinv( Matrix RealA, Matrix ImagA,
+          Matrix& RealAinv, Matrix& ImagAinv );
+
+void solve(double* a, double* b, double* c, double* d, int N) {
+    N--; // since we start from x0 (not x1)
+    c[0] /= b[0];
+    d[0] /= b[0];
+    
+    for (int i = 1; i < N; i++) {
+        c[i] /= b[i] - a[i]*c[i-1];
+        d[i] = (d[i] - a[i]*d[i-1]) / (b[i] - a[i]*c[i-1]);
+    }
+    
+    d[N] = (d[N] - a[N]*d[N-1]) / (b[N] - a[N]*c[N-1]);
+    
+    for (int i = N; i-- > 0;) {
+        d[i] -= c[i]*d[i+1];
+    }
+}
+
+int main() {
+    
+    //* Initialize parameters (grid spacing, chain segment number, etc.)
+    cout << "Enter number of grid points: "; int N; cin >> N;
+    double L = 100;        // System extends from -L/2 to L/2
+    double h = L/(N-1);    // Grid size
+    double Rg = 1;  double diffusion = 1; // Units of radius of gyration, diffusion scaled to one
+    cout << "Enter chain segment: "; double s; cin >> s;
+    Matrix x(N);
+    int i, j, k;
+    for( i=1; i<=N; i++ )
+        x(i) = h*(i-1) - L/2;// Coordinates  of grid points
+    
+    //* Set up left hand matrix
+    Matrix eye(N,N), ls(N,N);
+    eye.set(0.0);  // Set all elements to zero
+    for( i=1; i<=N; i++ ) // Identity matrix
+        eye(i,i) = 1.0;
+    ls.set(0.0);  // Set all elements to zero
+    double coeff = diffusion;
+    for( i=2; i<=(N-1); i++ ) {
+        ls(i,i-1) = coeff;
+        ls(i,i) = -2*coeff;  // Set interior rows
+        ls(i,i+1) = coeff;
+    
+     //n is number of unknowns... change to N for grid spacing??
+    double a[5] = { 0, -1, -1, -1 ,-1};
+    double b[5] = { 4,  4,  4,  4 ,4};
+    double c[5] = {-1, -1, -1,  -1 ,0};
+    double d[5] = { 5,  5, 10, 23 ,44};
+    // results    { 2,  3,  5, 7  }
+    solve(a,b,c,d,N);
+    for (int i = 0; i < N; i++) {
+        cout << d[i] << endl;
+    }
+    cout << endl << "n= " << N << endl << "n is not changed hooray !!"<<endl;
+    return 0;
+}
+
+}

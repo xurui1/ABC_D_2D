@@ -20,22 +20,20 @@ using namespace std;
         double xAB=30.0,xAC=30.0,xAD=0.0,xBC=0.0,xBD=30.0,xCD=30.0;
         double Vol;
         double Conv_w,Conv_p,dfffE,fE_hom;
-        double kappaD,fracA,fracB,fracC,muABC=0.0,muD=5.0,r_0;
+        double kappaD,fracA,fracB,fracC,muABC=0.0,muD=-5.0,r_0;
         double XM[4][4];
         float phiABC_hom,phiD_hom;
+
+
     
     int bilayer,disk,ten_find;
     int Mtip,Ntip,iter;
 
 /********************************Parameters*********************************/
 
-
-
-
-
-        double OP; // Order parameter
+double OP; // Order parameter
     
-        int n1, n2, n3;
+int n1, n2, n3;
     
 double **eta;
 double **dpp;

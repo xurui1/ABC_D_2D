@@ -11,7 +11,7 @@ void *smalloc(int n, const char *name){
   	if (n == 0) return NULL;
     void *ptr = malloc(n);
   	if (ptr == NULL) {
-        char str[128];
+        //char str[128];
         printf("Failed to allocate %d bytes for array %s/n",n,name);
   	}
   	return ptr;

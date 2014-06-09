@@ -28,12 +28,12 @@ int fE_homo(){
     wC_ave=xAC*pA_ave+xBC*pB_ave+xCD*pD_ave+eta_ave;
     wD_ave=xAD*pA_ave+xBD*pB_ave+xCD*pC_ave+eta_ave;
     
-    for (i=1; i<=10000000; i++){
+    for (i=1; i<=10000; i++){
         eta_ave=eta_ave-0.05*(1.0-(pA_ave+pB_ave+pC_ave+pD_ave));
         
-        pA_ave=exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC)*(1.0-fracB-fracC);
-        pB_ave=exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC)*(1.0-fracA-fracC);
-        pC_ave=exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC)*(1.0-fracA-fracB);
+        pA_ave=(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))*(1.0-fracB-fracC);
+        pB_ave=(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))*(1.0-fracA-fracC);
+        pC_ave=(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))*(1.0-fracA-fracB);
         pD_ave=exp(kappaD*(muD-wD_ave));
         
         dwA_ave=(xAB*pB_ave+xAC*pC_ave+xAD*pD_ave+eta_ave)-wA_ave;

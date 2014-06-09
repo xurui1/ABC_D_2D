@@ -1,6 +1,6 @@
 void profile(int msg){
     int  i,j,ii;
-    float cr,cz,ct,epsct;
+    float ct,epsct;
     float px,py,pz;
     string outfile,orderpar;
     

@@ -18,11 +18,10 @@
 #include "Q_partition.h"            //Chain partition function
 #include "rand_field.h"             //Generate random field or input from file
 #include "profile.h"                //output profile of system
-#include "cleanme.h"                //clean old data files
 #include "new_fields.h"             //generate new potential field based on concentration
 #include "fE_homo.h"                //Homogeneous free energy
 #include "FreeEnergy.h"             //Free energy
-#include "read.h"                   //extract parameters from file
+#include "read_write.h"                   //extract parameters from file
 #include "TDMA.h"                   //Tridiagonal Matrix Algorithm
 #include "modA.h"                   //Solve Diffusion Equation for A block
 #include "modB.h"                   //Solve Diffusion Equation for B block
@@ -40,15 +39,14 @@ int secant();                                   //function prototype, defined be
 int main() {
     
     int once;
-    int msg1,msg2;
-    int s,s2,initial,i,j,jj;                               //counting indices
+    int s,s2,initial,i,j;                               //counting indices
     int muD_up,muD_down;                                   //For stepping up and down.
     double ptot,phiA,phiB,phiC,phiD;                       //concentrations of chains
-    double fracA, fracB, fracC;                            //chain fractions
-    double fEnow,fEold;                                    // Used for calculating the dfE
+    
     double D_r,D_z;                                        //Box size in the r and z direction is Rg^2
     double Area = 0.0,Tip_R;                               //Area and perimeter?? of system
-    double f_int_0, ABC_0;
+    double f_int_0, ABC_0;                                 //not sure of purpose
+    double phistar;                                        //concentration of star copolymer
     
     eta =create_2d_double_array(Nr,Nz, "eta");             //incompressibility condition
     dpp =create_2d_double_array(Nr,Nz, "dpp");             //not sure what dpp is used for (update w fields?)
@@ -70,13 +68,18 @@ int main() {
     dwD=create_2d_double_array(Nr,Nz, "dwD");              //differential of wD
     pD=create_2d_double_array(Nr,Nz, "pD");                //probability amplitude of chain D
     
+    /*********************Set Kappa and fA**************************************************/
+    kappaD=(double)ND/((double)(NA+NB+NC));
+    fracA=((double)NA/((double)(NA+NB+NC)));
+    fracB=(double)NB/(double)(NA+NB+NC);
+    fracC=(double)NC/(double)(NA+NB+NC);
     
     f_int_0=0.0;
     ABC_0=0.0;
     
     initial=1;
     
-    read();
+    //read(); not working right now for some reason, cannot figure out why
   
     
     delt=1.0/(NA+NB+NC);
@@ -85,14 +88,11 @@ int main() {
     
     /***************************************Initial settings********************************/
     
-    
-    
     r_0=10.0;                            // Distance from the center of cylinder
-    initial=1;                           // 0=Random 1=Read from file 2=make your own condition
+    initial=0;                           // 0=Random 1=Read from file 2=make your own condition
                                          //if intial=1, then can choose config. 1=on, 0=off
     
-    ten_find=1;                          // If ten_find=1 then it will find the mu for the tensionless bilayer
-    
+    ten_find=0;                          // If ten_find=1 then it will find the mu for the tensionless bilayer
     muD_up=0;                            // increase mu of homopolymer D
     muD_down=0;                          // decrease mu of homopolymer D
     
@@ -100,25 +100,10 @@ int main() {
     once=1;
     disk=0;
     
+    XMatrix();                           //call the interaction matrix
+    clean_data();                        // Clean the data files
     
-    
-    /******************************** Clean the data files*****************************/
-    
-    if (disk==1) {
-        ofstream myfile;
-        myfile.open("./results/fE_disk.dat", std::ofstream::trunc);
-        myfile.close();
-    }
-    if (bilayer==1) {
-        ofstream myfile;
-        myfile.open("./results/fE_bilayer.dat", std::ofstream::trunc);
-        myfile.close();
-        }
 
-    
-    XMatrix();                                //define the interaction matrix
-    
-    
     /*********************Define the pinning condition*************************************/
     
     if (disk==1){
@@ -130,95 +115,77 @@ int main() {
         Tip_R=0;
     }
     
-    /*********************Set Kappa and fA**************************************************/
+   
     
-    kappaD=ND/(NA+NB+NC);
-    fracA=NA/(NA+NB+NC);
-    fracB=NB/(NA+NB+NC);
-    fracC=NC/(NA+NB+NC);
+    for (iter=0;;iter++){
+        if (ten_find==1)
+            {secant();}
+        rand_field(initial);
+        
+        for (i=0;i<=Nr-1;i++){
+            for (j=0;j<=Nz-1;j++){
+                eta2[i][j]=0.0;
+                eta[i][j]=0.0;
+            }
+        }
+            
+       fE_homo();
+            
+        Vol=2.0*pi*(0.5*(Nz-1)*delz*pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));
+        if (bilayer==1){Area=pi*(pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));}
+        if (disk==1) {Area=pi*(pow((Tip_R+r_0),2)-pow((r_0),2));}
+            
+        cleanme();
     
-    for (;;)
-        if (ten_find==1){
-            secant();
+        s2=0;
+        fE_old=0.0;
             
-            rand_field(initial);
-            iter=iter+1;
-            **eta2=0;
-            **eta=0;
-            
-            fE_homo();
-            
-            Vol=2.0*pi*(0.5*(Nz-1)*delz*pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));
-            if (bilayer==1){Area=pi*(pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));}
-            if (disk==1) {Area=pi*(pow((Tip_R+r_0),2)-pow((r_0),2));}
-            
-            cleanme();
-            s2=0;
-            fE_old=0.0;
-            
-            for (s=1;s<=100000;s++){
-                qA_forward();
-                qB_forward();
-                qC_forward();
-                qD_forward();
+        for (s=1;s<=100000;s++){
+            qA_forward();                       //solve diffusion equation for A block
+            qB_forward();                       //solve diffusion equation for B block
+            qC_forward();                       //solve diffusion equation for C block
+            qD_forward();                       //solve diffusion equation for D block
                 
-                qdagA_forward();
-                qdagB_forward();
-                qdagC_forward();
+            qdagA_forward();                    //solve diffusion equation for complementary A propagator
+            qdagB_forward();                    //solve diffusion equation for complementary B propagator
+            qdagC_forward();                    //solve diffusion equation for complementary C propagator
                 
-                Q_partition();
-                phi();
-                pressure();
-                if (disk==1){pressure2();}
-                FreeEnergy();
-                totalphi(ptot,phiA,phiB,phiC,phiD);
-                new_fields();
-                double phistar= phiA+phiB+phiC;
+            Q_partition();                      //Solve chain partition function
+            phi();                              //Determine new monomer concentrations
+            pressure();                         //Determine/apply incompressibility condition
+            if (disk==1){pressure2();}          //Determine/apply incompressibility condition
+            FreeEnergy();                       //Solve for free energy
+            totalphi(ptot,phiA,phiB,phiC,phiD); //Determine total monomer concentrations
+            new_fields();   //Set new interaction fields
+            
+            phistar= phiA+phiB+phiC;            //Concentration of star copolymer
                 
                 
-                /********************print during run***********************/
-                cout<< fE-fE_hom<< phistar << phiD<<endl;
-                //write(4,*) real(s),fE,dfffE
-                //write temporary data for plotting
+            
+            cout<< fE-fE_hom<< phistar<< phiD<<endl;
+            
+            //write(4,*) real(s),fE,dfffE
+            
+            //write temporary data for plotting
                 
-                if (Conv_p<1.0e-4 and Conv_w<1.0e-4 and dfffE<1.0e-4)
+            if (Conv_p<1.0e-4 and Conv_w<1.0e-4 and dfffE<1.0e-4){
                     break;
             }
-            //OP=((phiA+phiB)-(phiE+phiD))/((phiA+phiB)+(phiE+phiD));
-            cout<< "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"<< endl;
-            if (bilayer==1){
-                cout<<"Shape chosen is: Bilayer"<< endl;
-                //cout<<"order_parameter"<<OP<< endl;
-                cout<<"muABC="<<muABC<<"   "<<"muD="<< muD<< endl;
-                cout<<"fE="<<((fE-fE_hom)*Vol)/Area;
-            }
-            else if (disk==1){
-                cout<<"Shape chosen is: Disk"<< endl;
-                //cout<<"order_parameter"<<OP<< endl;
-                cout<<"muABC="<<muABC<<"   "<<"muD="<< muD<< endl;
-                cout<<"fE="<<((fE-fE_hom)*Vol)/Area;
-                }
-            cout<< "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"<< endl;
             
-            if (disk==1){
-                fstream myfile;
-                myfile.open("./results/fE_disk.dat");
-                myfile<<ND<<((fE-fE_hom)*Vol)/Area<<((phiA+phiB+phiD)-phiABC_hom)*Vol/Area<< (r_0+Tip_R)<<
-                (phiA+phiB+phiC)<<(phiD)<<Area<<muABC<<muD<< endl;
-                myfile.close();
-            }
-            if (bilayer==1){
-                fstream myfile;
-                myfile.open("./results/fE_bilayer.dat");
-                myfile<<ND<<((fE-fE_hom)*Vol)/Area<<((phiA+phiB+phiD)-phiABC_hom)*Vol/Area<< (r_0+Tip_R)<<
-                (phiA+phiB+phiC)<<(phiD)<<Area<<muABC<<muD<< endl;
-                myfile.close();
-            }
+            OP=((phiA+phiB+phiC)-(phiD))/((phiA+phiB+phiC)+(phiD));
+            
+            show_data(Area);
+        }
+        
+        save_data(Area,phiA,phiB,phiC,phiD,Tip_R);
+        
             profile(2);
             
-            if ((disk==1) and (bilayer==1)) {break;}
+        
+        if ((disk==1) and (bilayer==1)) {break;}
             
-            if (disk==1){
+        
+        if (disk==1){
                 if (muD_up==1){
                     muD=muD+0.1;
                     if (OP<(-0.99)){break;}}
@@ -227,26 +194,40 @@ int main() {
                     if (OP>0.99){break;}}
                 }
             if ((disk==0) and (bilayer==0)){break;}
-           
-            
-            
         }
     
+    destroy_2d_double_array(eta);
+    destroy_2d_double_array(dpp);
+    destroy_2d_double_array(eta2);
     
+    destroy_2d_double_array(wA);
+    destroy_2d_double_array(dwA);
+    destroy_2d_double_array(pA);
     
-    
+    destroy_2d_double_array(wB);
+    destroy_2d_double_array(dwB);
+    destroy_2d_double_array(pB);
+
+    destroy_2d_double_array(wC);
+    destroy_2d_double_array(dwC);
+    destroy_2d_double_array(pC);
+
+    destroy_2d_double_array(wD);
+    destroy_2d_double_array(dwD);
+    destroy_2d_double_array(pD);
+
     
 }
+
+/**************************************The Secant method********************/
 
 int secant(){
     
     
-    int s,s2,ii,msg,msg1;
+    int s,s2,ii,msg,msg1,i,j;
     double mu1,mu2,muD;
     int initial;
-     /*int i,j;
-    double mu3
-     double fE1,fE2,fE3;*/
+    
     
     
     mu1=muD;
@@ -260,8 +241,14 @@ int secant(){
     msg=0;
     
     for (;;){
-        **eta2=0.0;
-        **eta=0.0;
+        for (i=0;i<=Nr;i++){
+            for (j=0;j<=Nz;j++){
+                eta2[i][j]=0;
+                eta[i][j]=0;
+            }
+        }
+        
+        
         fE_homo( );
         Vol=2.0*pi*(0.5*(Nz-1)*delz*(pow(((Nr-1)*delr+r_0),2)-pow((r_0),2)));
         

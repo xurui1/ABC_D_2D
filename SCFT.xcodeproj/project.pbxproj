@@ -35,7 +35,6 @@
 		796DBE72193D039C001B7A97 /* phi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = phi.h; sourceTree = "<group>"; };
 		796DBE73193D04F9001B7A97 /* etas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = etas.h; sourceTree = "<group>"; };
 		796DBE74193D08F6001B7A97 /* Q_partition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Q_partition.h; sourceTree = "<group>"; };
-		796DBE75193D0957001B7A97 /* cleanme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cleanme.h; sourceTree = "<group>"; };
 		796DBE76193D0B98001B7A97 /* new_fields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = new_fields.h; sourceTree = "<group>"; };
 		796DBE77193E0F5F001B7A97 /* fE_homo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fE_homo.h; sourceTree = "<group>"; };
 		796DBE78193E1B40001B7A97 /* FreeEnergy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreeEnergy.h; sourceTree = "<group>"; };
@@ -44,9 +43,8 @@
 		79999ACC192E2F6E00F83B8F /* SCFT */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SCFT; sourceTree = BUILT_PRODUCTS_DIR; };
 		79999ACF192E2F6E00F83B8F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		79999AD1192E2F6E00F83B8F /* SCFT.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SCFT.1; sourceTree = "<group>"; };
-		79A955651933C2420044A006 /* Attempt1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Attempt1; sourceTree = "<group>"; };
 		79A955661933C9B00044A006 /* global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
-		79F3A0861940F7AF0079B337 /* read.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = read.h; sourceTree = "<group>"; };
+		79F3A0861940F7AF0079B337 /* read_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = read_write.h; sourceTree = "<group>"; };
 		79F3A0871940FCFB0079B337 /* smemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smemory.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,7 +87,6 @@
 				796DBE72193D039C001B7A97 /* phi.h */,
 				796DBE73193D04F9001B7A97 /* etas.h */,
 				796DBE74193D08F6001B7A97 /* Q_partition.h */,
-				796DBE75193D0957001B7A97 /* cleanme.h */,
 				796DBE76193D0B98001B7A97 /* new_fields.h */,
 				796DBE77193E0F5F001B7A97 /* fE_homo.h */,
 				796DBE78193E1B40001B7A97 /* FreeEnergy.h */,
@@ -99,9 +96,8 @@
 				79602079193FA0510037189E /* modD.h */,
 				7960207A193FA3D90037189E /* modphi.h */,
 				796DBE7A193E4C9C001B7A97 /* TDMA.h */,
-				79A955651933C2420044A006 /* Attempt1 */,
+				79F3A0861940F7AF0079B337 /* read_write.h */,
 				79999AD1192E2F6E00F83B8F /* SCFT.1 */,
-				79F3A0861940F7AF0079B337 /* read.h */,
 			);
 			path = SCFT;
 			sourceTree = "<group>";

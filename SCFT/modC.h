@@ -11,9 +11,11 @@ int C_Matrix_r(int ii){
     DiagCUr=create_1d_double_array(int(Nr-1), "DiagCUr");
     DiagCLr=create_1d_double_array(Nr-1, "DiagCLr");
     
-    *DiagCr=0;
-    *DiagCUr=0;
-    *DiagCLr=0;
+    for (i=0;i<=Nr-1;i++){
+        DiagCr[i]=0;}
+    for (i=0;i<=Nr-2;i++){
+        DiagCUr[i]=0;
+        DiagCLr[i]=0;}
     
     for (i=0; i<=(Nr-1); i++){
         DiagCr[i]=1.0+(delt/(pow(delr,2))+((delt/2.0)*wC[i][ii]));}
@@ -36,24 +38,26 @@ int C_Matrix_r(int ii){
 
 int C_Matrix_z(int ii){
     
-    int i;
-    //int j;
+    
+    int j;
     //double alphaC,betaCL,betaCU;
     
     DiagCz=create_1d_double_array(Nr, "DiagCz");
     DiagCUz=create_1d_double_array(Nr-1, "DiagCUz");
     DiagCLz=create_1d_double_array(Nr-1, "DiagCLz");
     
-    *DiagCz=0;
-    *DiagCUz=0;
-    *DiagCLz=0;
+    for (j=0;j<=Nz-1;j++){
+        DiagCz[j]=0;}
+    for (j=0;j<=Nz-2;j++){
+        DiagCUz[j]=0;
+        DiagCLz[j]=0;}
     
-    for (i=0; i<=(Nz-1); i++){
-        DiagCz[i]=1.0+delt/(pow(delz,2));}
-    for (i=0; i<=(Nz-2); i++){
-        DiagCUz[i]=-delt/(2.0*pow(delz,2));}
-    for (i=0; i<=(Nz-2); i++){
-        DiagCLz[i]=-delt/(2.0*pow(delz,2));}
+    for (j=0; j<=(Nz-1); j++){
+        DiagCz[j]=1.0+delt/(pow(delz,2));}
+    for (j=0; j<=(Nz-2); j++){
+        DiagCUz[j]=-delt/(2.0*pow(delz,2));}
+    for (j=0; j<=(Nz-2); j++){
+        DiagCLz[j]=-delt/(2.0*pow(delz,2));}
     
     DiagCUz[0]=2.0*DiagCUz[1];
     DiagCLz[Nz-1]=2.0*DiagCLz[Nz-1];
@@ -87,8 +91,11 @@ int qC_forward(){
     DiagCLzdz=create_1d_double_array(Nr-1, "DiagCLzdz");
     
     
-    **qC_0=0;
-    ***qC=0;
+    for (i=0; i<=Nr-1;i++){
+        for (j=0;j<=Nz-1;j++){
+            qC_0[i][j]=0;
+            for (s=0;s<=Ns-1;s++){
+                qC[i][j][s]=0;}}}
     
     //Initialize the qs
     
@@ -98,7 +105,10 @@ int qC_forward(){
             qC[i][j][0]=1.0;}}
     
     for (s=0;s<=(NC-1);s++){
-        *bCr=0;
+        
+        for (i=0;i<=Nr-1;i++){
+            bCr[i]=0;}
+        
         /********************************scan over z***********************************************/
         for (i=0;i<=(Nr-1);i++){
             C_Matrix_z(i);
@@ -133,12 +143,16 @@ int qC_forward(){
                 qC[i][j][s]=bCr[j];}
             
         }
-        bCr=0;
+        for (i=0;i<=Nr-1;i++){
+            bBr[i]=0;}
+        
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=Nz-1; j++){
-                qC_0[i][j]=qC[i][j][s];}
-        }
-        *bCz=0;
+                qC_0[i][j]=qC[i][j][s];}}
+        
+        for (j=0;j<=Nz-1;j++){
+            bCz[j]=0;}
+        
         /***********************************scan over r***************************************************/
         for (j=0;j<=(Nz-1);j++){
             C_Matrix_r(j);
@@ -170,15 +184,15 @@ int qC_forward(){
                 qC[i][j][s]=bCz[i];}
         }
         
-        
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=Nz-1; j++){
                 qC_0[i][j]=qC[i][j][s];}
+            
         }
     }
     
     destroy_2d_double_array(qC_0);
-    //destroy_3d_double_array(qC);
+    destroy_3d_double_array(qC);
     destroy_1d_double_array(DiagCLr);
     destroy_1d_double_array(DiagCUr);
     destroy_1d_double_array(DiagCr);
@@ -193,6 +207,7 @@ int qC_forward(){
     destroy_1d_double_array(DiagCzdz);
     destroy_1d_double_array(bCr);
     destroy_1d_double_array(bCz);
+    
     return qC_forward();
 }
 
@@ -221,8 +236,11 @@ int qdagC_forward(){
     DiagCUzdz=create_1d_double_array(Nr-1, "DiagCUzdz");
     DiagCLzdz=create_1d_double_array(Nr-1, "DiagCLzdz");
     
-    **qdagC_0=0;
-    ***qdagC=0;
+    for (i=0; i<=Nr-1;i++){
+        for (j=0;j<=Nz-1;j++){
+            qdagC_0[i][j]=0;
+            for (s=0;s<=Ns-1;s++){
+                qdagC[i][j][s]=0;}}}
     
     for (i=0;i<=Nr-1;i++){
         for (j=0;j<=Nz-1;j++){
@@ -232,7 +250,10 @@ int qdagC_forward(){
     }
     
     for (s=0;s<=NC-1;s++){
-        *bCr=0;
+        
+        for (i=0;i<=Nr-1;i++){
+            bCr[i]=0;}
+        
         /********************************scan over z***********************************************/
         for (i=0;i<=(Nr-1);i++){
             C_Matrix_z(i);
@@ -267,7 +288,10 @@ int qdagC_forward(){
                 qdagC[i][j][s]=bCr[j];}
             
         }
-        *bCr=0;
+        
+        for (i=0;i<=Nr-1;i++){
+            bCr[i]=0;}
+        
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=Nz-1; j++){
                 qdagC_0[i][j]=qdagC[i][j][s];}
@@ -277,7 +301,9 @@ int qdagC_forward(){
         
     }
     
-    *bCz=0;
+    for (j=0;j<=Nz-1;j++){
+        bCz[j]=0;}
+    
     /***********************************scan over r***************************************************/
     for (j=0;j<=(Nz-1);j++){
         C_Matrix_r(j);

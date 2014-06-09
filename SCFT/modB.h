@@ -11,9 +11,13 @@ int B_Matrix_r(int ii){
     DiagBUr=create_1d_double_array(int(Nr-1), "DiagBUr");
     DiagBLr=create_1d_double_array(Nr-1, "DiagBLr");
     
-    *DiagBr=0;
-    *DiagBUr=0;
-    *DiagBLr=0;
+    for (i=0;i<=Nr-1;i++){
+        DiagBr[i]=0;
+    }
+    for (i=0;i<=Nr-2;i++){
+        DiagBUr[i]=0;
+        DiagBLr[i]=0;
+    }
     
     for (i=0; i<=(Nr-1); i++){
         DiagBr[i]=1.0+(delt/(pow(delr,2))+((delt/2.0)*wB[i][ii]));}
@@ -39,20 +43,22 @@ int B_Matrix_z(int ii){
     DiagBz=create_1d_double_array(Nr, "DiagBz");
     DiagBUz=create_1d_double_array(Nr-1, "DiagBUz");
     DiagBLz=create_1d_double_array(Nr-1, "DiagBLz");
-    int i;
-    //int j;
+    
+    int j;
     //double alphaB,betaBL,betaBU;
     
-    *DiagBz=0;
-    *DiagBUz=0;
-    *DiagBLz=0;
+    for (j=0;j<=Nz-1;j++){
+        DiagAz[j]=0;}
+    for (j=0;j<=Nz-2;j++){
+        DiagAUz[j]=0;
+        DiagALz[j]=0;}
     
-    for (i=0; i<=(Nz-1); i++){
-        DiagBz[i]=1.0+delt/(pow(delz,2));}
-    for (i=0; i<=(Nz-2); i++){
-        DiagBUz[i]=-delt/(2.0*pow(delz,2));}
-    for (i=0; i<=(Nz-2); i++){
-        DiagBLz[i]=-delt/(2.0*pow(delz,2));}
+    for (j=0; j<=(Nz-1); j++){
+        DiagBz[j]=1.0+delt/(pow(delz,2));}
+    for (j=0; j<=(Nz-2); j++){
+        DiagBUz[j]=-delt/(2.0*pow(delz,2));}
+    for (j=0; j<=(Nz-2); j++){
+        DiagBLz[j]=-delt/(2.0*pow(delz,2));}
     
     DiagBUz[0]=2.0*DiagBUz[1];
     DiagBLz[Nz-1]=2.0*DiagBLz[Nz-1];
@@ -83,8 +89,13 @@ int qB_forward(){
     DiagBzdz=create_1d_double_array(Nr, "DiagBzdz");
     DiagBUzdz=create_1d_double_array(Nr-1, "DiagBUzdz");
     DiagBLzdz=create_1d_double_array(Nr-1, "DiagBLzdz");
-    **qB_0=0;
-    ***qB=0;
+    
+    
+    for (i=0; i<=Nr-1;i++){
+        for (j=0;j<=Nz-1;j++){
+            qB_0[i][j]=0;
+            for (s=0;s<=Ns-1;s++){
+                qB[i][j][s]=0;}}}
     
     //Initialize the qs
     
@@ -94,7 +105,10 @@ int qB_forward(){
             qB[i][j][0]=1.0;}}
     
     for (s=0;s<=(NB-1);s++){
-        *bBr=0;
+        
+        for (i=0;i<=Nr-1;i++){
+            bBr[i]=0;}
+        
         /********************************scan over z***********************************************/
         for (i=0;i<=(Nr-1);i++){
             B_Matrix_z(i);
@@ -119,6 +133,7 @@ int qB_forward(){
                     betaU=(delt/(2.0*pow(delr,2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
                     bBr[j]=gamma*qB_0[i][j]+betaU*qB_0[i+1][j]+betaL*qB_0[i-1][j];}
             }
+            
             DiagBrdr=DiagBr;
             DiagBUrdr=DiagBUr;
             DiagBLrdr=DiagBLr;
@@ -127,14 +142,18 @@ int qB_forward(){
             
             for (j=0; j<=Nz-1; j++){
                 qB[i][j][s]=bBr[j];}
-            
         }
-        *bBr=0;
+        
+        for (i=0;i<=Nr-1;i++){
+            bBr[i]=0;}
+        
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=Nz-1; j++){
-                qB_0[i][j]=qB[i][j][s];}
-        }
-        *bBz=0;
+                qB_0[i][j]=qB[i][j][s];}}
+        
+        for (j=0;j<=Nz-1;j++){
+            bBz[j]=0;}
+        
         /***********************************scan over r***************************************************/
         for (j=0;j<=(Nz-1);j++){
             B_Matrix_r(j);
@@ -169,11 +188,11 @@ int qB_forward(){
     
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=Nz-1; j++){
-                qB_0[i][j]=qB[i][j][s];}
-        }
-    }
+                qB_0[i][j]=qB[i][j][s];}}}
+    
+    
     destroy_2d_double_array(qB_0);
-    //destroy_3d_double_array(qB);
+    destroy_3d_double_array(qB);
     destroy_1d_double_array(DiagBLr);
     destroy_1d_double_array(DiagBUr);
     destroy_1d_double_array(DiagBr);
@@ -216,8 +235,11 @@ int qdagB_forward(){
     DiagBUzdz=create_1d_double_array(Nr-1, "DiagBUzdz");
     DiagBLzdz=create_1d_double_array(Nr-1, "DiagBUzdz");
     
-    **qdagB_0=0;
-    ***qdagB=0;
+    for (i=0; i<=Nr-1;i++){
+        for (j=0;j<=Nz-1;j++){
+            qdagB_0[i][j]=0;
+            for (s=0;s<=Ns-1;s++){
+                qdagB[i][j][s]=0;}}}
     
     for (i=0;i<=Nr-1;i++){
         for (j=0;j<=Nz-1;j++){
@@ -227,7 +249,10 @@ int qdagB_forward(){
     }
     
     for (s=0;s<=NB-1;s++){
-        *bBr=0;
+        
+        for (i=0;i<=Nr-1;i++){
+            bBr[i]=0;}
+        
         /********************************scan over z***********************************************/
         for (i=0;i<=(Nr-1);i++){
             B_Matrix_z(i);
@@ -262,7 +287,9 @@ int qdagB_forward(){
                 qdagB[i][j][s]=bBr[j];}
             
         }
-        *bBr=0;
+        for (i=0;i<=Nr-1;i++){
+            bBr[i]=0;}
+        
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=Nz-1; j++){
                 qdagB_0[i][j]=qdagB[i][j][s];}
@@ -272,7 +299,9 @@ int qdagB_forward(){
         
     }
     
-    *bBz=0;
+    for (j=0;j<=Nz-1;j++){
+        bBz[j]=0;}
+    
     /***********************************scan over r***************************************************/
     for (j=0;j<=(Nz-1);j++){
         B_Matrix_r(j);

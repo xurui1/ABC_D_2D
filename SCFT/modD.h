@@ -4,16 +4,17 @@ int D_Matrix_r(int ii){
 
     
     int i;
-    //int j;
     //double alphaC,betaCL,betaCU;
     
     DiagDr=create_1d_double_array(Nr, "DiagDr");
     DiagDUr=create_1d_double_array(int(Nr-1), "DiagDUr");
     DiagDLr=create_1d_double_array(Nr-1, "DiagDLr");
     
-    *DiagDr=0;
-    *DiagDUr=0;
-    *DiagDLr=0;
+    for (i=0;i<=Nr-1;i++){
+        DiagDr[i]=0;}
+    for (i=0;i<=Nr-2;i++){
+        DiagDUr[i]=0;
+        DiagDLr[i]=0;}
     
     for (i=0; i<=(Nr-1); i++){
         DiagDr[i]=1.0+(delt/(pow(delr,2))+((delt/2.0)*wD[i][ii]));}
@@ -36,23 +37,24 @@ int D_Matrix_r(int ii){
 
 int D_Matrix_z(int ii){
     
-    int i;
-    //int j;
+    int j;
     //double alphaC,betaCL,betaCU;
     DiagDz=create_1d_double_array(Nr, "DiagDz");
     DiagDUz=create_1d_double_array(Nr-1, "DiagDUz");
     DiagDLz=create_1d_double_array(Nr-1, "DiagDLz");
     
-    *DiagDz=0;
-    *DiagDUz=0;
-    *DiagDLz=0;
+    for (j=0;j<=Nz-1;j++){
+        DiagDz[j]=0;}
+    for (j=0;j<=Nz-2;j++){
+        DiagDUz[j]=0;
+        DiagDLz[j]=0;}
     
-    for (i=0; i<=(Nz-1); i++){
-        DiagDz[i]=1.0+delt/(pow(delz,2));}
-    for (i=0; i<=(Nz-2); i++){
-        DiagDUz[i]=-delt/(2.0*pow(delz,2));}
-    for (i=0; i<=(Nz-2); i++){
-        DiagDLz[i]=-delt/(2.0*pow(delz,2));}
+    for (j=0; j<=(Nz-1); j++){
+        DiagDz[j]=1.0+delt/(pow(delz,2));}
+    for (j=0; j<=(Nz-2); j++){
+        DiagDUz[j]=-delt/(2.0*pow(delz,2));}
+    for (j=0; j<=(Nz-2); j++){
+        DiagDLz[j]=-delt/(2.0*pow(delz,2));}
     
     DiagDUz[0]=2.0*DiagDUz[1];
     DiagDLz[Nz-1]=2.0*DiagDLz[Nz-1];
@@ -83,8 +85,11 @@ int qD_forward(){
     DiagDUzdz=create_1d_double_array(Nr-1, "DiagDUzdz");
     DiagDLzdz=create_1d_double_array(Nr-1, "DiagDLzdz");
     
-    **qD_0=0;
-    ***qD=0;
+    for (i=0; i<=Nr-1;i++){
+        for (j=0;j<=Nz-1;j++){
+            qD_0[i][j]=0;
+            for (s=0;s<=Ns-1;s++){
+                qD[i][j][s]=0;}}}
     
     //Initialize the qs
     
@@ -94,7 +99,10 @@ int qD_forward(){
             qD[i][j][0]=1.0;}}
     
     for (s=0;s<=(ND-1);s++){
-        *bDr=0;
+        
+        for (i=0;i<=Nr-1;i++){
+            bDr[i]=0;}
+        
         /********************************scan over z***********************************************/
         for (i=0;i<=(Nr-1);i++){
             D_Matrix_z(i);
@@ -129,12 +137,16 @@ int qD_forward(){
                 qD[i][j][s]=bDr[j];}
             
         }
-        *bDr=0;
+        for (i=0;i<=Nr-1;i++){
+            bDr[i]=0;}
+        
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=Nz-1; j++){
-                qD_0[i][j]=qD[i][j][s];}
-        }
-        *bDz=0;
+                qD_0[i][j]=qD[i][j][s];}}
+        
+        for (j=0;j<=Nz-1;j++){
+            bDz[j]=0;}
+        
         /***********************************scan over r***************************************************/
         for (j=0;j<=(Nz-1);j++){
             D_Matrix_r(j);
@@ -169,12 +181,11 @@ int qD_forward(){
         
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=Nz-1; j++){
-                qD_0[i][j]=qD[i][j][s];}
-        }
+                qD_0[i][j]=qD[i][j][s];}}
     }
     
     destroy_2d_double_array(qD_0);
-    //destroy_3d_double_array(qD);
+    destroy_3d_double_array(qD);
     destroy_1d_double_array(DiagDLr);
     destroy_1d_double_array(DiagDUr);
     destroy_1d_double_array(DiagDr);

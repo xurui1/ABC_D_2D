@@ -1,18 +1,13 @@
-#include <cstring>
-#include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <cmath>
-#include <vector>
 
 
 void *smalloc(int n, const char *name){
   	if (n == 0) return NULL;
+    
     void *ptr = malloc(n);
-  	if (ptr == NULL) {
-        //char str[128];
-        printf("Failed to allocate %d bytes for array %s/n",n,name);
+  	
+    if (ptr == NULL) {
+        char str[128];
+        std::cout<< "Failed to allocate: "<<n<<" for array: "<<name<<std::endl;
   	}
   	return ptr;
 }
@@ -20,7 +15,6 @@ void *smalloc(int n, const char *name){
 
 
 void sfree(void *ptr){
-    
   	if (ptr == NULL) return;
   	free(ptr);
 }

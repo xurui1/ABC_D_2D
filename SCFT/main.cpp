@@ -8,8 +8,8 @@
 
 #include <iostream>                 //Standard functions
 #include <fstream>                  //For file input/output
-#include "smemory.h"                //Ash's memory allocation class
 #include "global.h"                 //definition of global variables, functions
+#include "smemory.h"                //Ash's memory allocation class
 #include <cstring>                  //For manipulation of strings and arrays
 #include <cstdlib>                  //General utilities library (has random num)
 #include "xmatrix.h"                //The interaction matrix
@@ -43,7 +43,7 @@ int main() {
     int muD_up,muD_down;                                   //For stepping up and down.
     double ptot,phiA,phiB,phiC,phiD;                       //concentrations of chains
     
-    double D_r,D_z;                                        //Box size in the r and z direction is Rg^2
+                                                           //Box size in the r and z direction is Rg^2
     double Area = 0.0,Tip_R;                               //Area and perimeter?? of system
     double f_int_0, ABC_0;                                 //not sure of purpose
     double phistar;                                        //concentration of star copolymer
@@ -83,8 +83,8 @@ int main() {
   
     
     delt=1.0/(NA+NB+NC);
-    delr=D_r/double(Nr-1);
-    delz=D_z/double(Nz-1);
+    delr=(double)D_r/(double(Nr-1));
+    delz=(double)D_z/(double(Nz-1));
     
     /***************************************Initial settings********************************/
     
@@ -129,7 +129,7 @@ int main() {
             }
         }
             
-       fE_homo();
+       //fE_homo();
             
         Vol=2.0*pi*(0.5*(Nz-1)*delz*pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));
         if (bilayer==1){Area=pi*(pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));}
@@ -215,6 +215,12 @@ int main() {
     destroy_2d_double_array(wD);
     destroy_2d_double_array(dwD);
     destroy_2d_double_array(pD);
+    
+    destroy_3d_double_array(qA);
+    destroy_3d_double_array(qB);
+    destroy_3d_double_array(qC);
+    destroy_3d_double_array(qD);
+    
 
     
 }

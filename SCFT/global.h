@@ -11,8 +11,8 @@
 
 using namespace std;
 
-        int Nr,Nz,Ns;
-        int D_r=5.0, D_z=11.0;
+        int Nr=20,Nz=20,Ns=100;
+        int D_r=5, D_z=11;
         int NA=50.0,NB=50.0,NC=50.0,ND=50.0;
         const double pi = 3.14195265;
         double delr,delz,delt,sig=0.05,sig2=0.05;

@@ -162,7 +162,7 @@ void qC_forward(){
                 for (i=0;i<=(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bCr[j]=gamma*qC_0[i][j]+beta*qC_0[j+1][i]+beta*qC_0[j-1][i];}
+                    bCz[i]=gamma*qC_0[i][j]+beta*qC_0[j+1][i]+beta*qC_0[j-1][i];}
             }
             DiagCzdz[j]=DiagCz[j];
             DiagCUzdz[j]=DiagCUz[j];
@@ -238,8 +238,8 @@ void qdagC_forward(){
     
     for (i=0;i<=Nr-1;i++){
         for (j=0;j<=Nz-1;j++){
-            qdagC[i][j][0]=qA[i][j][NA]*qC[i][j][NC];
-            qdagC_0[i][j]=(qA[i][j][NA])*(qC[i][j][NC]);
+            qdagC[i][j][0]=qA[i][j][NA]*qB[i][j][NB];
+            qdagC_0[i][j]=(qA[i][j][NA])*(qB[i][j][NB]);
         }
     }
     
@@ -292,12 +292,9 @@ void qdagC_forward(){
             for (j=0; j<=Nz-1; j++){
                 qdagC_0[i][j]=qdagC[i][j][s];}
         }
-        
-        
-        
     }
     
-    for (j=0;j<=Nr-1;j++){
+    for (j=0;j<=Nz-1;j++){
         bCz[j]=0;
     }
     /***********************************scan over r***************************************************/
@@ -319,15 +316,15 @@ void qdagC_forward(){
             for (i=0;i<=(Nr-1);i++){
                 gamma=1.0-(delt/(pow((double)delz,(int)2)));
                 beta=(delt/(2.0*pow((double)delz,(int)2)));
-                bCr[j]=gamma*qdagC_0[i][j]+beta*qdagC_0[j+1][i]+beta*qdagC_0[j-1][i];}
+                bCz[i]=gamma*qdagC_0[i][j]+beta*qdagC_0[j+1][i]+beta*qdagC_0[j-1][i];}
         }
-        DiagCzdz=DiagCz;
-        DiagCUzdz=DiagCUz;
-        DiagCLzdz=DiagCLz;
+        DiagCzdz[j]=DiagCz[j];
+        DiagCUzdz[j]=DiagCUz[j];
+        DiagCLzdz[j]=DiagCLz[j];
         
         TDMA(Nr,DiagCLzdz,DiagCzdz,DiagCUzdz,bCz);
         
-        for (i=0; j<=Nr-1; i++){
+        for (i=0; i<=Nr-1; i++){
             qdagC[i][j][s]=bCz[i];}
     }
     
@@ -341,7 +338,6 @@ void qdagC_forward(){
     }
     
     destroy_2d_double_array(qdagC_0);
-    destroy_3d_double_array(qdagC);
     destroy_1d_double_array(DiagCLr);
     destroy_1d_double_array(DiagCUr);
     destroy_1d_double_array(DiagCr);

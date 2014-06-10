@@ -1,5 +1,4 @@
 void XMatrix(){
-#include "global.h"
     
  XM[0][0]=0.0;
  XM[1][0]=xAB;
@@ -20,6 +19,4 @@ void XMatrix(){
  XM[1][3]=xBD;
  XM[2][3]=xCD;
  XM[3][3]=0.0;
- 
- 
  }

@@ -161,7 +161,7 @@ void qB_forward(){
                 for (i=0;i<=(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bBr[j]=gamma*qB_0[i][j]+beta*qB_0[j+1][i]+beta*qB_0[j-1][i];}
+                    bBz[i]=gamma*qB_0[i][j]+beta*qB_0[j+1][i]+beta*qB_0[j-1][i];}
             }
             DiagBzdz[j]=DiagBz[j];
             DiagBUzdz[j]=DiagBUz[j];
@@ -318,15 +318,15 @@ void qdagB_forward(){
             for (i=0;i<=(Nr-1);i++){
                 gamma=1.0-(delt/(pow((double)delz,(int)2)));
                 beta=(delt/(2.0*pow((double)delz,(int)2)));
-                bBr[j]=gamma*qdagB_0[i][j]+beta*qdagB_0[j+1][i]+beta*qdagB_0[j-1][i];}
+                bBz[i]=gamma*qdagB_0[i][j]+beta*qdagB_0[j+1][i]+beta*qdagB_0[j-1][i];}
         }
-        DiagBzdz=DiagBz;
-        DiagBUzdz=DiagBUz;
-        DiagBLzdz=DiagBLz;
+        DiagBzdz[j]=DiagBz[j];
+        DiagBUzdz[j]=DiagBUz[j];
+        DiagBLzdz[j]=DiagBLz[j];
         
         TDMA(Nr,DiagBLzdz,DiagBzdz,DiagBUzdz,bBz);
         
-        for (i=0; j<=Nr-1; i++){
+        for (i=0; i<=Nr-1; i++){
             qdagB[i][j][s]=bBz[i];}
     }
     
@@ -340,7 +340,6 @@ void qdagB_forward(){
     }
     
     destroy_2d_double_array(qdagB_0);
-    destroy_3d_double_array(qdagB);
     destroy_1d_double_array(DiagBLr);
     destroy_1d_double_array(DiagBUr);
     destroy_1d_double_array(DiagBr);

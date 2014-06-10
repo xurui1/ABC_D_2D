@@ -1,11 +1,6 @@
 
 
-
-
-
-
 void D_Matrix_r(int ii){
-    
     
     int i;
     
@@ -86,7 +81,6 @@ void qD_forward(){
             for (s=0;s<=Ns-1;s++){
                 qD[i][j][s]=0;}}}
     
-    
     //Initialize the qs
     
     for (i=0;i<=(Nr-1);i++){
@@ -101,7 +95,7 @@ void qD_forward(){
         
         /********************************scan over z***********************************************/
         for (i=0;i<=(Nr-1);i++){
-            B_Matrix_z(i);
+            D_Matrix_z(i);
             if (i==0){
                 for (j=0;j<=(Nz-1);j++){
                     gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wD[i][j]);
@@ -131,23 +125,21 @@ void qD_forward(){
             
             for (j=0; j<=Nz-1; j++){
                 qD[i][j][s]=bDr[j];}
-            
         }
+        
         for (i=0;i<=Nr-1;i++){
-            bDr[i]=0;
-        }
+            bDr[i]=0;}
         
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=Nz-1; j++){
-                qD_0[i][j]=qD[i][j][s];}
-        }
+                qD_0[i][j]=qD[i][j][s];}}
         
         for (j=0;j<=Nz-1;j++){
-            bDz[j]=0;
-        }
+            bDz[j]=0;}
+        
         /***********************************scan over r***************************************************/
         for (j=0;j<=(Nz-1);j++){
-            B_Matrix_r(j);
+            D_Matrix_r(j);
             if (j==0){
                 for (i=0;i<=(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
@@ -155,7 +147,7 @@ void qD_forward(){
                     bDz[i]=gamma*qD_0[i][j]+beta*qD_0[j+1][i]+beta*qD_0[j+1][i];}
             }
             else if (j==(Nz-1)){
-                for (i=0;i<=(Nz-1);i++){
+                for (i=0;i<=(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
                     bDz[i]=gamma*qD_0[i][j]+beta*qD_0[j-1][i]+beta*qD_0[j-1][i];}
@@ -164,7 +156,7 @@ void qD_forward(){
                 for (i=0;i<=(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bDr[j]=gamma*qD_0[i][j]+beta*qD_0[j+1][i]+beta*qD_0[j-1][i];}
+                    bDz[i]=gamma*qD_0[i][j]+beta*qD_0[j+1][i]+beta*qD_0[j-1][i];}
             }
             DiagDzdz[j]=DiagDz[j];
             DiagDUzdz[j]=DiagDUz[j];
@@ -200,6 +192,8 @@ void qD_forward(){
     destroy_1d_double_array(DiagDUzdz);
     destroy_1d_double_array(DiagDzdz);
     destroy_1d_double_array(bDr);
-    destroy_1d_double_array(bDz);
+    //destroy_1d_double_array(bDz);
     
 }
+
+

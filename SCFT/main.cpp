@@ -153,7 +153,7 @@ int main() {
             Q_partition();                      //Solve chain partition function
             phi();                              //Determine new monomer concentrations
             pressure();                         //Determine/apply incompressibility condition
-            if (disk==1){pressure2();}          //Determine/apply incompressibility condition
+            if (disk==1){pressure2();}          //Determine/apply pinning condition
             FreeEnergy();                       //Solve for free energy
             totalphi(ptot,phiA,phiB,phiC,phiD); //Determine total monomer concentrations
             new_fields();   //Set new interaction fields
@@ -178,8 +178,7 @@ int main() {
         }
         
         save_data(Area,phiA,phiB,phiC,phiD,Tip_R);
-        
-            profile(2);
+        profile(2);
             
         
         if ((disk==1) and (bilayer==1)) {break;}
@@ -221,11 +220,12 @@ int main() {
     destroy_3d_double_array(qC);
     destroy_3d_double_array(qD);
     
-
-    
+    destroy_3d_double_array(qdagA);
+    destroy_3d_double_array(qdagB);
+    destroy_3d_double_array(qdagC);
 }
-
-/**************************************The Secant method********************/
+/******************************************************************************************/
+/**************************************The Secant method***********************************/
 
 int secant(){
     

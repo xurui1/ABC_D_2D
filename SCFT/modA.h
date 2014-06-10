@@ -130,8 +130,8 @@ void qA_forward(){
                 qA[i][j][s]=bAr[j];}
             
             }
-        for (i=0;i<=Nr-1;i++){
-            bAr[i]=0;
+        for (j=0;j<=Nr-1;j++){
+            bAr[j]=0;
         }
         
         for (i=0;i<=(Nr-1);i++){
@@ -161,7 +161,7 @@ void qA_forward(){
                 for (i=0;i<=(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bAr[j]=gamma*qA_0[i][j]+beta*qA_0[j+1][i]+beta*qA_0[j-1][i];}
+                    bAz[i]=gamma*qA_0[i][j]+beta*qA_0[j+1][i]+beta*qA_0[j-1][i];}
             }
             DiagAzdz[j]=DiagAz[j];
             DiagAUzdz[j]=DiagAUz[j];
@@ -230,23 +230,17 @@ void qA_forward(){
             for (j=0;j<=Nz-1;j++){
                 qdagA_0[i][j]=0;
                 for (s=0;s<=Ns-1;s++){
-                    qdagA[i][j][s]=0;
-                }
-            }
-        }
+                    qdagA[i][j][s]=0;}}}
         
         for (i=0;i<=Nr-1;i++){
             for (j=0;j<=Nz-1;j++){
                 qdagA[i][j][0]=qB[i][j][NB]*qC[i][j][NC];
-                qdagA_0[i][j]=(qB[i][j][NB])*(qC[i][j][NC]);
-            }
-        }
+                qdagA_0[i][j]=(qB[i][j][NB])*(qC[i][j][NC]);}}
         
         for (s=0;s<=NA-1;s++){
             
             for (i=0;i<=Nr-1;i++){
-                bAr[i]=0;
-            }
+                bAr[i]=0;}
             
             /********************************scan over z***********************************************/
             for (i=0;i<=(Nr-1);i++){
@@ -272,27 +266,22 @@ void qA_forward(){
                         betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
                         bAr[j]=gamma*qdagA_0[i][j]+betaU*qdagA_0[i+1][j]+betaL*qdagA_0[i-1][j];}
                 }
-                DiagArdr=DiagAr;
-                DiagAUrdr=DiagAUr;
-                DiagALrdr=DiagALr;
+                DiagArdr[i]=DiagAr[i];
+                DiagAUrdr[i]=DiagAUr[i];
+                DiagALrdr[i]=DiagALr[i];
                 
                 TDMA(Nz,DiagALrdr,DiagArdr,DiagAUrdr,bAr);
                 
                 for (j=0; j<=Nz-1; j++){
                     qdagA[i][j][s]=bAr[j];}
-                
             }
             
             for (i=0;i<=Nr-1;i++){
-                bAr[i]=0;
-            }
+                bAr[i]=0;}
             
             for (i=0;i<=(Nr-1);i++){
                 for (j=0; j<=Nz-1; j++){
-                    qdagA_0[i][j]=qdagA[i][j][s];}
-            }
-            
-            
+                    qdagA_0[i][j]=qdagA[i][j][s];}}
             
         }
         
@@ -318,15 +307,15 @@ void qA_forward(){
                 for (i=0;i<=(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bAr[j]=gamma*qdagA_0[i][j]+beta*qdagA_0[j+1][i]+beta*qdagA_0[j-1][i];}
+                    bAz[i]=gamma*qdagA_0[i][j]+beta*qdagA_0[j+1][i]+beta*qdagA_0[j-1][i];}
             }
-            DiagAzdz=DiagAz;
-            DiagAUzdz=DiagAUz;
-            DiagALzdz=DiagALz;
+            DiagAzdz[j]=DiagAz[j];
+            DiagAUzdz[j]=DiagAUz[j];
+            DiagALzdz[j]=DiagALz[j];
             
             TDMA(Nr,DiagALzdz,DiagAzdz,DiagAUzdz,bAz);
             
-            for (i=0; j<=Nr-1; i++){
+            for (i=0; i<=Nr-1; i++){
                 qdagA[i][j][s]=bAz[i];}
         }
         
@@ -340,7 +329,6 @@ void qA_forward(){
         }
         
         destroy_2d_double_array(qdagA_0);
-        destroy_3d_double_array(qdagA);
         destroy_1d_double_array(DiagALr);
         destroy_1d_double_array(DiagAUr);
         destroy_1d_double_array(DiagAr);

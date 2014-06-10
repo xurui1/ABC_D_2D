@@ -56,7 +56,7 @@ int phi(){
                     pC[i][j]=pC[i][j]+4*((qC[i][j][s])*(qdagC[i][j][NC-s]));}
                 else if (s%2 ==0 and s!=NC and s!=0){
                     pC[i][j]=pC[i][j]+2*((qC[i][j][s])*(qdagC[i][j][NC-s]));}
-                else {cout<< "Error calculating phiB"<< endl;}
+                else {cout<< "Error calculating phiC"<< endl;}
                 return 0;
             }
             pC[i][j]=pC[i][j]*delt/3.0;
@@ -72,7 +72,7 @@ int phi(){
                     pD[i][j]=pD[i][j]+4*((qD[i][j][s])*(qD[i][j][ND-s]));}
                 else if (s%2 ==0 and s!=ND and s!=0){
                     pD[i][j]=pD[i][j]+2*((qD[i][j][s])*(qD[i][j][ND-s]));}
-                else {cout<< "Error calculating phiB"<< endl;}
+                else {cout<< "Error calculating phiD"<< endl;}
                 return 0;
             }
             pD[i][j]=pD[i][j]*delt/3.0;
@@ -87,20 +87,5 @@ int phi(){
         }
     }
    
-    
-    destroy_2d_double_array(pA);
-    destroy_2d_double_array(pB);
-    destroy_2d_double_array(pC);
-    destroy_2d_double_array(pD);
-    destroy_3d_double_array(qA);
-    destroy_3d_double_array(qB);
-    destroy_3d_double_array(qC);
-    destroy_3d_double_array(qD);
-    destroy_3d_double_array(qdagA);
-    destroy_3d_double_array(qdagB);
-    destroy_3d_double_array(qdagC);
-    
-    
-    
     return phi();
 }

@@ -3,8 +3,8 @@ void FreeEnergy(){
     int i,j,ii,jj;
     double F1,F2,F3,F4,F5,F6,F7,F8,F9;
     double FF1,FF2,FF3,FF4,FF5,FF6,FF7,FF8,FF9;
-    double p_vect[4]={};
-    double w_vect[4]={};
+    double p_vect[4];
+    double w_vect[4];
     
     fE=0.0;
     
@@ -27,8 +27,8 @@ void FreeEnergy(){
             w_vect[2]=wC[i][j];
             w_vect[3]=wD[i][j];
             
-            for (ii=0; i<=3; ii++){
-                for (jj=0;i<=3; jj++){
+            for (ii=0; ii<=3; ii++){
+                for (jj=0;jj<=3; jj++){
                     F1=F1+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz;}
                 FF1=FF1+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz;}
             }
@@ -53,8 +53,8 @@ void FreeEnergy(){
             w_vect[2]=wC[i][j];
             w_vect[3]=wD[i][j];
             
-            for (ii=0; i<=3; ii++){
-                for (jj=0;i<=3; jj++){
+            for (ii=0; ii<=3; ii++){
+                for (jj=0;jj<=3; jj++){
                     F2=F2+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
                 FF2=FF2+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
         }
@@ -78,8 +78,8 @@ void FreeEnergy(){
             w_vect[2]=wC[i][j];
             w_vect[3]=wD[i][j];
             
-            for (ii=0; i<=3; ii++){
-                for (jj=0;i<=3; jj++){
+            for (ii=0; ii<=3; ii++){
+                for (jj=0;jj<=3; jj++){
                     F3=F3+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
                 FF3=FF3+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
         }
@@ -103,8 +103,8 @@ void FreeEnergy(){
             w_vect[2]=wC[i][j];
             w_vect[3]=wD[i][j];
             
-            for (ii=0; i<=3; ii++){
-                for (jj=0;i<=3; jj++){
+            for (ii=0; ii<=3; ii++){
+                for (jj=0;jj<=3; jj++){
                     F4=F4+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
                 FF4=FF4+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
         }
@@ -128,8 +128,8 @@ void FreeEnergy(){
             w_vect[2]=wC[i][j];
             w_vect[3]=wD[i][j];
             
-            for (ii=0; i<=3; ii++){
-                for (jj=0;i<=3; jj++){
+            for (ii=0; ii<=3; ii++){
+                for (jj=0;jj<=3; jj++){
                     F5=F5+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
                 FF5=FF5+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
         }
@@ -242,18 +242,6 @@ void FreeEnergy(){
     dfffE=abs(fE-fE_old);
     fE_old=fE;
     
-    destroy_2d_double_array(pA);
-    destroy_2d_double_array(pB);
-    destroy_2d_double_array(pC);
-    destroy_2d_double_array(pD);
-    destroy_2d_double_array(wA);
-    destroy_2d_double_array(wB);
-    destroy_2d_double_array(wC);
-    destroy_2d_double_array(wD);
-    
-    
-
-    return FreeEnergy();
 }
 
 

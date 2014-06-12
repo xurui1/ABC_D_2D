@@ -53,7 +53,7 @@ void D_Matrix_z(int ii){
 
 
 /**************************Finally time to define some propagators**********************/
-void qD_forward(){
+double qD_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
@@ -127,8 +127,8 @@ void qD_forward(){
                 qD[i][j][s]=bDr[j];}
         }
         
-        for (i=0;i<=Nr-1;i++){
-            bDr[i]=0;}
+        for (j=0;j<=Nz-1;j++){
+            bDr[j]=0;}
         
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=Nz-1; j++){
@@ -169,7 +169,7 @@ void qD_forward(){
         }
         
         for (i=0;i<=Nr-1;i++){
-            bDr[i]=0;
+            bDz[i]=0;
         }
         
         for (i=0;i<=(Nr-1);i++){
@@ -192,7 +192,9 @@ void qD_forward(){
     destroy_1d_double_array(DiagDUzdz);
     destroy_1d_double_array(DiagDzdz);
     destroy_1d_double_array(bDr);
-    //destroy_1d_double_array(bDz);
+    destroy_1d_double_array(bDz);
+    
+    return ***qD;
     
 }
 

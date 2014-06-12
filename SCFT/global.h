@@ -23,9 +23,11 @@ using namespace std;
         double kappaD,fracA,fracB,fracC,muABC=0.0,muD=-5.0,r_0;
         double XM[4][4];
         float phiABC_hom,phiD_hom;
+        double phistar;                           //concentration of star copolymer
+        double ptot_in,phiA,phiB,phiC,phiD;
 
 
-    
+
     int bilayer,disk,ten_find;
     int Mtip,Ntip,iter;
 
@@ -39,7 +41,7 @@ double **eta;
 double **dpp;
 double **eta2;
 
-/********************************A-Block*********************************/
+/********************************A-Block************************************/
 
 double *bAr;
 double *bAz;

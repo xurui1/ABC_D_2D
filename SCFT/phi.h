@@ -1,7 +1,7 @@
 
 
 /**********************************Function for calculating concentrations***********/
-int phi(){
+double phi(){
     int i,j,s;
     
     for (i=0;i<=Nr;i++){
@@ -87,5 +87,5 @@ int phi(){
         }
     }
    
-    return phi();
+    return **pA, **pB, **pC, **pD;
 }

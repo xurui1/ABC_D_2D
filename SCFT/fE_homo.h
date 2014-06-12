@@ -1,4 +1,4 @@
-void fE_homo(){
+double fE_homo(){
     
     int i,j;
     double pA_ave,pB_ave,pC_ave,pD_ave;
@@ -71,4 +71,5 @@ void fE_homo(){
     
     fE_hom=f_int-f_omeg-(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))-(exp(kappaD*(muD-wD_ave))/kappaD);
     
+    return fE_hom;
 }

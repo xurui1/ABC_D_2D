@@ -55,7 +55,7 @@ void A_Matrix_z(int ii){
 
 
 /**************************Finally time to define some propagators**********************/
-void qA_forward(){
+double qA_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
@@ -93,8 +93,8 @@ void qA_forward(){
         
     for (s=0;s<=(NA-1);s++){
         
-        for (i=0;i<=Nr-1;i++){
-            bAr[i]=0;}
+        for (j=0;j<=Nz-1;j++){
+            bAz[j]=0;}
         
 /********************************scan over z***********************************************/
         for (i=0;i<=(Nr-1);i++){
@@ -174,7 +174,7 @@ void qA_forward(){
         }
         
         for (i=0;i<=Nr-1;i++){
-            bAr[i]=0;
+            bAz[i]=0;
         }
         
         for (i=0;i<=(Nr-1);i++){
@@ -182,7 +182,7 @@ void qA_forward(){
                 qA_0[i][j]=qA[i][j][s];}
         }
     }
-    
+        
     destroy_2d_double_array(qA_0);
     destroy_1d_double_array(DiagALr);
     destroy_1d_double_array(DiagAUr);
@@ -199,11 +199,12 @@ void qA_forward(){
     destroy_1d_double_array(bAr);
     destroy_1d_double_array(bAz);
     
+    return ***qA;
 }
     
 /***********************************Define the complementary propagator***********************************/
 
-    void qdagA_forward(){
+    double qdagA_forward(){
         
         int s,i,j;
         double gamma,betaU,betaL,beta;
@@ -276,8 +277,8 @@ void qA_forward(){
                     qdagA[i][j][s]=bAr[j];}
             }
             
-            for (i=0;i<=Nr-1;i++){
-                bAr[i]=0;}
+            for (j=0;j<=Nz-1;j++){
+                bAr[j]=0;}
             
             for (i=0;i<=(Nr-1);i++){
                 for (j=0; j<=Nz-1; j++){
@@ -285,7 +286,7 @@ void qA_forward(){
             
         }
         
-        for (j=0;j<=Nr-1;j++){
+        for (j=0;j<=Nz-1;j++){
             bAz[j]=0;
         }
         /***********************************scan over r***************************************************/
@@ -320,7 +321,7 @@ void qA_forward(){
         }
         
         for (i=0;i<=Nr-1;i++){
-            bAr[i]=0;
+            bAz[i]=0;
         }
         
         for (i=0;i<=(Nr-1);i++){
@@ -344,6 +345,7 @@ void qA_forward(){
         destroy_1d_double_array(bAr);
         destroy_1d_double_array(bAz);
         
+        return ***qdagA;
     }
 
         

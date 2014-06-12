@@ -1,6 +1,5 @@
-int totalphi(double ptot_in, double phiA, double phiB, double phiC, double phiD){
+double totalphi(){
     
-    //int dummy;
     int i,j;
     
     phiA=0.0;
@@ -8,6 +7,7 @@ int totalphi(double ptot_in, double phiA, double phiB, double phiC, double phiD)
     phiC=0.0;
     phiD=0.0;
     ptot_in=0.0;
+    phistar=0.0;
     
     for (i=1; i<=(Nr-2); i++){
         for (j=1; j<=(Nr-2); j++){
@@ -68,6 +68,5 @@ int totalphi(double ptot_in, double phiA, double phiB, double phiC, double phiD)
     
     ptot_in=phiA+phiB+phiC+phiD;
     
-    
-    return totalphi(ptot_in, phiA, phiB, phiC, phiD);
+    return phiD;
 }

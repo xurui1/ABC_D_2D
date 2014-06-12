@@ -55,7 +55,7 @@ void B_Matrix_z(int ii){
 
 
 /**************************Finally time to define some propagators**********************/
-void qB_forward(){
+double qB_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
@@ -130,8 +130,8 @@ void qB_forward(){
                 qB[i][j][s]=bBr[j];}
             
         }
-        for (i=0;i<=Nr-1;i++){
-            bBr[i]=0;
+        for (j=0;j<=Nr-1;j++){
+            bBr[j]=0;
         }
         
         for (i=0;i<=(Nr-1);i++){
@@ -174,7 +174,7 @@ void qB_forward(){
         }
         
         for (i=0;i<=Nr-1;i++){
-            bBr[i]=0;
+            bBz[i]=0;
         }
         
         for (i=0;i<=(Nr-1);i++){
@@ -199,11 +199,12 @@ void qB_forward(){
     destroy_1d_double_array(bBr);
     destroy_1d_double_array(bBz);
     
+    return ***qB;
 }
 
 /***********************************Define the complementary propagator***********************************/
 
-void qdagB_forward(){
+double qdagB_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
@@ -283,8 +284,8 @@ void qdagB_forward(){
             
         }
         
-        for (i=0;i<=Nr-1;i++){
-            bBr[i]=0;
+        for (j=0;j<=Nz-1;j++){
+            bBr[j]=0;
         }
         
         for (i=0;i<=(Nr-1);i++){
@@ -293,10 +294,9 @@ void qdagB_forward(){
         }
         
         
-        
     }
     
-    for (j=0;j<=Nr-1;j++){
+    for (j=0;j<=Nz-1;j++){
         bBz[j]=0;
     }
     /***********************************scan over r***************************************************/
@@ -331,7 +331,7 @@ void qdagB_forward(){
     }
     
     for (i=0;i<=Nr-1;i++){
-        bBr[i]=0;
+        bBz[i]=0;
     }
     
     for (i=0;i<=(Nr-1);i++){
@@ -355,6 +355,7 @@ void qdagB_forward(){
     destroy_1d_double_array(bBr);
     destroy_1d_double_array(bBz);
     
+    return ***qdagB;
 }
 
 

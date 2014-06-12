@@ -38,15 +38,15 @@ int secant();                                   //function prototype, defined be
 
 int main() {
     
+    
     int once;
-    int s,s2,initial,i,j;                               //counting indices
+    int s,s2,initial,i,j;                                  //counting indices
     int muD_up,muD_down;                                   //For stepping up and down.
-    double ptot,phiA,phiB,phiC,phiD;                       //concentrations of chains
+                                                           //concentrations of chains
     
                                                            //Box size in the r and z direction is Rg^2
     double Area = 0.0,Tip_R;                               //Area and perimeter?? of system
     double f_int_0, ABC_0;                                 //not sure of purpose
-    double phistar;                                        //concentration of star copolymer
     
     eta =create_2d_double_array(Nr,Nz, "eta");             //incompressibility condition
     dpp =create_2d_double_array(Nr,Nz, "dpp");             //not sure what dpp is used for (update w fields?)
@@ -73,6 +73,7 @@ int main() {
     fracA=((double)NA/((double)(NA+NB+NC)));
     fracB=(double)NB/(double)(NA+NB+NC);
     fracC=(double)NC/(double)(NA+NB+NC);
+    
     
     f_int_0=0.0;
     ABC_0=0.0;
@@ -103,79 +104,63 @@ int main() {
     XMatrix();                           //call the interaction matrix
     clean_data();                        // Clean the data files
     
-
     /*********************Define the pinning condition*************************************/
     
     if (disk==1){
-        Ntip=20;
-        Mtip=1;
-        Tip_R=(Ntip-1)*delr;
-    }
-    else {
-        Tip_R=0;
-    }
-    
-   
+        Ntip=20;Mtip=1;
+        Tip_R=(Ntip-1)*delr;}
+    else {Tip_R=0;}
     
     for (iter=0;;iter++){
         if (ten_find==1)
             {secant();}
+        
         rand_field(initial);
         
         for (i=0;i<=Nr-1;i++){
             for (j=0;j<=Nz-1;j++){
                 eta2[i][j]=0.0;
-                eta[i][j]=0.0;
-            }
-        }
-            
-       //fE_homo();
+                eta[i][j]=0.0;}}
+
+       fE_homo();
             
         Vol=2.0*pi*(0.5*(Nz-1)*delz*pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));
         if (bilayer==1){Area=pi*(pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));}
         if (disk==1) {Area=pi*(pow((Tip_R+r_0),2)-pow((r_0),2));}
-            
+        
         cleanme();
     
-        s2=0;
-        fE_old=0.0;
-            
+        s2=0;fE_old=0.0;
+        
         for (s=1;s<=100000;s++){
-            qA_forward();                       //solve diffusion equation for A block
-            qB_forward();                       //solve diffusion equation for B block
-            qC_forward();                       //solve diffusion equation for C block
-            qD_forward();                       //solve diffusion equation for D block
-                
-            qdagA_forward();                    //solve diffusion equation for complementary A propagator
-            qdagB_forward();                    //solve diffusion equation for complementary B propagator
-            qdagC_forward();                    //solve diffusion equation for complementary C propagator
-                
+            qA_forward();qB_forward();qC_forward();qD_forward();  //solve forward propagator
+            qdagA_forward();  qdagB_forward();  qdagC_forward();  //solve complementary propagator
+
             Q_partition();                      //Solve chain partition function
             phi();                              //Determine new monomer concentrations
             pressure();                         //Determine/apply incompressibility condition
             if (disk==1){pressure2();}          //Determine/apply pinning condition
             FreeEnergy();                       //Solve for free energy
-            totalphi(ptot,phiA,phiB,phiC,phiD); //Determine total monomer concentrations
-            new_fields();   //Set new interaction fields
+            totalphi();                         //Determine total monomer concentrations
+            new_fields();                       //Set new interaction fields
             
-            phistar= phiA+phiB+phiC;            //Concentration of star copolymer
-                
-                
             
-            cout<< fE-fE_hom<< phistar<< phiD<<endl;
+            cout<< fE-fE_hom<< " "<<phiA+phiB+phiC<<" "<< phiD<<endl;
             
-            //write(4,*) real(s),fE,dfffE
-            
-            //write temporary data for plotting
+            if (s<s2){
+                profile(1);
+                write_data();
+            }
                 
             if (Conv_p<1.0e-4 and Conv_w<1.0e-4 and dfffE<1.0e-4){
                     break;
             }
-            
-            OP=((phiA+phiB+phiC)-(phiD))/((phiA+phiB+phiC)+(phiD));
-            
-            show_data(Area);
         }
+            
+        OP=((phiA+phiB+phiC)-(phiD))/((phiA+phiB+phiC)+(phiD));
+            
+        show_data(Area);
+        
         
         save_data(Area,phiA,phiB,phiC,phiD,Tip_R);
         profile(2);
@@ -231,7 +216,8 @@ int secant(){
     
     
     int s,s2,ii,msg,msg1,i,j;
-    double mu1,mu2,muD;
+    double mu1,mu2,mu3;
+    double fE1,fE2,fE3;
     int initial;
     
     
@@ -267,6 +253,7 @@ int secant(){
             qB_forward();
             qC_forward();
             qD_forward();
+            
             qdagA_forward();
             qdagB_forward();
             qdagC_forward();
@@ -278,9 +265,52 @@ int secant(){
             
             
             cout<< Conv_w<< fE-fE_hom<< muD << ii << endl;
+            write_data();
+            
+            if (Conv_p<1.0e-4 and Conv_w<1.0e-4 and dfffE<1.0e-4){break;}
+        }
+        
+        
+        if (ii==1){
+            fE1=fE-fE_hom;
+            muD=mu2;
+            }
+            
+        if (ii==2) {
+            fE2=fE-fE_hom;
+            mu3=mu2-(fE2*((mu2-mu1)/(fE2-fE1)));
+            muD=mu3;
+            }
+            
+        if (ii==3){
+            fE3=fE-fE_hom;
+            if (abs(fE3)<1.0e-5){
+                break;}
+            else{
+                mu1=mu2;
+                mu2=mu3;
+                muD=mu1;
+                ii=1;
+                msg=1;
+            }
+        }
+        cout<<muD<<endl;
+           
+        if (msg==0){
+            ii=ii+1;
+        }
+        msg=0;
+            
+        if (ii>3){cout<<"something is wrong in the secant method mod"<<endl;}
+            
+        break;
             
         }
         
+    if ((msg1==1) and(disk==0)){
+        disk=1;
+        bilayer=0;
     }
+    
     return secant();
 }

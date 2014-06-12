@@ -1,4 +1,4 @@
-void TDMA(const size_t N_in, const double DiagL_in[], const double Diag_in[], const double DiagU_in[],double b_in[]) {
+double TDMA(const size_t N_in, const double DiagL_in[], const double Diag_in[], const double DiagU_in[],double b_in[]) {
     size_t i;
     
     /* Allocate scratch space. */
@@ -27,4 +27,5 @@ void TDMA(const size_t N_in, const double DiagL_in[], const double Diag_in[], co
     /* free scratch space */
     free(c);
     
+    return b_in[N_in];
 }

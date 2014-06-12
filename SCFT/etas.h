@@ -10,10 +10,11 @@ void pressure(){
 }
 /***********************calculating eta2 (pinning condition)***********************************/
 void pressure2(){
+    cout<< "pressure2"<<endl;
     int i,j;
     for (i=Ntip;;){
         for (j=Mtip;;){
-            eta2[i][j]=eta2[i][j]-10*((pA[i][j]-pD[i][j])-(pB[i][j]+pC[i][j]));
+            eta2[i][j]=eta2[i][j]-10*((pA[i][j]+pD[i][j])-(pB[i][j]+pC[i][j]));
         }
     }
 }

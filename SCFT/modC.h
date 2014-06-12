@@ -204,7 +204,7 @@ void qC_forward(){
 
 /***********************************Define the complementary propagator***********************************/
 
-void qdagC_forward(){
+double qdagC_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
@@ -247,6 +247,8 @@ void qdagC_forward(){
         
         for (i=0;i<=Nr-1;i++){
             bCr[i]=0;
+            
+            return ***qC;
         }
         
         /********************************scan over z***********************************************/
@@ -353,6 +355,7 @@ void qdagC_forward(){
     destroy_1d_double_array(bCr);
     destroy_1d_double_array(bCz);
     
+    return ***qdagC;
 }
 
 

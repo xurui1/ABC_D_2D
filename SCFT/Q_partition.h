@@ -38,5 +38,5 @@ double Q_partition(){
     
     cout<<"Q_ABC: "<<Q_ABC<<" Q_D:"<<Q_D<<endl;
     
-    return Q_ABC,Q_D;
+    return Q_D;
 }

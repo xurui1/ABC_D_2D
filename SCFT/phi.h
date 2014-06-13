@@ -19,7 +19,7 @@ double phi(){
         for (j=1;j<=Nz;j++){
             for (s=0;s<=NA;s++){
                 if (s==0 or s==NA){
-                    pA[i][j]=pA[i][j]+((qA[i][j][s])*(qdagA[i][j][NA-s]));}
+                    pA[i][j]=pA[i][j]+((qA[i][j][s])*(qdagA[i][j][int(NA-s)]));}
                 else if ((s%2) !=0 and s!=NA){
                     pA[i][j]=pA[i][j]+4*((qA[i][j][s])*(qdagA[i][j][NA-s]));}
                 else if ((s%2) ==0 and s!=NA and s!=0){
@@ -87,5 +87,5 @@ double phi(){
         }
     }
    
-    return **pA, **pB, **pC, **pD;
+    return **pD;
 }

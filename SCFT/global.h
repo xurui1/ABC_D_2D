@@ -5,7 +5,6 @@
 #include <fstream>
 #include <stdlib.h>    //Include standard fucntion libraries
 #include <math.h>      //Use the math function libraries
-#include <time.h>      //Call system time libraries to define the integer seed for random numbers
 #include <cmath>
 #include <vector>
 
@@ -25,7 +24,6 @@ using namespace std;
         float phiABC_hom,phiD_hom;
         double phistar;                           //concentration of star copolymer
         double ptot_in,phiA,phiB,phiC,phiD;
-
 
 
     int bilayer,disk,ten_find;

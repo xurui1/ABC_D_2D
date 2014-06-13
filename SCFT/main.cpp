@@ -28,6 +28,7 @@
 #include "modC.h"                   //Solve Diffusion Equation for C block
 #include "modD.h"                   //Solve Diffusion Equation for D chain
 #include "modphi.h"                 //concentrations
+#include "Destroy.h"                //get rid of arrays
 #include <string>                   //manipulation of strings (not sure if needed)
 #include <sstream>                  //stringstream (not sure if needed)
 
@@ -180,34 +181,8 @@ int main() {
             if ((disk==0) and (bilayer==0)){break;}
         }
     
-    destroy_2d_double_array(eta);
-    destroy_2d_double_array(dpp);
-    destroy_2d_double_array(eta2);
+    Destroy();
     
-    destroy_2d_double_array(wA);
-    destroy_2d_double_array(dwA);
-    destroy_2d_double_array(pA);
-    
-    destroy_2d_double_array(wB);
-    destroy_2d_double_array(dwB);
-    destroy_2d_double_array(pB);
-
-    destroy_2d_double_array(wC);
-    destroy_2d_double_array(dwC);
-    destroy_2d_double_array(pC);
-
-    destroy_2d_double_array(wD);
-    destroy_2d_double_array(dwD);
-    destroy_2d_double_array(pD);
-    
-    destroy_3d_double_array(qA);
-    destroy_3d_double_array(qB);
-    destroy_3d_double_array(qC);
-    destroy_3d_double_array(qD);
-    
-    destroy_3d_double_array(qdagA);
-    destroy_3d_double_array(qdagB);
-    destroy_3d_double_array(qdagC);
 }
 /******************************************************************************************/
 /**************************************The Secant method***********************************/

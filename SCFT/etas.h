@@ -2,8 +2,8 @@
 
 void pressure(){
     int i,j;
-    for (i=1;i<=Nr;i++) {
-        for (j=1;j<=Nz;j++){
+    for (i=0;i<=int(Nr-1);i++) {
+        for (j=0;j<=int(Nz-1);j++){
             eta[i][j]=eta[i][j]-(1.0-(pA[i][j]+pB[i][j]+pC[i][j]+pD[i][j]));
         }
     }

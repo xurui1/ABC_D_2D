@@ -58,23 +58,7 @@ double qA_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
-    
-    qA=create_3d_double_array(Nr,Nz,Ns,"qA");
-    qA_0=create_2d_double_array(Nr,Nz, "qA_0");
-    bAr=create_1d_double_array(Nz, "bAr");
-    bAz=create_1d_double_array(Nr, "bAz");
-    DiagAr=create_1d_double_array(Nz, "DiagAr");
-    DiagAUr=create_1d_double_array(((int)Nz-1), "DiagAUr");
-    DiagALr=create_1d_double_array(((int)Nz-1), "DiagALr");
-    DiagAz=create_1d_double_array(Nr, "DiagAz");
-    DiagAUz=create_1d_double_array(((int)Nr-1), "DiagAUz");
-    DiagALz=create_1d_double_array(((int)Nr-1), "DiagALz");
-    DiagArdr=create_1d_double_array(Nz, "DiagArdr");
-    DiagAUrdr=create_1d_double_array(((int)Nz-1), "DiagAUrdr");
-    DiagALrdr=create_1d_double_array(((int)Nz-1), "DiagALrdr");
-    DiagAzdz=create_1d_double_array(Nr, "DiagAzdz");
-    DiagAUzdz=create_1d_double_array(((int)Nr-1), "DiagAUzdz");
-    DiagALzdz=create_1d_double_array(((int)Nr-1), "DiagALzdz");
+
     
     for (i=0; i<=int(Nr-1);i++){
         for (j=0;j<=int(Nz-1);j++){
@@ -197,10 +181,6 @@ double qA_forward(){
         
         int s,i,j;
         double gamma,betaU,betaL,beta;
-        
-        qdagA=create_3d_double_array(Nr,Nz,Ns,"qdagA");
-        qdagA_0=create_2d_double_array(Nr,Nz, "qdagA_0");
-
         
         for (i=0; i<=int(Nr-1);i++){
             for (j=0;j<=int(Nz-1);j++){

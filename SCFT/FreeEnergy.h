@@ -15,8 +15,8 @@ double FreeEnergy(){
     F1=0.0;
     FF1=0.0;
     
-    for (i=1;i <= (Nr-2);i++){
-        for (j=1;j<= (Nz-2); j++){
+    for (i=1;i <= int(Nr-2);i++){
+        for (j=1;j<= int(Nz-2); j++){
             p_vect[0]=pA[i][j];
             p_vect[1]=pB[i][j];
             p_vect[2]=pC[i][j];
@@ -42,7 +42,7 @@ double FreeEnergy(){
     FF2=0.0;
     
     i=0;
-        for (j=1;j<= (Nz-2); j++){
+        for (j=1;j<= int(Nz-2); j++){
             p_vect[0]=pA[i][j];
             p_vect[1]=pB[i][j];
             p_vect[2]=pC[i][j];
@@ -66,8 +66,8 @@ double FreeEnergy(){
     F3=0.0;
     FF3=0.0;
     
-    i=(Nr-1);
-        for (j=1;j<= (Nz-2); j++){
+    i=int(Nr-1);
+        for (j=1;j<= int(Nz-2); j++){
             p_vect[0]=pA[i][j];
             p_vect[1]=pB[i][j];
             p_vect[2]=pC[i][j];
@@ -91,7 +91,7 @@ double FreeEnergy(){
     F4=0.0;
     FF4=0.0;
     
-    for (i=1;i<=(Nr-2);i++){
+    for (i=1;i<=int(Nr-2);i++){
         j=0;
         p_vect[0]=pA[i][j];
         p_vect[1]=pB[i][j];
@@ -116,8 +116,8 @@ double FreeEnergy(){
     F5=0.0;
     FF5=0.0;
     
-    for (i=1;i<=(Nr-2);i++){
-        j=(Nz-1);
+    for (i=1;i<=int(Nr-2);i++){
+        j=int(Nz-1);
         p_vect[0]=pA[i][j];
         p_vect[1]=pB[i][j];
         p_vect[2]=pC[i][j];
@@ -159,7 +159,7 @@ double FreeEnergy(){
         }
     /********************************Corner 2******************************************/
     
-    i=(Nr-1);
+    i=int(Nr-1);
     j=0;
     memset(p_vect,0,4);
     memset(w_vect,0,4);
@@ -183,7 +183,7 @@ double FreeEnergy(){
     /********************************Corner 3******************************************/
     
     i=0;
-    j=(Nz-1);
+    j=int(Nz-1);
     memset(p_vect,0,4);
     memset(w_vect,0,4);
     F8=0.0;
@@ -205,8 +205,8 @@ double FreeEnergy(){
     }
     /********************************Corner 4******************************************/
     
-    i=Nr-1;
-    j=Nz-1;
+    i=int(Nr-1);
+    j=int(Nz-1);
     memset(p_vect,0,4);
     memset(w_vect,0,4);
     F9=0.0;

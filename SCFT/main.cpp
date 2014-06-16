@@ -28,7 +28,7 @@
 #include "modC.h"                   //Solve Diffusion Equation for C block
 #include "modD.h"                   //Solve Diffusion Equation for D chain
 #include "modphi.h"                 //concentrations
-#include "Destroy.h"                //get rid of arrays
+#include "Create_Destroy.h"         //define and destroy arrays
 #include <string>                   //manipulation of strings (not sure if needed)
 #include <sstream>                  //stringstream (not sure if needed)
 
@@ -39,35 +39,13 @@ int secant();                                   //function prototype, defined be
 
 int main() {
     
-    
     int once;
     int s,s2,initial,i,j;                                  //counting indices
-    int muD_up,muD_down;                                   //For stepping up and down.
-                                                           //concentrations of chains
-    
-                                                           //Box size in the r and z direction is Rg^2
+    int muD_up,muD_down;                                   //For stepping up and down potential E.
     double Area = 0.0,Tip_R;                               //Area and perimeter?? of system
     double f_int_0, ABC_0;                                 //not sure of purpose
     
-    eta =create_2d_double_array(Nr,Nz, "eta");             //incompressibility condition
-    dpp =create_2d_double_array(Nr,Nz, "dpp");             //not sure what dpp is used for (update w fields?)
-    eta2 =create_2d_double_array(Nr,Nz, "eta2");           //pinning condition
-    
-    wA=create_2d_double_array(Nr,Nz, "wA");                //interaction potential of chain A
-    dwA=create_2d_double_array(Nr,Nz, "dwA");              //differential of wA
-    pA=create_2d_double_array(Nr,Nz, "pA");                //probability amplitude of chain A
-    
-    wB=create_2d_double_array(Nr,Nz, "wB");                //interaction potential of chain B
-    dwB=create_2d_double_array(Nr,Nz, "dwB");              //differential of wB
-    pB=create_2d_double_array(Nr,Nz, "pB");                //probability amplitude of chain B
-    
-    wC=create_2d_double_array(Nr,Nz, "wC");                //interaction potential of chain C
-    dwC=create_2d_double_array(Nr,Nz, "dwC");              //differential of wC
-    pC=create_2d_double_array(Nr,Nz, "pC");                //probability amplitude of chain C
-    
-    wD=create_2d_double_array(Nr,Nz, "wD");                //interaction potential of chain D
-    dwD=create_2d_double_array(Nr,Nz, "dwD");              //differential of wD
-    pD=create_2d_double_array(Nr,Nz, "pD");                //probability amplitude of chain D
+
     
     /*********************Set Kappa and fA**************************************************/
     kappaD=(double)ND/((double)(NA+NB+NC));
@@ -75,11 +53,12 @@ int main() {
     fracB=(double)NB/(double)(NA+NB+NC);
     fracC=(double)NC/(double)(NA+NB+NC);
     
+    create();
     
     f_int_0=0.0;
     ABC_0=0.0;
     
-    initial=1;
+    initial=0;
     
     //read(); not working right now for some reason, cannot figure out why
   
@@ -103,7 +82,7 @@ int main() {
     disk=0;
     
     XMatrix();                           //call the interaction matrix
-    clean_data();                        // Clean the data files
+    clean_data();                        // Clean the result files
     
     /*********************Define the pinning condition*************************************/
     
@@ -112,30 +91,32 @@ int main() {
         Tip_R=(Ntip-1)*delr;}
     else {Tip_R=0;}
     
+    /************************************LOOP************************************************/
+    
     for (iter=0;;iter++){
         if (ten_find==1)
             {secant();}
         
-        rand_field(initial);
+        rand_field(initial);                    //Found in rand_field
         
-        for (i=0;i<=Nr-1;i++){
-            for (j=0;j<=Nz-1;j++){
+        for (i=0;i<=int(Nr-1);i++){
+            for (j=0;j<=int(Nz-1);j++){
                 eta2[i][j]=0.0;
                 eta[i][j]=0.0;}}
 
-       fE_homo();
+       fE_homo();                               //Found in fE_homo
             
         Vol=2.0*pi*(0.5*(Nz-1)*delz*pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));
         if (bilayer==1){Area=pi*(pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));}
         if (disk==1) {Area=pi*(pow((Tip_R+r_0),2)-pow((r_0),2));}
         
-        cleanme();
+        cleanme();                              //Found in read_write
     
         s2=0;fE_old=0.0;
         
         for (s=1;s<=100000;s++){
-            qA_forward();qB_forward();qC_forward();qD_forward();  //solve forward propagator
-            qdagA_forward();  qdagB_forward();  qdagC_forward();  //solve complementary propagator
+            qA_forward();qB_forward();qC_forward();qD_forward();  //solve forward propagators
+            qdagA_forward();  qdagB_forward();  qdagC_forward();  //solve complementary propagators
 
             Q_partition();                      //Solve chain partition function
             phi();                              //Determine new monomer concentrations
@@ -146,7 +127,7 @@ int main() {
             new_fields();                       //Set new interaction fields
             
             
-            cout<< fE-fE_hom<< " "<<phiA+phiB+phiC<<" "<< phiD<<endl;
+            cout<< "Free deltaE: "<<fE-fE_hom<< " Phi-star: "<<phiA+phiB+phiC<<" phi-D: "<< phiD<<endl;
             
             if (s<s2){
                 profile(1);
@@ -161,7 +142,6 @@ int main() {
         OP=((phiA+phiB+phiC)-(phiD))/((phiA+phiB+phiC)+(phiD));
             
         show_data(Area);
-        
         
         save_data(Area,phiA,phiB,phiC,phiD,Tip_R);
         profile(2);
@@ -178,12 +158,15 @@ int main() {
                     muD=muD-0.1;
                     if (OP>0.99){break;}}
                 }
-            if ((disk==0) and (bilayer==0)){break;}
+        if ((disk==0) and (bilayer==0)){break;}
         }
     
-    Destroy();
+    Destroy();                      //Destroy all allocated arrays
     
 }
+
+
+
 /******************************************************************************************/
 /**************************************The Secant method***********************************/
 
@@ -208,8 +191,8 @@ int secant(){
     msg=0;
     
     for (;;){
-        for (i=0;i<=Nr;i++){
-            for (j=0;j<=Nz;j++){
+        for (i=0;i<=int(Nr-1);i++){
+            for (j=0;j<=int(Nz-1);j++){
                 eta2[i][j]=0;
                 eta[i][j]=0;
             }
@@ -239,7 +222,7 @@ int secant(){
             new_fields( );
             
             
-            cout<< Conv_w<< fE-fE_hom<< muD << ii << endl;
+            cout<< "Field convergence: "<<Conv_w<<"Free deltaE: "<< fE-fE_hom<< muD << ii << endl;
             write_data();
             
             if (Conv_p<1.0e-4 and Conv_w<1.0e-4 and dfffE<1.0e-4){break;}

@@ -4,8 +4,8 @@ void new_fields (){
     int i,j;
     Conv_w=0.0;
     Conv_p=0.0;
-    for (i=1;i<=Nr;i++) {
-        for (j=1;j<=Nz;j++){
+    for (i=0;i<=int(Nr-1);i++) {
+        for (j=0;j<=int(Nz-1);j++){
             dwA[i][j]= xAB*(pB[i][j])+xAC*(pC[i][j])+xAD*(pD[i][j])-(eta2[i][j])+(eta[i][j])-(wA[i][j]);
             dwB[i][j]= xAB*(pB[i][j])+xBC*(pC[i][j])+xBD*(pD[i][j])-(eta2[i][j])+(eta[i][j])-(wB[i][j]);
             dwC[i][j]= xAC*(pA[i][j])+xBC*(pB[i][j])+xCD*(pD[i][j])-(eta2[i][j])+(eta[i][j])-(wC[i][j]);

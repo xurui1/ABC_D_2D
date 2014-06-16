@@ -44,7 +44,7 @@
 		79999ACF192E2F6E00F83B8F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		79999AD1192E2F6E00F83B8F /* SCFT.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SCFT.1; sourceTree = "<group>"; };
 		79A955661933C9B00044A006 /* global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = global.h; sourceTree = "<group>"; };
-		79BEC964194B6DFD004315EB /* Destroy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Destroy.h; sourceTree = "<group>"; };
+		79BEC964194B6DFD004315EB /* Create_Destroy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Create_Destroy.h; sourceTree = "<group>"; };
 		79F3A0861940F7AF0079B337 /* read_write.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = read_write.h; sourceTree = "<group>"; };
 		79F3A0871940FCFB0079B337 /* smemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smemory.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,7 +99,7 @@
 				796DBE7A193E4C9C001B7A97 /* TDMA.h */,
 				79F3A0861940F7AF0079B337 /* read_write.h */,
 				79999AD1192E2F6E00F83B8F /* SCFT.1 */,
-				79BEC964194B6DFD004315EB /* Destroy.h */,
+				79BEC964194B6DFD004315EB /* Create_Destroy.h */,
 			);
 			path = SCFT;
 			sourceTree = "<group>";

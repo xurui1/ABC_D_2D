@@ -57,23 +57,6 @@ double qB_forward(){
     int s,i,j;
     double gamma,betaU,betaL,beta;
     
-    qB=create_3d_double_array(Nr,Nz,Ns,"qB");
-    qB_0=create_2d_double_array(Nr,Nz, "qB_0");
-    bBr=create_1d_double_array(Nz, "bBr");
-    bBz=create_1d_double_array(Nr, "bBz");
-    DiagBr=create_1d_double_array(Nz, "DiagBr");
-    DiagBUr=create_1d_double_array(((int)Nz-1), "DiagBUr");
-    DiagBLr=create_1d_double_array(((int)Nz-1), "DiagBLr");
-    DiagBz=create_1d_double_array(Nr, "DiagBz");
-    DiagBUz=create_1d_double_array(((int)Nr-1), "DiagBUz");
-    DiagBLz=create_1d_double_array(((int)Nr-1), "DiagBLz");
-    DiagBrdr=create_1d_double_array(Nz, "DiagBrdr");
-    DiagBUrdr=create_1d_double_array(((int)Nz-1), "DiagBUrdr");
-    DiagBLrdr=create_1d_double_array(((int)Nz-1), "DiagBLrdr");
-    DiagBzdz=create_1d_double_array(Nr, "DiagBzdz");
-    DiagBUzdz=create_1d_double_array(((int)Nr-1), "DiagBUzdz");
-    DiagBLzdz=create_1d_double_array(((int)Nr-1), "DiagBLzdz");
-    
     for (i=0; i<=int(Nr-1);i++){
         for (j=0;j<=int(Nz-1);j++){
             qB_0[i][j]=0;
@@ -184,21 +167,6 @@ double qB_forward(){
         }
     }
     
-    /*destroy_1d_double_array(DiagBLr);
-    destroy_1d_double_array(DiagBUr);
-    destroy_1d_double_array(DiagBr);
-    destroy_1d_double_array(DiagBLrdr);
-    destroy_1d_double_array(DiagBUrdr);
-    destroy_1d_double_array(DiagBrdr);
-    destroy_1d_double_array(DiagBLz);
-    destroy_1d_double_array(DiagBUz);
-    destroy_1d_double_array(DiagBz);
-    destroy_1d_double_array(DiagBLzdz);
-    destroy_1d_double_array(DiagBUzdz);
-    destroy_1d_double_array(DiagBzdz);
-    destroy_1d_double_array(bBr);
-    destroy_1d_double_array(bBz);*/
-    
     return ***qB;
 }
 
@@ -208,24 +176,6 @@ double qdagB_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
-    
-    qdagB=create_3d_double_array(Nr,Nz,Ns,"qdagB");
-    qdagB_0=create_2d_double_array(Nr,Nz, "qdagB_0");
-    /*bBr=create_1d_double_array(Nz, "bBr");
-    bBz=create_1d_double_array(Nr, "bBz");
-    DiagBr=create_1d_double_array(Nz, "DiagBr");
-    DiagBUr=create_1d_double_array(((int)Nz-1), "DiagBUr");
-    DiagBLr=create_1d_double_array(((int)Nz-1), "DiagBLr");
-    DiagBz=create_1d_double_array(Nr, "DiagBz");
-    DiagBUz=create_1d_double_array(((int)Nr-1), "DiagBUz");
-    DiagBLz=create_1d_double_array(((int)Nr-1), "DiagBLz");
-    DiagBrdr=create_1d_double_array(Nz, "DiagBrdr");
-    DiagBUrdr=create_1d_double_array(((int)Nz-1), "DiagBUrdr");
-    DiagBLrdr=create_1d_double_array(((int)Nz-1), "DiagBLrdr");
-    DiagBzdz=create_1d_double_array(Nr, "DiagBzdz");
-    DiagBUzdz=create_1d_double_array(((int)Nr-1), "DiagBUzdz");
-    DiagBLzdz=create_1d_double_array(((int)Nr-1), "DiagBLzdz");*/
-    
     
     for (i=0; i<=int(Nr-1);i++){
         for (j=0;j<=int(Nz-1);j++){

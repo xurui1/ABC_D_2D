@@ -1,8 +1,7 @@
 
 
 
-
-void C_Matrix_r(int ii){
+void C_Matrix_r(int ii,double *DiagCz, double *DiagCLz, double *DiagCUz){
     
     
     int i;
@@ -31,7 +30,7 @@ void C_Matrix_r(int ii){
 
 }
 
-void C_Matrix_z(int ii){
+void C_Matrix_z(int ii,double *DiagCr, double *DiagCLr, double *DiagCUr){
     
     int j;
     
@@ -39,7 +38,7 @@ void C_Matrix_z(int ii){
         DiagCr[j]=0;}
     for (j=0;j<=int(Nz-2);j++){
         DiagCUr[j]=0;
-        DiagCLz[j]=0;}
+        DiagCLr[j]=0;}
     
     
     for (j=0; j<=int(Nz-1); j++){
@@ -56,10 +55,38 @@ void C_Matrix_z(int ii){
 
 
 /**************************Finally time to define some propagators**********************/
-double qC_forward(){
+void qC_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
+    double *DiagCr;
+    double *DiagCUr;
+    double *DiagCLr;
+    double *DiagCrdr;
+    double *DiagCUrdr;
+    double *DiagCLrdr;
+    double *DiagCz;
+    double *DiagCUz;
+    double *DiagCLz;
+    double *DiagCzdz;
+    double *DiagCUzdz;
+    double *DiagCLzdz;
+    
+    bCr=create_1d_double_array(Nz, "bCr");
+    bCz=create_1d_double_array(Nr, "bCz");
+    DiagCr=create_1d_double_array(Nz, "DiagCr");
+    DiagCUr=create_1d_double_array(((int)Nz-1), "DiagCUr");
+    DiagCLr=create_1d_double_array(((int)Nz-1), "DiagCLr");
+    DiagCz=create_1d_double_array(Nr, "DiagCz");
+    DiagCUz=create_1d_double_array(((int)Nr-1), "DiagCUz");
+    DiagCLz=create_1d_double_array(((int)Nr-1), "DiagCLz");
+    DiagCrdr=create_1d_double_array(Nz, "DiagCrdr");
+    DiagCUrdr=create_1d_double_array(((int)Nz-1), "DiagCUrdr");
+    DiagCLrdr=create_1d_double_array(((int)Nz-1), "DiagCLrdr");
+    DiagCzdz=create_1d_double_array(Nr, "DiagCzdz");
+    DiagCUzdz=create_1d_double_array(((int)Nr-1), "DiagCUzdz");
+    DiagCLzdz=create_1d_double_array(((int)Nr-1), "DiagCLzdz");
+
     
     for (i=0; i<=int(Nr-1);i++){
         for (j=0;j<=int(Nz-1);j++){
@@ -82,7 +109,7 @@ double qC_forward(){
         
         /********************************scan over z***********************************************/
         for (i=0;i<=int(Nr-1);i++){
-            B_Matrix_z(i);
+            C_Matrix_z(i,DiagCr,DiagCLr,DiagCUr);
             if (i==0){
                 for (j=0;j<=int(Nz-1);j++){
                     gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wC[i][j]);
@@ -130,7 +157,7 @@ double qC_forward(){
         }
         /***********************************scan over r***************************************************/
         for (j=0;j<=int(Nz-1);j++){
-            B_Matrix_r(j);
+            C_Matrix_r(j,DiagCz,DiagCLz,DiagCUz);
             if (j==0){
                 for (i=0;i<=int(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
@@ -171,15 +198,55 @@ double qC_forward(){
         }
     }
     
-    return ***qC;
+    destroy_1d_double_array(DiagCLr);
+    destroy_1d_double_array(DiagCUr);
+    destroy_1d_double_array(DiagCr);
+    destroy_1d_double_array(DiagCLrdr);
+    destroy_1d_double_array(DiagCUrdr);
+    destroy_1d_double_array(DiagCrdr);
+    destroy_1d_double_array(DiagCLz);
+    destroy_1d_double_array(DiagCUz);
+    destroy_1d_double_array(DiagCz);
+    destroy_1d_double_array(DiagCLzdz);
+    destroy_1d_double_array(DiagCUzdz);
+    destroy_1d_double_array(DiagCzdz);
+    destroy_1d_double_array(bCr);
+    destroy_1d_double_array(bCz);
 }
 
 /***********************************Define the complementary propagator***********************************/
 
-double qdagC_forward(){
+void qdagC_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
+    double *DiagCr;
+    double *DiagCUr;
+    double *DiagCLr;
+    double *DiagCrdr;
+    double *DiagCUrdr;
+    double *DiagCLrdr;
+    double *DiagCz;
+    double *DiagCUz;
+    double *DiagCLz;
+    double *DiagCzdz;
+    double *DiagCUzdz;
+    double *DiagCLzdz;
+    
+    bCr=create_1d_double_array(Nz, "bCr");
+    bCz=create_1d_double_array(Nr, "bCz");
+    DiagCr=create_1d_double_array(Nz, "DiagCr");
+    DiagCUr=create_1d_double_array(((int)Nz-1), "DiagCUr");
+    DiagCLr=create_1d_double_array(((int)Nz-1), "DiagCLr");
+    DiagCz=create_1d_double_array(Nr, "DiagCz");
+    DiagCUz=create_1d_double_array(((int)Nr-1), "DiagCUz");
+    DiagCLz=create_1d_double_array(((int)Nr-1), "DiagCLz");
+    DiagCrdr=create_1d_double_array(Nz, "DiagCrdr");
+    DiagCUrdr=create_1d_double_array(((int)Nz-1), "DiagCUrdr");
+    DiagCLrdr=create_1d_double_array(((int)Nz-1), "DiagCLrdr");
+    DiagCzdz=create_1d_double_array(Nr, "DiagCzdz");
+    DiagCUzdz=create_1d_double_array(((int)Nr-1), "DiagCUzdz");
+    DiagCLzdz=create_1d_double_array(((int)Nr-1), "DiagCLzdz");
 
     for (i=0; i<=int(Nr-1);i++){
         for (j=0;j<=int(Nz-1);j++){
@@ -206,7 +273,7 @@ double qdagC_forward(){
         
         /********************************scan over z***********************************************/
         for (i=0;i<=int(Nr-1);i++){
-            B_Matrix_z(i);
+            C_Matrix_z(i,DiagCr,DiagCLr,DiagCUr);
             if (i==0){
                 for (j=0;j<=int(Nz-1);j++){
                     gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wC[i][j]);
@@ -256,7 +323,7 @@ double qdagC_forward(){
     }
     /***********************************scan over r***************************************************/
     for (j=0;j<=int(Nz-1);j++){
-        B_Matrix_r(j);
+        C_Matrix_r(j,DiagCz,DiagCLz,DiagCUz);
         if (j==0){
             for (i=0;i<=int(Nr-1);i++){
                 gamma=1.0-(delt/(pow((double)delz,(int)2)));
@@ -295,8 +362,21 @@ double qdagC_forward(){
         for (j=0; j<=int(Nz-1); j++){
             qdagC_0[i][j]=qdagC[i][j][s];}
     }
-    
-    return ***qdagC;
+    destroy_1d_double_array(DiagCLr);
+    destroy_1d_double_array(DiagCUr);
+    destroy_1d_double_array(DiagCr);
+    destroy_1d_double_array(DiagCLrdr);
+    destroy_1d_double_array(DiagCUrdr);
+    destroy_1d_double_array(DiagCrdr);
+    destroy_1d_double_array(DiagCLz);
+    destroy_1d_double_array(DiagCUz);
+    destroy_1d_double_array(DiagCz);
+    destroy_1d_double_array(DiagCLzdz);
+    destroy_1d_double_array(DiagCUzdz);
+    destroy_1d_double_array(DiagCzdz);
+    destroy_1d_double_array(bCr);
+    destroy_1d_double_array(bCz);
+
 }
 
 

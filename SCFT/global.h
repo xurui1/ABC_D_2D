@@ -50,18 +50,7 @@ double ***qA;
 double **qA_0;
 double ***qdagA;
 double **qdagA_0;
-double *DiagAr;
-double *DiagAUr;
-double *DiagALr;
-double *DiagArdr;
-double *DiagAUrdr;
-double *DiagALrdr;
-double *DiagAz;
-double *DiagAUz;
-double *DiagALz;
-double *DiagAzdz;
-double *DiagAUzdz;
-double *DiagALzdz;
+
 
 
 /********************************B-Block*********************************/
@@ -75,19 +64,7 @@ double ***qB;
 double **qB_0;
 double ***qdagB;
 double **qdagB_0;
-double *DiagBr;
-double *DiagBUr;
-double *DiagBLr;
-double *DiagBrdr;
-double *DiagBUrdr;
-double *DiagBLrdr;
-double *DiagBz;
-double *DiagBUz;
-double *DiagBLz;
-double *DiagBzdz;
-double *DiagBUzdz;
-double *DiagBLzdz;
- 
+
 
 
 /********************************C-Block*********************************/
@@ -101,18 +78,7 @@ double ***qC;
 double **qC_0;
 double ***qdagC;
 double **qdagC_0;
-double *DiagCr;
-double *DiagCUr;
-double *DiagCLr;
-double *DiagCrdr;
-double *DiagCUrdr;
-double *DiagCLrdr;
-double *DiagCz;
-double *DiagCUz;
-double *DiagCLz;
-double *DiagCzdz;
-double *DiagCUzdz;
-double *DiagCLzdz;
+
 
 
 /********************************D-chain***********************************/
@@ -124,16 +90,5 @@ double **dwD;
 double **pD;
 double ***qD;
 double **qD_0;
-double *DiagDr;
-double *DiagDUr;
-double *DiagDLr;
-double *DiagDrdr;
-double *DiagDUrdr;
-double *DiagDLrdr;
-double *DiagDz;
-double *DiagDUz;
-double *DiagDLz;
-double *DiagDzdz;
-double *DiagDUzdz;
-double *DiagDLzdz;
+
 

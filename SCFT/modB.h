@@ -1,5 +1,5 @@
 
-void B_Matrix_r(int ii){
+void B_Matrix_r(int ii, double *DiagBz, double *DiagBLz,double *DiagBUz){
     
     int i;
     
@@ -27,7 +27,7 @@ void B_Matrix_r(int ii){
     
 }
 
-void B_Matrix_z(int ii){
+void B_Matrix_z(int ii, double *DiagBr, double *DiagBLr, double *DiagBUr){
     
     int j;
     
@@ -52,10 +52,39 @@ void B_Matrix_z(int ii){
 
 
 /**************************Finally time to define some propagators**********************/
-double qB_forward(){
+void qB_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
+    
+    double *DiagBr;
+    double *DiagBUr;
+    double *DiagBLr;
+    double *DiagBrdr;
+    double *DiagBUrdr;
+    double *DiagBLrdr;
+    double *DiagBz;
+    double *DiagBUz;
+    double *DiagBLz;
+    double *DiagBzdz;
+    double *DiagBUzdz;
+    double *DiagBLzdz;
+    
+    
+    bBr=create_1d_double_array(Nz, "bBr");
+    bBz=create_1d_double_array(Nr, "bBz");
+    DiagBr=create_1d_double_array(Nz, "DiagBr");
+    DiagBUr=create_1d_double_array(((int)Nz-1), "DiagBUr");
+    DiagBLr=create_1d_double_array(((int)Nz-1), "DiagBLr");
+    DiagBz=create_1d_double_array(Nr, "DiagBz");
+    DiagBUz=create_1d_double_array(((int)Nr-1), "DiagBUz");
+    DiagBLz=create_1d_double_array(((int)Nr-1), "DiagBLz");
+    DiagBrdr=create_1d_double_array(Nz, "DiagBrdr");
+    DiagBUrdr=create_1d_double_array(((int)Nz-1), "DiagBUrdr");
+    DiagBLrdr=create_1d_double_array(((int)Nz-1), "DiagBLrdr");
+    DiagBzdz=create_1d_double_array(Nr, "DiagBzdz");
+    DiagBUzdz=create_1d_double_array(((int)Nr-1), "DiagBUzdz");
+    DiagBLzdz=create_1d_double_array(((int)Nr-1), "DiagBLzdz");
     
     for (i=0; i<=int(Nr-1);i++){
         for (j=0;j<=int(Nz-1);j++){
@@ -78,7 +107,7 @@ double qB_forward(){
         
         /********************************scan over z***********************************************/
         for (i=0;i<=int(Nr-1);i++){
-            B_Matrix_z(i);
+            B_Matrix_z(i,DiagBr,DiagBLr,DiagBUr);
             if (i==0){
                 for (j=0;j<=int(Nz-1);j++){
                     gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wB[i][j]);
@@ -126,7 +155,7 @@ double qB_forward(){
         }
         /***********************************scan over r***************************************************/
         for (j=0;j<=int(Nz-1);j++){
-            B_Matrix_r(j);
+            B_Matrix_r(j,DiagBz,DiagBLz, DiagBUz);
             if (j==0){
                 for (i=0;i<=int(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
@@ -167,15 +196,55 @@ double qB_forward(){
         }
     }
     
-    return ***qB;
+    destroy_1d_double_array(DiagBLr);
+    destroy_1d_double_array(DiagBUr);
+    destroy_1d_double_array(DiagBr);
+    destroy_1d_double_array(DiagBLrdr);
+    destroy_1d_double_array(DiagBUrdr);
+    destroy_1d_double_array(DiagBrdr);
+    destroy_1d_double_array(DiagBLz);
+    destroy_1d_double_array(DiagBUz);
+    destroy_1d_double_array(DiagBz);
+    destroy_1d_double_array(DiagBLzdz);
+    destroy_1d_double_array(DiagBUzdz);
+    destroy_1d_double_array(DiagBzdz);
+    destroy_1d_double_array(bBr);
+    destroy_1d_double_array(bBz);
 }
 
 /***********************************Define the complementary propagator***********************************/
 
-double qdagB_forward(){
+void qdagB_forward(){
     
     int s,i,j;
     double gamma,betaU,betaL,beta;
+    double *DiagBr;
+    double *DiagBUr;
+    double *DiagBLr;
+    double *DiagBrdr;
+    double *DiagBUrdr;
+    double *DiagBLrdr;
+    double *DiagBz;
+    double *DiagBUz;
+    double *DiagBLz;
+    double *DiagBzdz;
+    double *DiagBUzdz;
+    double *DiagBLzdz;
+    
+    bBr=create_1d_double_array(Nz, "bBr");
+    bBz=create_1d_double_array(Nr, "bBz");
+    DiagBr=create_1d_double_array(Nz, "DiagBr");
+    DiagBUr=create_1d_double_array(((int)Nz-1), "DiagBUr");
+    DiagBLr=create_1d_double_array(((int)Nz-1), "DiagBLr");
+    DiagBz=create_1d_double_array(Nr, "DiagBz");
+    DiagBUz=create_1d_double_array(((int)Nr-1), "DiagBUz");
+    DiagBLz=create_1d_double_array(((int)Nr-1), "DiagBLz");
+    DiagBrdr=create_1d_double_array(Nz, "DiagBrdr");
+    DiagBUrdr=create_1d_double_array(((int)Nz-1), "DiagBUrdr");
+    DiagBLrdr=create_1d_double_array(((int)Nz-1), "DiagBLrdr");
+    DiagBzdz=create_1d_double_array(Nr, "DiagBzdz");
+    DiagBUzdz=create_1d_double_array(((int)Nr-1), "DiagBUzdz");
+    DiagBLzdz=create_1d_double_array(((int)Nr-1), "DiagBLzdz");
     
     for (i=0; i<=int(Nr-1);i++){
         for (j=0;j<=int(Nz-1);j++){
@@ -201,7 +270,7 @@ double qdagB_forward(){
         
         /********************************scan over z***********************************************/
         for (i=0;i<=int(Nr-1);i++){
-            B_Matrix_z(i);
+            B_Matrix_z(i,DiagBr,DiagBLr,DiagBUr);
             if (i==0){
                 for (j=0;j<=int(Nz-1);j++){
                     gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wB[i][j]);
@@ -253,7 +322,8 @@ double qdagB_forward(){
     }
     /***********************************scan over r***************************************************/
     for (j=0;j<=int(Nz-1);j++){
-        B_Matrix_r(j);
+        B_Matrix_r(j,DiagBz,DiagBLz, DiagBUz);
+
         if (j==0){
             for (i=0;i<=int(Nr-1);i++){
                 gamma=1.0-(delt/(pow((double)delz,(int)2)));
@@ -293,7 +363,7 @@ double qdagB_forward(){
             qdagB_0[i][j]=qdagB[i][j][s];}
     }
     
-    /*destroy_1d_double_array(DiagBLr);
+    destroy_1d_double_array(DiagBLr);
     destroy_1d_double_array(DiagBUr);
     destroy_1d_double_array(DiagBr);
     destroy_1d_double_array(DiagBLrdr);
@@ -306,9 +376,9 @@ double qdagB_forward(){
     destroy_1d_double_array(DiagBUzdz);
     destroy_1d_double_array(DiagBzdz);
     destroy_1d_double_array(bBr);
-    destroy_1d_double_array(bBz);*/
+    destroy_1d_double_array(bBz);
     
-    return ***qdagB;
+   
 }
 
 

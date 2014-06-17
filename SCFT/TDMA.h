@@ -14,7 +14,7 @@ double TDMA(const size_t N_in, const double DiagL_in[], const double Diag_in[], 
     b_in[0] = b_in[0] / Diag_in[0];
     
     /* loop from 1 to N - 1 inclusive */
-    for (i = 1; i < N_in; i++) {
+    for (i = 1; i <= int(N_in-1); i++) {
         double m = 1.0 / (Diag_in[i] - (DiagL_in[i] * c[i - 1]));
         c[i] = c[i] * m;
         b_in[i] = (b_in[i] - DiagL_in[i] * b_in[i - 1]) * m;

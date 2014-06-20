@@ -257,8 +257,8 @@ void qdagB_forward(){
     
     for (i=0;i<=int(Nr-1);i++){
         for (j=0;j<=int(Nz-1);j++){
-            qdagB[i][j][0]=qA[i][j][NA]*qC[i][j][NC];
-            qdagB_0[i][j]=(qA[i][j][NA])*(qC[i][j][NC]);
+            qdagB[i][j][0]=qA[i][j][int(NA-1)]*qC[i][j][int(NC-1)];
+            qdagB_0[i][j]=(qA[i][j][int(NA-1)])*(qC[i][j][int(NC-1)]);
         }
     }
     

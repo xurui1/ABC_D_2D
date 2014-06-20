@@ -63,24 +63,17 @@ void create(){
     qA_0=create_2d_double_array(Nr,Nz, "qA_0");
     qdagA=create_3d_double_array(Nr,Nz,Ns,"qdagA");
     qdagA_0=create_2d_double_array(Nr,Nz, "qdagA_0");
-
-    
     
     qB=create_3d_double_array(Nr,Nz,Ns,"qB");
     qB_0=create_2d_double_array(Nr,Nz, "qB_0");
     qdagB=create_3d_double_array(Nr,Nz,Ns,"qdagB");
     qdagB_0=create_2d_double_array(Nr,Nz, "qdagB_0");
-
-    
     
     qC=create_3d_double_array(Nr,Nz,Ns,"qC");
     qC_0=create_2d_double_array(Nr,Nz, "qC_0");
     qdagC=create_3d_double_array(Nr,Nz,Ns,"qdagC");
     qdagC_0=create_2d_double_array(Nr,Nz, "qdagC_0");
     
-    
     qD=create_3d_double_array(Nr,Nz,Ns,"qD");
     qD_0=create_2d_double_array(Nr,Nz, "qD_0");
-
-    
 }

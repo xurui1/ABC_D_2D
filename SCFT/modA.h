@@ -257,8 +257,10 @@ void qA_forward(){
         
         for (i=0;i<=int(Nr-1);i++){
             for (j=0;j<=int(Nz-1);j++){
-                qdagA[i][j][0]=qB[i][j][NB]*qC[i][j][NC];
-                qdagA_0[i][j]=(qB[i][j][NB])*(qC[i][j][NC]);}}
+                qdagA[i][j][0]=qB[i][j][int(NB-1)]*qC[i][j][int(NC-1)];
+                qdagA_0[i][j]=qB[i][j][int(NB-1)]*qC[i][j][int(NC-1)];
+            }
+        }
         
         for (s=0;s<=int(NA-1);s++){
             
@@ -282,13 +284,14 @@ void qA_forward(){
                         betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
                         bAr[j]=gamma*qdagA_0[i][j]+betaU*qdagA_0[int(i-1)][j]+betaL*qdagA_0[int(i-1)][j];}
                 }
+                
                 else {
                     for (j=0;j<=int(Nz-1);j++){
                         gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wA[i][j]);
                         betaL=(delt/(2.0*pow((double)delr,(int)2)))-(delt/((((i-1)*delr)+(r_0))*4.0*delr));
                         betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
-                        bAr[j]=gamma*qdagA_0[i][j]+betaU*qdagA_0[int(i+1)][j]+betaL*qdagA_0[int(i-1)][j];}
-                }
+                        bAr[j]=gamma*qdagA_0[i][j]+betaU*qdagA_0[int(i+1)][j]+betaL*qdagA_0[int(i-1)][j];}}
+                
                 for (j=0;j<=int(Nz-1);j++){
                     DiagArdr[j]=DiagAr[j];}
                 for (j=0;j<=int(Nz-2);j++){

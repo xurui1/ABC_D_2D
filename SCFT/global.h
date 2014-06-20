@@ -40,7 +40,6 @@ double **dpp;
 double **eta2;
 
 /********************************A-Block************************************/
-
 double *bAr;
 double *bAz;
 double **wA;
@@ -50,11 +49,7 @@ double ***qA;
 double **qA_0;
 double ***qdagA;
 double **qdagA_0;
-
-
-
 /********************************B-Block*********************************/
-
 double *bBr;
 double *bBz;
 double **wB;
@@ -64,11 +59,7 @@ double ***qB;
 double **qB_0;
 double ***qdagB;
 double **qdagB_0;
-
-
-
 /********************************C-Block*********************************/
-
 double *bCr;
 double *bCz;
 double **wC;
@@ -78,11 +69,7 @@ double ***qC;
 double **qC_0;
 double ***qdagC;
 double **qdagC_0;
-
-
-
 /********************************D-chain***********************************/
-
 double *bDr;
 double *bDz;
 double **wD;

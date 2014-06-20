@@ -25,19 +25,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7930227C19532B46002C4433 /* modsecant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modsecant.h; sourceTree = "<group>"; };
 		79602077193F93EC0037189E /* modB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modB.h; sourceTree = "<group>"; };
 		79602078193F9B010037189E /* modC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modC.h; sourceTree = "<group>"; };
 		79602079193FA0510037189E /* modD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modD.h; sourceTree = "<group>"; };
 		7960207A193FA3D90037189E /* modphi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modphi.h; sourceTree = "<group>"; };
-		7960207C1940A31C0037189E /* profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = profile.h; sourceTree = "<group>"; };
 		796DBE70193CFD7F001B7A97 /* xmatrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xmatrix.h; sourceTree = "<group>"; };
-		796DBE71193D0015001B7A97 /* rand_field.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = rand_field.h; sourceTree = "<group>"; };
-		796DBE72193D039C001B7A97 /* phi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = phi.h; sourceTree = "<group>"; };
-		796DBE73193D04F9001B7A97 /* etas.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = etas.h; sourceTree = "<group>"; };
+		796DBE71193D0015001B7A97 /* fields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fields.h; sourceTree = "<group>"; };
 		796DBE74193D08F6001B7A97 /* Q_partition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Q_partition.h; sourceTree = "<group>"; };
-		796DBE76193D0B98001B7A97 /* new_fields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = new_fields.h; sourceTree = "<group>"; };
-		796DBE77193E0F5F001B7A97 /* fE_homo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fE_homo.h; sourceTree = "<group>"; };
-		796DBE78193E1B40001B7A97 /* FreeEnergy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FreeEnergy.h; sourceTree = "<group>"; };
+		796DBE78193E1B40001B7A97 /* energy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = energy.h; sourceTree = "<group>"; };
 		796DBE79193E3A11001B7A97 /* modA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modA.h; sourceTree = "<group>"; };
 		796DBE7A193E4C9C001B7A97 /* TDMA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TDMA.h; sourceTree = "<group>"; };
 		79999ACC192E2F6E00F83B8F /* SCFT */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SCFT; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,14 +79,9 @@
 				79A955661933C9B00044A006 /* global.h */,
 				796DBE70193CFD7F001B7A97 /* xmatrix.h */,
 				79F3A0871940FCFB0079B337 /* smemory.h */,
-				796DBE71193D0015001B7A97 /* rand_field.h */,
-				7960207C1940A31C0037189E /* profile.h */,
-				796DBE72193D039C001B7A97 /* phi.h */,
-				796DBE73193D04F9001B7A97 /* etas.h */,
+				796DBE71193D0015001B7A97 /* fields.h */,
 				796DBE74193D08F6001B7A97 /* Q_partition.h */,
-				796DBE76193D0B98001B7A97 /* new_fields.h */,
-				796DBE77193E0F5F001B7A97 /* fE_homo.h */,
-				796DBE78193E1B40001B7A97 /* FreeEnergy.h */,
+				796DBE78193E1B40001B7A97 /* energy.h */,
 				796DBE79193E3A11001B7A97 /* modA.h */,
 				79602077193F93EC0037189E /* modB.h */,
 				79602078193F9B010037189E /* modC.h */,
@@ -100,6 +91,7 @@
 				79F3A0861940F7AF0079B337 /* read_write.h */,
 				79999AD1192E2F6E00F83B8F /* SCFT.1 */,
 				79BEC964194B6DFD004315EB /* Create_Destroy.h */,
+				7930227C19532B46002C4433 /* modsecant.h */,
 			);
 			path = SCFT;
 			sourceTree = "<group>";

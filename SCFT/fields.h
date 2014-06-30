@@ -112,10 +112,12 @@ void new_fields (){
     for (i=0;i<=int(Nr-1);i++) {
         for (j=0;j<=int(Nz-1);j++){
             dwA[i][j]= xAB*(pB[i][j])+xAC*(pC[i][j])+xAD*(pD[i][j])-(eta2[i][j])+(eta[i][j])-(wA[i][j]);
-            dwB[i][j]= xAB*(pB[i][j])+xBC*(pC[i][j])+xBD*(pD[i][j])-(eta2[i][j])+(eta[i][j])-(wB[i][j]);
-            dwC[i][j]= xAC*(pA[i][j])+xBC*(pB[i][j])+xCD*(pD[i][j])-(eta2[i][j])+(eta[i][j])-(wC[i][j]);
+            dwB[i][j]= xAB*(pB[i][j])+xBC*(pC[i][j])+xBD*(pD[i][j])+(eta2[i][j])+(eta[i][j])-(wB[i][j]);
+            dwC[i][j]= xAC*(pA[i][j])+xBC*(pB[i][j])+xCD*(pD[i][j])+(eta2[i][j])+(eta[i][j])-(wC[i][j]);
             dwD[i][j]= xAD*(pA[i][j])+xBD*(pB[i][j])+xCD*(pC[i][j])-(eta2[i][j])+(eta[i][j])-(wD[i][j]);
             dpp[i][j]=1.0-(pA[i][j]+pB[i][j]+pC[i][j]+pD[i][j]);
+            
+            //changed (-) to (+) for eta2, according to Kyles paper (for hydrophobic components).
             
             Conv_w=Conv_w+abs((dwA[i][j])+(dwB[i][j])+(dwC[i][j])+(dwD[i][j]));
             Conv_p=Conv_p+abs(dpp[i][j]);
@@ -145,9 +147,7 @@ void pressure(){
 void pressure2(){
     cout<< "pressure2"<<endl;
     int i,j;
-    for (i=Ntip;;){
-        for (j=Mtip;;){
-            eta2[i][j]=eta2[i][j]-10*((pA[i][j]+pD[i][j])-(pB[i][j]+pC[i][j]));
-        }
-    }
+    i=int(Ntip-1);
+    j=int(Mtip-1);
+    eta2[i][j]=eta2[i][j]-10*((pA[i][j]+pD[i][j])-(pB[i][j]+pC[i][j]));
 }

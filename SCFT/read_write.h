@@ -62,16 +62,16 @@ void save_data(double Area, double phiA, double phiB, double phiC, double phiD, 
     if (disk==1){
         fstream myfile;
         myfile.open("./results/fE_disk.dat");
-        myfile<<ND<<((fE-fE_hom)*Vol)/Area<<((phiA+phiB+phiD)-phiABC_hom)*Vol/Area<< (r_0+Tip_R)<<
-        (phiA+phiB+phiC)<<(phiD)<<Area<<muABC<<muD<< endl;
+        myfile<<ND<<" "<<((fE-fE_hom)*Vol)/Area<<" "<<((phiA+phiB+phiD)-phiABC_hom)*Vol/Area<< " "<<(r_0+Tip_R)<<
+        " "<<(phiA+phiB+phiC)<<" "<<(phiD)<<" "<<Area<<" "<<muABC<<" "<<muD<< endl;
         myfile.close();
     }
     
     if (bilayer==1){
         fstream myfile;
         myfile.open("./results/fE_bilayer.dat");
-        myfile<<ND<<((fE-fE_hom)*Vol)/Area<<((phiA+phiB+phiD)-phiABC_hom)*Vol/Area<< (r_0+Tip_R)<<
-        (phiA+phiB+phiC)<<(phiD)<<Area<<muABC<<muD<< endl;
+        myfile<<ND<<" "<<((fE-fE_hom)*Vol)/Area<<" "<<((phiA+phiB+phiD)-phiABC_hom)*Vol/Area<<" "<< (r_0+Tip_R)<<
+        " "<<(phiA+phiB+phiC)<<" "<<(phiD)<<" "<<Area<<" "<<muABC<<" "<<muD<< endl;
         myfile.close();
     }
 }
@@ -83,33 +83,33 @@ void write_data(){
     myfile.open("./results/phi.dat");
     for (i=0;i<=Nr-1;i++){
         for (j=0;j<=Nz-1;j++){
-            myfile <<(i*delr)<<(j*delz)<<pA[i][j]<<pB[i][j]<<pC[i][j]<<pD[i][j];}}
+            myfile <<(i*delr)<<" "<<(j*delz)<<" "<<pA[i][j]<<" "<<pB[i][j]<<" "<<pC[i][j]<<" "<<pD[i][j];}}
     myfile.close();
     
     myfile.open("./results/phi1Dr.dat");
     for (i=0;i<=Nr-1;i++){
         for (j=0;j<=Nz-1;j++){
-            myfile <<(i*delr)<<(j*delz)<<pA[i][Nz/2]<<pB[i][Nz/2]<<pC[i][Nz/2]<<pD[i][Nz/2];}}
+            myfile <<(i*delr)<<" "<<(j*delz)<<" "<<pA[i][Nz/2]<<" "<<pB[i][Nz/2]<<" "<<pC[i][Nz/2]<<" "<<pD[i][Nz/2];}}
     myfile.close();
     
     myfile.open("./results/phi1Dz.dat");
     for (i=0;i<=Nr-1;i++){
         for (j=0;j<=Nz-1;j++){
-            myfile <<(i*delr)<<(j*delz)<<pA[Nr/2][j]<<pB[Nr/2][j]<<pC[Nr/2][j]<<pD[Nr/2][j]<<std::endl;}}
+            myfile <<(i*delr)<<" "<<(j*delz)<<" "<<pA[Nr/2][j]<<" "<<pB[Nr/2][j]<<" "<<pC[Nr/2][j]<<" "<<pD[Nr/2][j]<<std::endl;}}
     myfile.close();
     
     if (disk==1){
         myfile.open("./results/omega.disk");
         for (i=0;i<=Nr-1;i++){
             for (j=0;j<=Nz-1;j++){
-                myfile<<wA[i][j]<<wB[i][j]<<wC[i][j]<<wD[i][j]<<std::endl;}}
+                myfile<<wA[i][j]<<" "<<wB[i][j]<<" "<<wC[i][j]<<" "<<wD[i][j]<<std::endl;}}
         myfile.close();}
     
     if (bilayer==1){
         myfile.open("./results/omega.disk");
         for (i=0;i<=Nr-1;i++){
             for (j=0;j<=Nz-1;j++){
-                myfile<<wA[i][j]<<wB[i][j]<<wC[i][j]<<wD[i][j]<<std::endl;}}
+                myfile<<wA[i][j]<<" "<<wB[i][j]<<" "<<wC[i][j]<<" "<<wD[i][j]<<std::endl;}}
         myfile.close();}
     
 }
@@ -126,7 +126,7 @@ void profile(int msg){
         myfile.open("./results/profile1.dat");
         for (i=0;i<=(Nr-1);i++){
             for (j=0;j<=(Nz-1);j++){
-                myfile<<(i*delr)<<(j*delz)<<pA[i][j]<<pB[i][j]<<pC[i][j]<<pD[i][j]<<endl;
+                myfile<<(i*delr)<<" "<<(j*delz)<<" "<<pA[i][j]<<" "<<pB[i][j]<<" "<<pC[i][j]<<" "<<pD[i][j]<<endl;
             }
         }
         myfile.close();
@@ -137,7 +137,7 @@ void profile(int msg){
         myfile.open("./results/outphi/profile.dat");
         for (i=0;i<=(Nr-1);i++){
             for (j=0;j<=(Nz-1);j++){
-                myfile<<(i*delr)<<(j*delz)<<pA[i][j]<<pB[i][j]<<pC[i][j]<<pD[i][j]<<endl;
+                myfile<<(i*delr)<<" "<<(j*delz)<<" "<<pA[i][j]<<" "<<pB[i][j]<<" "<<pC[i][j]<<" "<<pD[i][j]<<endl;
             }
         }
         myfile.close();
@@ -147,14 +147,14 @@ void profile(int msg){
             px=(((i-1)*delr+r_0))*cos(ct);
             py=(((i-1)*delr+r_0))*sin(ct);
             pz=(i-1)*delz;
-            myfile<<ct<<(i-1)*delr<<(i-1)*delz;
+            myfile<<ct<<(i-1)*delr<<" "<<(i-1)*delz;
         }
         myfile.close();
         myfile.open("./results/ABCD.dat");
         for (ii=0;ii<=(Nr-1);ii++){
             for (i=0;i<=(Nr-1);i++){
                 for(j=0;j<=(Nr-1);j++){
-                    myfile<<pA[i][j]<<pB[i][j]<<pC[i][j]<<pD[i][j]<<endl;
+                    myfile<<pA[i][j]<<" "<<pB[i][j]<<" "<<pC[i][j]<<" "<<pD[i][j]<<endl;
                 }
             }
         }

@@ -28,10 +28,7 @@
 #include "Create_Destroy.h"         //define and destroy arrays
 #include "modsecant.h"              //The secant method
 
-
-
 using namespace std;
-
 
 int main() {
     
@@ -40,8 +37,7 @@ int main() {
     int muD_up,muD_down;                                   //For stepping up and down potential E.
     double Area = 0.0,Tip_R;                               //Area and perimeter?? of system
     double f_int_0, ABC_0;                                 //not sure of purpose
-    
-
+    double nan(const char* tagp);
     
     /*********************Set Kappa and fA**************************************************/
     kappaD=(double)ND/((double)(NA+NB+NC));
@@ -82,7 +78,7 @@ int main() {
         Tip_R=(Ntip-1)*delr;}
     else {Tip_R=0;}
     
-    /************************************LOOP************************************************/
+    /***********************************for LOOP*******************************************/
     
     for (iter=0;;iter++){
         if (ten_find==1)
@@ -120,12 +116,15 @@ int main() {
             
             cout<< "Free deltaE: "<<fE-fE_hom<< " Phi-star: "<<phiA+phiB+phiC<<" phi-D: "<< phiD<<" "<<iter<<endl;
             
+            if (abs(fE)>=(1.0e5)or isnan(fE)==true){cout<<"Free energy out of bouds";return 0;}
+
+            
             if (s<s2){
                 profile(1);
                 write_data();
             }
                 
-            if (Conv_p<1.0e-4 and Conv_w<1.0e-4 and dfffE<1.0e-4){
+            if (Conv_p<1.0e-4 and Conv_w<3.0e-3 and dfffE<1.0e-4){
                     break;
             }
         }
@@ -137,9 +136,9 @@ int main() {
         save_data(Area,phiA,phiB,phiC,phiD,Tip_R);
         profile(2);
             
+        if (bilayer==1 and once==1){break;}
         
         if ((disk==1) and (bilayer==1)) {break;}
-            
         
         if (disk==1){
                 if (muD_up==1){
@@ -149,9 +148,17 @@ int main() {
                     muD=muD-0.1;
                     if (OP>0.99){break;}}
                 }
+        
+        
+        if (bilayer==1){
+            if (muD<-5.0){break;}
+            muD=muD-0.1;
+        }
+ 
         if ((disk==0) and (bilayer==0)){break;}
         }
     
+    /*******************************end for loop*******************************************/
     Destroy();                      //Destroy all allocated arrays
     
 }

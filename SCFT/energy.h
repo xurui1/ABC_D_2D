@@ -1,4 +1,4 @@
-double FreeEnergy(){
+void FreeEnergy(){
     
     int i,j,ii,jj;
     double F1,F2,F3,F4,F5,F6,F7,F8,F9;
@@ -235,7 +235,8 @@ double FreeEnergy(){
     dfffE=0.0;
     dfffE=abs(fE-fE_old);
     fE_old=fE;
-    return fE;
+    
+    
 }
 
 

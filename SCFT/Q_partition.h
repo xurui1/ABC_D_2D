@@ -47,7 +47,7 @@ double Q_partition(){
     Q_ABC=Q_ABC*2.0/Vol;
     Q_D=Q_D*2.0/Vol;
     
-    cout<<"Q_ABC: "<<Q_ABC<<" Q_D:"<<Q_D<<endl;
+    //cout<<"Q_ABC: "<<Q_ABC<<" Q_D:"<<Q_D<<endl;
     
     return Q_D;
 }

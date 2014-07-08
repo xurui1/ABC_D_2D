@@ -29,6 +29,7 @@
 #include "modsecant.h"              //The secant method
 
 using namespace std;
+double UnifRand();
 
 int main() {
     
@@ -91,10 +92,10 @@ int main() {
                 eta2[i][j]=0.0;
                 eta[i][j]=0.0;}}
 
-       fE_homo();                               //Found in fE_homo
+        fE_homo();                               //Found in Energy
             
-        Vol=2.0*pi*(0.5*(Nz-1)*delz*pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));
-        if (bilayer==1){Area=pi*(pow(((Nr-1)*delr+r_0),2)-pow((r_0),2));}
+        Vol=2.0*pi*(0.5*D_z*pow((D_r+r_0),2)-pow((r_0),2));
+        if (bilayer==1){Area=pi*(pow((D_r+r_0),2)-pow((r_0),2));}
         if (disk==1) {Area=pi*(pow((Tip_R+r_0),2)-pow((r_0),2));}
         
         cleanme();                              //Found in read_write
@@ -114,32 +115,27 @@ int main() {
             new_fields();                       //Set new interaction fields
             
             
-            cout<< "Free deltaE: "<<fE-fE_hom<< " Phi-star: "<<phiA+phiB+phiC<<" phi-D: "<< phiD<<" "<<iter<<endl;
+//            cout<< "fE: "<<(fE-fE_hom)*Vol/Area<< " Phi-star: "<<phiA+phiB+phiC<<" phi-D: "<< phiD<<" "<<iter<<endl;
             
-            if (abs(fE)>=(1.0e5)or isnan(fE)==true){cout<<"Free energy out of bouds";return 0;}
+            if (abs((fE-fE_hom)*Vol/Area)>=(1.0e5) or isnan(fE)==true){cout<<"Free energy out of bounds";return 0;}
 
-            
-            if (s<s2){
+            if (s>s2){
                 profile(1);
                 write_data();
-            }
+                s2=s2+10;}
                 
-            if (Conv_p<1.0e-4 and Conv_w<3.0e-3 and dfffE<1.0e-4){
-                    break;
-            }
+            if (Conv_p<1.0e-4 and Conv_w<3.0e-4 and dfffE<1.0e-4){break;}
+            
         }
             
-        OP=((phiA+phiB+phiC)-(phiD))/((phiA+phiB+phiC)+(phiD));
-            
+        //OP=((phiA+phiB+phiC)-(phiD))/((phiA+phiB+phiC)+(phiD)); //irrelevant, only one type of star copolymer
         show_data(Area);
-        
         save_data(Area,phiA,phiB,phiC,phiD,Tip_R);
         profile(2);
             
         if (bilayer==1 and once==1){break;}
-        
         if ((disk==1) and (bilayer==1)) {break;}
-        
+        if ((disk==0) and (bilayer==0)){break;}
         if (disk==1){
                 if (muD_up==1){
                     muD=muD+0.1;
@@ -148,17 +144,14 @@ int main() {
                     muD=muD-0.1;
                     if (OP>0.99){break;}}
                 }
-        
-        
         if (bilayer==1){
             if (muD<-5.0){break;}
-            muD=muD-0.1;
-        }
+            muD=muD-0.1;}
  
-        if ((disk==0) and (bilayer==0)){break;}
-        }
-    
-    /*******************************end for loop*******************************************/
+        
+    /********************************end of iteration loop*********************************/
+    }
+
     Destroy();                      //Destroy all allocated arrays
     
 }

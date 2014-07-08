@@ -59,21 +59,21 @@ void create(){
     dwD=create_2d_double_array(Nr,Nz, "dwD");              //differential of wD
     pD=create_2d_double_array(Nr,Nz, "pD");                //probability amplitude of chain D
     
-    qA=create_3d_double_array(Nr,Nz,Ns,"qA");
+    qA=create_3d_double_array(Nr,Nz,int(Ns+1),"qA");
     qA_0=create_2d_double_array(Nr,Nz, "qA_0");
-    qdagA=create_3d_double_array(Nr,Nz,Ns,"qdagA");
+    qdagA=create_3d_double_array(Nr,Nz,int(Ns+1),"qdagA");
     qdagA_0=create_2d_double_array(Nr,Nz, "qdagA_0");
     
-    qB=create_3d_double_array(Nr,Nz,Ns,"qB");
+    qB=create_3d_double_array(Nr,Nz,int(Ns+1),"qB");
     qB_0=create_2d_double_array(Nr,Nz, "qB_0");
-    qdagB=create_3d_double_array(Nr,Nz,Ns,"qdagB");
+    qdagB=create_3d_double_array(Nr,Nz,int(Ns+1),"qdagB");
     qdagB_0=create_2d_double_array(Nr,Nz, "qdagB_0");
     
-    qC=create_3d_double_array(Nr,Nz,Ns,"qC");
+    qC=create_3d_double_array(Nr,Nz,int(Ns+1),"qC");
     qC_0=create_2d_double_array(Nr,Nz, "qC_0");
-    qdagC=create_3d_double_array(Nr,Nz,Ns,"qdagC");
+    qdagC=create_3d_double_array(Nr,Nz,int(Ns+1),"qdagC");
     qdagC_0=create_2d_double_array(Nr,Nz, "qdagC_0");
     
-    qD=create_3d_double_array(Nr,Nz,Ns,"qD");
+    qD=create_3d_double_array(Nr,Nz,int(Ns+1),"qD");
     qD_0=create_2d_double_array(Nr,Nz, "qD_0");
 }

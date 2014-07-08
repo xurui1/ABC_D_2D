@@ -98,7 +98,7 @@ void qD_forward(){
             qD_0[i][j]=1.0;
             qD[i][j][0]=1.0;}}
     
-    for (s=0;s<=int(ND-1);s++){
+    for (s=0;s<=ND;s++){
         
         for (j=0;j<=int(Nz-1);j++){
             bDr[j]=0;}

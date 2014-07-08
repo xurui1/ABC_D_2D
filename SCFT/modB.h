@@ -100,7 +100,7 @@ void qB_forward(){
             qB_0[i][j]=1.0;
             qB[i][j][0]=1.0;}}
     
-    for (s=0;s<=int(NB-1);s++){
+    for (s=0;s<=NB;s++){
         
         for (j=0;j<=int(Nz-1);j++){
             bBr[j]=0;}
@@ -257,12 +257,12 @@ void qdagB_forward(){
     
     for (i=0;i<=int(Nr-1);i++){
         for (j=0;j<=int(Nz-1);j++){
-            qdagB[i][j][0]=qA[i][j][int(NA-1)]*qC[i][j][int(NC-1)];
-            qdagB_0[i][j]=(qA[i][j][int(NA-1)])*(qC[i][j][int(NC-1)]);
+            qdagB[i][j][0]=qA[i][j][NA]*qC[i][j][NC];
+            qdagB_0[i][j]=(qA[i][j][NA])*(qC[i][j][NC]);
         }
     }
     
-    for (s=0;s<=int(NB-1);s++){
+    for (s=0;s<=NB;s++){
         
         for (j=0;j<=int(Nz-1);j++){
             bBr[j]=0;

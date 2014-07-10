@@ -46,6 +46,7 @@ int main() {
     fracB=(double)NB/(double)(NA+NB+NC);
     fracC=(double)NC/(double)(NA+NB+NC);
     
+    
     create();
     
     f_int_0=0.0;
@@ -94,7 +95,8 @@ int main() {
 
         fE_homo();                               //Found in Energy
             
-        Vol=2.0*pi*(0.5*D_z*pow((D_r+r_0),2)-pow((r_0),2));
+        Vol=2*pi*(0.5*D_z*(pow((D_r+r_0),2)-pow((r_0),2)));
+        cout<< Vol<< endl;
         if (bilayer==1){Area=pi*(pow((D_r+r_0),2)-pow((r_0),2));}
         if (disk==1) {Area=pi*(pow((Tip_R+r_0),2)-pow((r_0),2));}
         
@@ -115,7 +117,7 @@ int main() {
             new_fields();                       //Set new interaction fields
             
             
-//            cout<< "fE: "<<(fE-fE_hom)*Vol/Area<< " Phi-star: "<<phiA+phiB+phiC<<" phi-D: "<< phiD<<" "<<iter<<endl;
+            cout<< "fE: "<<(fE-fE_hom)*Vol/Area<< " Phi-star: "<<phiA+phiB+phiC<<" phi-D: "<< phiD<<" "<<iter<<endl;
             
             if (abs((fE-fE_hom)*Vol/Area)>=(1.0e5) or isnan(fE)==true){cout<<"Free energy out of bounds";return 0;}
 
@@ -134,6 +136,7 @@ int main() {
         profile(2);
             
         if (bilayer==1 and once==1){break;}
+        if (disk==1 and once==1){break;}
         if ((disk==1) and (bilayer==1)) {break;}
         if ((disk==0) and (bilayer==0)){break;}
         if (disk==1){

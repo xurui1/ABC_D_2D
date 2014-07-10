@@ -10,55 +10,63 @@ void totalphi(){
 
     for (i=1; i<=int(Nr-2); i++){
         for (j=1; j<=int(Nz-2); j++){
-            phiA=phiA+(pA[i][j])*delr*(i*delr+r_0)*delz;
-            phiB=phiB+(pB[i][j])*delr*(i*delr+r_0)*delz;
-            phiC=phiC+(pC[i][j])*delr*(i*delr+r_0)*delz;
-            phiD=phiD+(pD[i][j])*delr*(i*delr+r_0)*delz;
+            phiA+=(pA[i][j])*delr*(i*delr+r_0)*delz;
+            phiB+=(pB[i][j])*delr*(i*delr+r_0)*delz;
+            phiC+=(pC[i][j])*delr*(i*delr+r_0)*delz;
+            phiD+=(pD[i][j])*delr*(i*delr+r_0)*delz;
         }}
     
     i=0;
     for (j=1; j<=int(Nz-2); j++){
-        phiA=phiA+0.5*(pA[i][j])*delr*(i*delr+r_0)*delz;
-        phiB=phiB+0.5*(pB[i][j])*delr*(i*delr+r_0)*delz;
-        phiC=phiC+0.5*(pC[i][j])*delr*(i*delr+r_0)*delz;
-        phiD=phiD+0.5*(pD[i][j])*delr*(i*delr+r_0)*delz;
+        phiA+=0.5*(pA[i][j])*delr*(i*delr+r_0)*delz;
+        phiB+=0.5*(pB[i][j])*delr*(i*delr+r_0)*delz;
+        phiC+=0.5*(pC[i][j])*delr*(i*delr+r_0)*delz;
+        phiD+=0.5*(pD[i][j])*delr*(i*delr+r_0)*delz;
     }
     
     i=int(Nr-1);
     for (j=1; j<=int(Nz-2); j++){
-        phiA=phiA+0.5*(pA[i][j])*delr*(i*delr+r_0)*delz;
-        phiB=phiB+0.5*(pB[i][j])*delr*(i*delr+r_0)*delz;
-        phiC=phiC+0.5*(pC[i][j])*delr*(i*delr+r_0)*delz;
-        phiD=phiD+0.5*(pD[i][j])*delr*(i*delr+r_0)*delz;
+        phiA+=0.5*(pA[i][j])*delr*(i*delr+r_0)*delz;
+        phiB+=0.5*(pB[i][j])*delr*(i*delr+r_0)*delz;
+        phiC+=0.5*(pC[i][j])*delr*(i*delr+r_0)*delz;
+        phiD+=0.5*(pD[i][j])*delr*(i*delr+r_0)*delz;
     }
     
     j=0;
     for (i=1; i<=int(Nr-2); i++){
-        phiA=phiA+0.5*(pA[i][j])*delr*(i*delr+r_0)*delz;
-        phiB=phiB+0.5*(pB[i][j])*delr*(i*delr+r_0)*delz;
-        phiC=phiC+0.5*(pC[i][j])*delr*(i*delr+r_0)*delz;
-        phiD=phiD+0.5*(pD[i][j])*delr*(i*delr+r_0)*delz;
+        phiA+=0.5*(pA[i][j])*delr*(i*delr+r_0)*delz;
+        phiB+=0.5*(pB[i][j])*delr*(i*delr+r_0)*delz;
+        phiC+=0.5*(pC[i][j])*delr*(i*delr+r_0)*delz;
+        phiD+=0.5*(pD[i][j])*delr*(i*delr+r_0)*delz;
     }
     
     j=int(Nz-1);
     for (i=1; i<=int(Nr-2); i++){
-        phiA=phiA+0.5*(pA[i][j])*delr*(i*delr+r_0)*delz;
-        phiB=phiB+0.5*(pB[i][j])*delr*(i*delr+r_0)*delz;
-        phiC=phiC+0.5*(pC[i][j])*delr*(i*delr+r_0)*delz;
-        phiD=phiD+0.5*(pD[i][j])*delr*(i*delr+r_0)*delz;
+        phiA+=0.5*(pA[i][j])*delr*(i*delr+r_0)*delz;
+        phiB+=0.5*(pB[i][j])*delr*(i*delr+r_0)*delz;
+        phiC+=0.5*(pC[i][j])*delr*(i*delr+r_0)*delz;
+        phiD+=0.5*(pD[i][j])*delr*(i*delr+r_0)*delz;
     }
     
-    phiA=phiA+0.25*delr*delz*((pA[0][0]*(double(0)*delr+r_0))+(pA[0][int(Nz-1)]*(double(0)*delr+r_0))+
-                              (pA[int(Nr-1)][0]*(double(Nr-1)*delr+r_0))+(pA[int(Nr-1)][int(Nz-1)]*(double(Nr-1)*delr+r_0)));
+    phiA+=0.25*delr*delz*((pA[0][0]*(double(0)*delr+r_0))+
+                              (pA[0][int(Nz-1)]*(double(0)*delr+r_0))+
+                              (pA[int(Nr-1)][0]*(double(Nr-1)*delr+r_0))+
+                              (pA[int(Nr-1)][int(Nz-1)]*(double(Nr-1)*delr+r_0)));
     
-    phiB=phiB+0.25*delr*delz*((pB[0][0]*(double(0)*delr+r_0))+(pB[0][int(Nz-1)]*(double(0)*delr+r_0))+
-                              (pB[int(Nr-1)][0]*(double(Nr-1)*delr+r_0))+(pB[int(Nr-1)][int(Nz-1)]*(double(Nr-1)*delr+r_0)));
+    phiB+=0.25*delr*delz*((pB[0][0]*(double(0)*delr+r_0))+
+                              (pB[0][int(Nz-1)]*(double(0)*delr+r_0))+
+                              (pB[int(Nr-1)][0]*(double(Nr-1)*delr+r_0))+
+                              (pB[int(Nr-1)][int(Nz-1)]*(double(Nr-1)*delr+r_0)));
     
-    phiC=phiC+0.25*delr*delz*((pC[0][0]*(double(0)*delr+r_0))+(pC[0][int(Nz-1)]*(double(0)*delr+r_0))+
-                              (pC[int(Nr-1)][0]*(double(Nr-1)*delr+r_0))+(pC[int(Nr-1)][int(Nz-1)]*(double(Nr-1)*delr+r_0)));
+    phiC+=0.25*delr*delz*((pC[0][0]*(double(0)*delr+r_0))+
+                            (pC[0][int(Nz-1)]*(double(0)*delr+r_0))+
+                              (pC[int(Nr-1)][0]*(double(Nr-1)*delr+r_0))+
+                              (pC[int(Nr-1)][int(Nz-1)]*(double(Nr-1)*delr+r_0)));
   
-    phiD=phiD+0.25*delr*delz*((pD[0][0]*(double(0)*delr+r_0))+(pD[0][int(Nz-1)]*(double(0)*delr+r_0))+
-                              (pD[int(Nr-1)][0]*(double(Nr-1)*delr+r_0))+(pD[int(Nr-1)][int(Nz-1)]*(double(Nr-1)*delr+r_0)));
+    phiD+=0.25*delr*delz*((pD[0][0]*(double(0)*delr+r_0))+
+                              (pD[0][int(Nz-1)]*(double(0)*delr+r_0))+
+                              (pD[int(Nr-1)][0]*(double(Nr-1)*delr+r_0))+
+                              (pD[int(Nr-1)][int(Nz-1)]*(double(Nr-1)*delr+r_0)));
     
 
     
@@ -68,7 +76,7 @@ void totalphi(){
     phiD=(2.0*pi*phiD)/Vol;
     
     ptot_in=phiA+phiB+phiC+phiD;
-    cout<<ptot_in<<" "<<phiA<<" "<<phiB<<" "<<phiC<<" "<<phiD<<endl;
+    //cout<<ptot_in<<" "<<phiA<<" "<<phiB<<" "<<phiC<<" "<<phiD<<endl;
 
     
 }
@@ -153,12 +161,7 @@ void phi(){
             pB[i][j]=exp(muABC)*(pB[i][j]);
             pC[i][j]=exp(muABC)*(pC[i][j]);
             pD[i][j]=exp(kappaD*muD)*(pD[i][j])/kappaD;
-            
-            /*pA[i][j]=1;
-            pB[i][j]=1;
-            pC[i][j]=1;
-            pD[i][j]=1;*/
-            
+
             
         }
     }

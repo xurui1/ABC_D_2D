@@ -11,16 +11,16 @@
 
 using namespace std;
 
-        int Nr=20,Nz=20,Ns=100;
+        int Nr=50,Nz=50,Ns=100;
         int D_r=5, D_z=11;                    //Box size in the r and z direction is Rg^2
         int NA=50.0,NB=50.0,NC=50.0,ND=100.0;
         const double pi = 3.14195265;
-        double delr,delz,delt,sig=0.001,sig2=0.001;
+        double delr,delz,delt,sig=0.01,sig2=0.01;
         double Q_ABC,Q_D,fE,fE_old;
         double xAB=30.0,xAC=30.0,xAD=0.0,xBC=0.0,xBD=30.0,xCD=30.0;
         double Vol;
         double Conv_w,Conv_p,dfffE,fE_hom;
-        double kappaD,fracA,fracB,fracC,muABC=0.0,muD=-1.0,r_0;
+        double kappaD,fracA,fracB,fracC,muABC=1.0,muD=-1.0,r_0;
         double XM[4][4];
         double phiABC_hom,phiD_hom;
         double ptot_in,phiA,phiB,phiC,phiD;

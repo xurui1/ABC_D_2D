@@ -30,6 +30,45 @@
 		79602078193F9B010037189E /* modC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modC.h; sourceTree = "<group>"; };
 		79602079193FA0510037189E /* modD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modD.h; sourceTree = "<group>"; };
 		7960207A193FA3D90037189E /* modphi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = modphi.h; sourceTree = "<group>"; };
+		79682D2F195892E200D427B0 /* .directory */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .directory; sourceTree = "<group>"; };
+		79682D30195892E200D427B0 /* a.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = a.dat; sourceTree = "<group>"; };
+		79682D31195892E200D427B0 /* ABCDE.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ABCDE.dat; sourceTree = "<group>"; };
+		79682D32195892E200D427B0 /* b.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = b.dat; sourceTree = "<group>"; };
+		79682D33195892E200D427B0 /* disk_freeE.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disk_freeE.dat; sourceTree = "<group>"; };
+		79682D34195892E200D427B0 /* fE_bilayer.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fE_bilayer.dat; sourceTree = "<group>"; };
+		79682D35195892E200D427B0 /* fE_disk.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fE_disk.dat; sourceTree = "<group>"; };
+		79682D36195892E200D427B0 /* omega.bilayer */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = omega.bilayer; sourceTree = "<group>"; };
+		79682D37195892E200D427B0 /* omega.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = omega.dat; sourceTree = "<group>"; };
+		79682D38195892E200D427B0 /* omega.disk */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = omega.disk; sourceTree = "<group>"; };
+		79682D3A195892E200D427B0 /* .directory */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .directory; sourceTree = "<group>"; };
+		79682D3C195892E200D427B0 /*     0.0000.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "    0.0000.dat"; sourceTree = "<group>"; };
+		79682D3D195892E200D427B0 /*     0.0208.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "    0.0208.dat"; sourceTree = "<group>"; };
+		79682D3E195892E200D427B0 /*     0.1793.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "    0.1793.dat"; sourceTree = "<group>"; };
+		79682D3F195892E200D427B0 /*     0.3023.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "    0.3023.dat"; sourceTree = "<group>"; };
+		79682D40195892E200D427B0 /*    -0.0102.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "   -0.0102.dat"; sourceTree = "<group>"; };
+		79682D41195892E200D427B0 /* phi.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = phi.dat; sourceTree = "<group>"; };
+		79682D42195892E200D427B0 /* phi1Dr.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = phi1Dr.dat; sourceTree = "<group>"; };
+		79682D43195892E200D427B0 /* phi1Dz.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = phi1Dz.dat; sourceTree = "<group>"; };
+		79682D44195892E200D427B0 /* phitotscan.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = phitotscan.dat; sourceTree = "<group>"; };
+		79682D45195892E200D427B0 /* profile1.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = profile1.dat; sourceTree = "<group>"; };
+		79682D46195892E200D427B0 /* profile4.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = profile4.dat; sourceTree = "<group>"; };
+		79682D48195892E200D427B0 /* .directory */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .directory; sourceTree = "<group>"; };
+		79682D49195892E200D427B0 /* bilayer_M100_N100.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bilayer_M100_N100.dat; sourceTree = "<group>"; };
+		79682D4A195892E200D427B0 /* bilayer_M200_N200.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bilayer_M200_N200.dat; sourceTree = "<group>"; };
+		79682D4B195892E200D427B0 /* bilayer_M50_N50.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bilayer_M50_N50.dat; sourceTree = "<group>"; };
+		79682D4C195892E200D427B0 /* bilayer_M50_N50_origin.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bilayer_M50_N50_origin.dat; sourceTree = "<group>"; };
+		79682D4D195892E200D427B0 /* bilayer_M70_N70.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bilayer_M70_N70.dat; sourceTree = "<group>"; };
+		79682D4E195892E200D427B0 /* circ.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = circ.dat; sourceTree = "<group>"; };
+		79682D4F195892E200D427B0 /* disk_M100_N100.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disk_M100_N100.dat; sourceTree = "<group>"; };
+		79682D50195892E200D427B0 /* disk_M200_N200.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disk_M200_N200.dat; sourceTree = "<group>"; };
+		79682D51195892E200D427B0 /* disk_M50_N50.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disk_M50_N50.dat; sourceTree = "<group>"; };
+		79682D52195892E200D427B0 /* disk_M50_N50.dat_muC */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disk_M50_N50.dat_muC; sourceTree = "<group>"; };
+		79682D53195892E200D427B0 /* disk_M50_N50_origin.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disk_M50_N50_origin.dat; sourceTree = "<group>"; };
+		79682D54195892E200D427B0 /* disk_M70_N70.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = disk_M70_N70.dat; sourceTree = "<group>"; };
+		79682D55195892E200D427B0 /* trace.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trace.dat; sourceTree = "<group>"; };
+		79682D56195892E200D427B0 /* xyz.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = xyz.dat; sourceTree = "<group>"; };
+		79682D8B196473BF00D427B0 /* growing_C.dat */ = {isa = PBXFileReference; lastKnownFileType = text; path = growing_C.dat; sourceTree = "<group>"; };
+		79682D8C19672A2700D427B0 /* profile.dat */ = {isa = PBXFileReference; lastKnownFileType = text; path = profile.dat; sourceTree = "<group>"; };
 		796DBE70193CFD7F001B7A97 /* xmatrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = xmatrix.h; sourceTree = "<group>"; };
 		796DBE71193D0015001B7A97 /* fields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fields.h; sourceTree = "<group>"; };
 		796DBE74193D08F6001B7A97 /* Q_partition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Q_partition.h; sourceTree = "<group>"; };
@@ -56,6 +95,76 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		79682D2E195892E200D427B0 /* results */ = {
+			isa = PBXGroup;
+			children = (
+				79682D2F195892E200D427B0 /* .directory */,
+				79682D30195892E200D427B0 /* a.dat */,
+				79682D31195892E200D427B0 /* ABCDE.dat */,
+				79682D32195892E200D427B0 /* b.dat */,
+				79682D33195892E200D427B0 /* disk_freeE.dat */,
+				79682D34195892E200D427B0 /* fE_bilayer.dat */,
+				79682D35195892E200D427B0 /* fE_disk.dat */,
+				79682D36195892E200D427B0 /* omega.bilayer */,
+				79682D37195892E200D427B0 /* omega.dat */,
+				79682D38195892E200D427B0 /* omega.disk */,
+				79682D39195892E200D427B0 /* outphi */,
+				79682D41195892E200D427B0 /* phi.dat */,
+				79682D42195892E200D427B0 /* phi1Dr.dat */,
+				79682D43195892E200D427B0 /* phi1Dz.dat */,
+				79682D44195892E200D427B0 /* phitotscan.dat */,
+				79682D45195892E200D427B0 /* profile1.dat */,
+				79682D46195892E200D427B0 /* profile4.dat */,
+				79682D47195892E200D427B0 /* shapes */,
+				79682D55195892E200D427B0 /* trace.dat */,
+				79682D56195892E200D427B0 /* xyz.dat */,
+				79682D8B196473BF00D427B0 /* growing_C.dat */,
+			);
+			path = results;
+			sourceTree = "<group>";
+		};
+		79682D39195892E200D427B0 /* outphi */ = {
+			isa = PBXGroup;
+			children = (
+				79682D3A195892E200D427B0 /* .directory */,
+				79682D3B195892E200D427B0 /* profile */,
+				79682D8C19672A2700D427B0 /* profile.dat */,
+			);
+			path = outphi;
+			sourceTree = "<group>";
+		};
+		79682D3B195892E200D427B0 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				79682D3C195892E200D427B0 /*     0.0000.dat */,
+				79682D3D195892E200D427B0 /*     0.0208.dat */,
+				79682D3E195892E200D427B0 /*     0.1793.dat */,
+				79682D3F195892E200D427B0 /*     0.3023.dat */,
+				79682D40195892E200D427B0 /*    -0.0102.dat */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
+		79682D47195892E200D427B0 /* shapes */ = {
+			isa = PBXGroup;
+			children = (
+				79682D48195892E200D427B0 /* .directory */,
+				79682D49195892E200D427B0 /* bilayer_M100_N100.dat */,
+				79682D4A195892E200D427B0 /* bilayer_M200_N200.dat */,
+				79682D4B195892E200D427B0 /* bilayer_M50_N50.dat */,
+				79682D4C195892E200D427B0 /* bilayer_M50_N50_origin.dat */,
+				79682D4D195892E200D427B0 /* bilayer_M70_N70.dat */,
+				79682D4E195892E200D427B0 /* circ.dat */,
+				79682D4F195892E200D427B0 /* disk_M100_N100.dat */,
+				79682D50195892E200D427B0 /* disk_M200_N200.dat */,
+				79682D51195892E200D427B0 /* disk_M50_N50.dat */,
+				79682D52195892E200D427B0 /* disk_M50_N50.dat_muC */,
+				79682D53195892E200D427B0 /* disk_M50_N50_origin.dat */,
+				79682D54195892E200D427B0 /* disk_M70_N70.dat */,
+			);
+			path = shapes;
+			sourceTree = "<group>";
+		};
 		79999AC3192E2F6E00F83B8F = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +184,7 @@
 		79999ACE192E2F6E00F83B8F /* SCFT */ = {
 			isa = PBXGroup;
 			children = (
+				79682D2E195892E200D427B0 /* results */,
 				79999ACF192E2F6E00F83B8F /* main.cpp */,
 				79A955661933C9B00044A006 /* global.h */,
 				796DBE70193CFD7F001B7A97 /* xmatrix.h */,

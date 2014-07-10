@@ -29,8 +29,8 @@ void FreeEnergy(){
             
             for (ii=0; ii<=3; ii++){
                 for (jj=0;jj<=3; jj++){
-                    F1=F1+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz;}
-                FF1=FF1+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz;}
+                    F1=F1+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*((i*delr)+(r_0))*delz;}
+                FF1=FF1+p_vect[ii]*w_vect[ii]*delr*((i*delr)+(r_0))*delz;}
             }
         }
 
@@ -55,8 +55,8 @@ void FreeEnergy(){
             
             for (ii=0; ii<=3; ii++){
                 for (jj=0;jj<=3; jj++){
-                    F2=F2+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
-                FF2=FF2+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
+                    F2=F2+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*((i*delr)+(r_0))*delz*0.5;}
+                FF2=FF2+p_vect[ii]*w_vect[ii]*delr*((i*delr)+(r_0))*delz*0.5;}
         }
     
     /*******************Side 2*****************************/
@@ -80,8 +80,8 @@ void FreeEnergy(){
             
             for (ii=0; ii<=3; ii++){
                 for (jj=0;jj<=3; jj++){
-                    F3=F3+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
-                FF3=FF3+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
+                    F3=F3+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*((i*delr)+(r_0))*delz*0.5;}
+                FF3=FF3+p_vect[ii]*w_vect[ii]*delr*((i*delr)+(r_0))*delz*0.5;}
         }
     
     /***************************************Side 3*****************************/
@@ -105,8 +105,8 @@ void FreeEnergy(){
         
         for (ii=0; ii<=3; ii++){
             for (jj=0;jj<=3; jj++){
-                F4=F4+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
-            FF4=FF4+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
+                F4=F4+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*((i*delr)+(r_0))*delz*0.5;}
+            FF4=FF4+p_vect[ii]*w_vect[ii]*delr*((i*delr)+(r_0))*delz*0.5;}
     }
     
     /*******************************************Side 4*****************************/
@@ -130,8 +130,8 @@ void FreeEnergy(){
         
         for (ii=0; ii<=3; ii++){
             for (jj=0;jj<=3; jj++){
-                F5=F5+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
-            FF5=FF5+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.5;}
+                F5=F5+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*((i*delr)+(r_0))*delz*0.5;}
+            FF5=FF5+p_vect[ii]*w_vect[ii]*delr*((i*delr)+(r_0))*delz*0.5;}
         
     }
     /********************************Corner 1******************************************/
@@ -154,8 +154,8 @@ void FreeEnergy(){
     
     for (ii=0;ii<=3;ii++){
         for (jj=ii;jj<=3;jj++){
-            F6=F6+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.25;}
-        FF6=FF6+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.25;
+            F6=F6+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*((i*delr)+(r_0))*delz*0.25;}
+        FF6=FF6+p_vect[ii]*w_vect[ii]*delr*((i*delr)+(r_0))*delz*0.25;
         }
     /********************************Corner 2******************************************/
     
@@ -177,8 +177,8 @@ void FreeEnergy(){
     
     for (ii=0;ii<=3;ii++){
         for (jj=ii;jj<=3;jj++){
-            F7=F7+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.25;}
-        FF7=FF7+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.25;
+            F7=F7+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*((i*delr)+(r_0))*delz*0.25;}
+        FF7=FF7+p_vect[ii]*w_vect[ii]*delr*((i*delr)+(r_0))*delz*0.25;
     }
     /********************************Corner 3******************************************/
     
@@ -200,8 +200,8 @@ void FreeEnergy(){
     
     for (ii=0;ii<=3;ii++){
         for (jj=ii;jj<=3;jj++){
-            F8=F8+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.25;}
-        FF8=FF8+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.25;
+            F8=F8+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*((i*delr)+(r_0))*delz*0.25;}
+        FF8=FF8+p_vect[ii]*w_vect[ii]*delr*((i*delr)+(r_0))*delz*0.25;
     }
     /********************************Corner 4******************************************/
     
@@ -223,8 +223,8 @@ void FreeEnergy(){
     
     for (ii=0;ii<=3;ii++){
         for (jj=ii;jj<=3;jj++){
-            F9=F9+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*(((i-1)*delr)+(r_0))*delz*0.25;}
-        FF9=FF9+p_vect[ii]*w_vect[ii]*delr*(((i-1)*delr)+(r_0))*delz*0.25;
+            F9=F9+p_vect[ii]*p_vect[jj]*XM[ii][jj]*delr*((i*delr)+(r_0))*delz*0.25;}
+        FF9=FF9+p_vect[ii]*w_vect[ii]*delr*((i*delr)+(r_0))*delz*0.25;
     }
     /******************Time to calculate the free energy!*******************************/
     
@@ -240,7 +240,7 @@ void FreeEnergy(){
 }
 
 
-double fE_homo(){
+void fE_homo(){
     
     int i,j;
     double pA_ave,pB_ave,pC_ave,pD_ave;
@@ -270,12 +270,12 @@ double fE_homo(){
     wC_ave=xAC*pA_ave+xBC*pB_ave+xCD*pD_ave+eta_ave;
     wD_ave=xAD*pA_ave+xBD*pB_ave+xCD*pC_ave+eta_ave;
     
-    for (i=1; i<=10000; i++){
+    for (i=1; i<=10000000; i++){
         eta_ave=eta_ave-0.05*(1.0-(pA_ave+pB_ave+pC_ave+pD_ave));
         
-        pA_ave=(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))*(1.0-fracB-fracC);
-        pB_ave=(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))*(1.0-fracA-fracC);
-        pC_ave=(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))*(1.0-fracA-fracB);
+        pA_ave=(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))*(fracA);
+        pB_ave=(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))*(fracB);
+        pC_ave=(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))*(fracC);
         pD_ave=exp(kappaD*(muD-wD_ave));
         
         dwA_ave=(xAB*pB_ave+xAC*pC_ave+xAD*pD_ave+eta_ave)-wA_ave;
@@ -313,7 +313,6 @@ double fE_homo(){
     
     fE_hom=f_int-f_omeg-(exp(muABC-wA_ave*fracA-wB_ave*fracB-wC_ave*fracC))-(exp(kappaD*(muD-wD_ave))/kappaD);
     
-    return fE_hom;
 }
 
 

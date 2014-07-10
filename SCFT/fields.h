@@ -28,7 +28,6 @@ void rand_field(int initial){
                         wC[i][j]=wC[i][j]+(2.0*unifRand()-1.0)*1.0;
                         wD[i][j]=wB[i][j]+(2.0*unifRand()-1.0)*1.0;
                     }
-                    
                 }
                 myfile.close();
             }
@@ -51,7 +50,7 @@ void rand_field(int initial){
                 fstream myfile;
                 myfile.open("results/shapes/disk_M50_N50.dat");
                 for (i=0;i<=int(Nr-1);i++) {
-                    for (j=1;j<=int(Nz-1);j++){
+                    for (j=0;j<=int(Nz-1);j++){
                         myfile << dummy<<wA[i][j]<<wB[i][j]<<wC[i][j]<<wD[i][j];
                         wA[i][j]=wA[i][j]+(2.0*unifRand()-1.0)*1.0;
                         wB[i][j]=wB[i][j]+(2.0*unifRand()-1.0)*1.0;
@@ -65,7 +64,7 @@ void rand_field(int initial){
                 fstream myfile;
                 myfile.open("results/omega.bilayer");
                 for (i=0;i<=int(Nr-1);i++) {
-                    for (j=1;j<=int(Nz-1);j++){
+                    for (j=0;j<=int(Nz-1);j++){
                         myfile << dummy<<wA[i][j]<<wB[i][j]<<wC[i][j]<<wD[i][j];
                         wA[i][j]=wA[i][j]+(2.0*unifRand()-1.0)*1.0;
                         wB[i][j]=wB[i][j]+(2.0*unifRand()-1.0)*1.0;
@@ -157,5 +156,5 @@ void pressure2(){
     int i,j;
     i=int(Ntip-1);
     j=int(Mtip-1);
-    eta2[i][j]=eta2[i][j]-10*((pA[i][j]+pD[i][j])-(pB[i][j]+pC[i][j]));
+    eta2[i][j]=eta2[i][j]-10*((pA[i][j])-(pB[i][j]+pC[i][j]));
 }

@@ -116,14 +116,14 @@ void write_data(){
         myfile.open("results/omega.disk");
         for (i=0;i<=Nr-1;i++){
             for (j=0;j<=Nz-1;j++){
-                myfile<<i<<" "<<j<<" "<<wA[i][j]<<" "<<wB[i][j]<<" "<<wC[i][j]<<" "<<wD[i][j]<<endl;}}
+                myfile<<i*delr<<" "<<j*delz<<" "<<wA[i][j]<<" "<<wB[i][j]<<" "<<wC[i][j]<<" "<<wD[i][j]<<endl;}}
         myfile.close();}
     
     if (bilayer==1){
         myfile.open("results/omega.bilayer");
         for (i=0;i<=Nr-1;i++){
             for (j=0;j<=Nz-1;j++){
-                myfile<<i<<" "<<j<<" "<<wA[i][j]<<" "<<wB[i][j]<<" "<<wC[i][j]<<" "<<wD[i][j]<<endl;}}
+                myfile<<i*delr<<" "<<j*delz<<" "<<wA[i][j]<<" "<<wB[i][j]<<" "<<wC[i][j]<<" "<<wD[i][j]<<endl;}}
         myfile.close();}
     
 }

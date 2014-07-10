@@ -40,7 +40,7 @@ void Destroy(){
 
 void create(){
     eta =create_2d_double_array(Nr,Nz, "eta");             //incompressibility condition
-    dpp =create_2d_double_array(Nr,Nz, "dpp");             //not sure what dpp is used for (update w fields?)
+    dpp =create_2d_double_array(Nr,Nz, "dpp");             //used to update omega field
     eta2 =create_2d_double_array(Nr,Nz, "eta2");           //pinning condition
     
     wA=create_2d_double_array(Nr,Nz, "wA");                //interaction potential of chain A

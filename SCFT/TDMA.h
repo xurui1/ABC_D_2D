@@ -3,15 +3,15 @@ double TDMA(const size_t N_in, const double DiagL_in[], const double Diag_in[], 
     
     /* Allocate scratch space. */
     double* c = (double*)malloc(sizeof(double) * N_in);
-    
-    //double* d = (double*)malloc(sizeof(double) * N_in);
+    double* d = (double*)malloc(sizeof(double) * N_in);
+
     
     if (!c) {
         cout<< "TDMA error"<< endl;
     }
     
     c[0] = DiagU_in[0] / Diag_in[0];
-    b_in[0] = b_in[0] / Diag_in[0];
+    d[0] = b_in[0] / Diag_in[0];
     
     /* loop from 1 to N - 1 inclusive */
     for (i = 1; i <= int(N_in-1); i++) {

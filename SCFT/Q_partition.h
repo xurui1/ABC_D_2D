@@ -31,13 +31,13 @@ double Q_partition(){
         Q_D=Q_D+0.5*(qD[i][j][0])*((i*delr)+(r_0))*delr*delz;
     }
     
-    Q_ABC=Q_ABC+0.25*delr*delz*(qdagB[0][0][NB]*(double(0)*delr+r_0)+
-                                qdagB[0][int(Nz-1)][NB]*(double(0)*delr+r_0)+
+    Q_ABC=Q_ABC+0.25*delr*delz*(qdagB[0][0][NB]*(double(0.0)*delr+r_0)+
+                                qdagB[0][int(Nz-1)][NB]*(double(0.0)*delr+r_0)+
                                 qdagB[int(Nr-1)][0][NB]*(double(Nr-1)*delr+(r_0))+
                                 qdagB[int(Nr-1)][int(Nz-1)][NB]*(double(Nr-1)*delr+(r_0)));
     
-    Q_D=Q_D+0.25*delr*delz*(qD[0][0][ND]*(double(0)*delr+r_0)+
-                            qD[0][int(Nz-1)][ND]*(double(0)*delr+r_0)+
+    Q_D=Q_D+0.25*delr*delz*(qD[0][0][ND]*(double(0.0)*delr+r_0)+
+                            qD[0][int(Nz-1)][ND]*(double(0.0)*delr+r_0)+
                             qD[int(Nr-1)][0][ND]*(double(Nr-1)*delr+(r_0))+
                             qD[int(Nr-1)][int(Nz-1)][ND]*(double(Nr-1)*delr+(r_0)));
 

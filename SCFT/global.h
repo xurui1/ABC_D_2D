@@ -11,9 +11,9 @@
 
 using namespace std;
 
-        int Nr=20,Nz=20,Ns=100;
+        int Nr=50,Nz=50,Ns=50;
         int D_r=5, D_z=11;                    //Box size in the r and z direction is Rg^2
-        int NA=20.0,NB=20.0,NC=20.0,ND=100.0;
+        int NA=50.0,NB=50.0,NC=50.0,ND=100.0;
         const double pi = 3.14195265;
         double delr,delz,delt,sig=0.01,sig2=0.01;
         double Q_ABC,Q_D,fE,fE_old;

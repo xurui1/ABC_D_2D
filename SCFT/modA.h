@@ -256,8 +256,10 @@ void qA_forward(){
         
         for (i=0;i<=int(Nr-1);i++){
             for (j=0;j<=int(Nz-1);j++){
-                qdagA[i][j][0]=qB[i][j][NB]*qC[i][j][NC];
-                qdagA_0[i][j]=qB[i][j][NB]*qC[i][j][NC];
+                qdagA[i][j][0]=(qB[i][j][NB])*(qC[i][j][NC]);
+                cout<<"qB: "<<qB[i][j][NB]<<" qC: "<<qC[i][j][NC]<< " qdagA:"<< qdagA[i][j][0]<<endl;
+                qdagA_0[i][j]=(qB[i][j][NB])*(qC[i][j][NC]);
+                //cout<<qdagA_0[i][j]<<endl;
             }
         }
         

@@ -270,7 +270,7 @@ void qdagB_forward(){
         
         /********************************scan over z***********************************************/
         for (i=0;i<=int(Nr-1);i++){
-            B_Matrix_r(i,DiagBr,DiagBLr,DiagBUr);
+            B_Matrix_r(i,DiagBz,DiagBLz,DiagBUz);
             if (i==0){
                 for (j=0;j<=int(Nz-1);j++){
                     gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wB[i][j]);

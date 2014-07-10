@@ -9,8 +9,8 @@ void rand_field(int initial){
 
     int i,j,dummy;
     srand((unsigned)time(NULL));
-    cout<<unifRand()<<endl;
-    cout<<unifRand()<<endl;
+   // cout<<unifRand()<<endl; making sure random number generator is working
+   // cout<<unifRand()<<endl;
 
     
     //This is for reading the initial omega fields from a files.

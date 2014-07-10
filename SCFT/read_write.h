@@ -158,10 +158,10 @@ void profile(int msg){
         myfile.open("results/xyz.dat");
         ct=0.0;
         for (i=0;i<=Nr-1;i++){
-            px=(((i-1)*delr+r_0))*cos(ct);
-            py=(((i-1)*delr+r_0))*sin(ct);
-            pz=(i-1)*delz;
-            myfile<<ct<<(i-1)*delr<<" "<<(i-1)*delz;
+            px=((i*delr+r_0))*cos(ct);
+            py=((i*delr+r_0))*sin(ct);
+            pz=i*delz;
+            myfile<<ct<<i*delr<<" "<<i*delz;
         }
         myfile.close();
         myfile.open("results/ABCD.dat");

@@ -96,7 +96,7 @@ int main() {
         fE_homo();                               //Found in Energy
             
         Vol=2*pi*(0.5*D_z*(pow((D_r+r_0),2)-pow((r_0),2)));
-        cout<< Vol<< endl;
+        //cout<< Vol<< endl;
         if (bilayer==1){Area=pi*(pow((D_r+r_0),2)-pow((r_0),2));}
         if (disk==1) {Area=pi*(pow((Tip_R+r_0),2)-pow((r_0),2));}
         

@@ -1,53 +1,53 @@
 
 
-void D_Matrix_z(int ii,double *DiagDr, double *DiagDLr, double *DiagDUr){
+void D_Matrix_r(int ii,double *DiagDz, double *DiagDLz, double *DiagDUz){
     
     int i;
     
     for (i=0;i<=int(Nr-1);i++){
-        DiagDr[i]=0;}
+        DiagDz[i]=0;}
     for (i=0;i<=int(Nr-2);i++){
-        DiagDUr[i]=0;
-        DiagDLr[i]=0;}
+        DiagDUz[i]=0;
+        DiagDLz[i]=0;}
     
     
     for (i=0; i<=int(Nr-1); i++){
-        DiagDr[i]=1.0+(delt/(pow(delr,2)))+((delt/4.0)*wD[i][ii]);}
+        DiagDz[i]=1.0+(delt/(pow((double)delr,(int)2)))+((delt/2.0)*wD[i][ii]);}
     for (i=1; i<=int(Nr-2);i++){
-        DiagDUr[i]=-(delt/(2.0*pow(delr,2)))-(delt/(((delr*i)+r_0)*4.0*delr));}
+        DiagDUz[i]=-(delt/(2.0*pow((double)delr,(int)2)))-(delt/(((delr*(i-1))+r_0)*4.0*delr));}
     for (i=0; i<=int(Nr-3);i++){
-        DiagDLr[i]=-(delt/(2.0*pow((double) delr,(int)2)))+(delt/(((delr*i)+r_0)*4.0*delr));}
+        DiagDLz[i]=-(delt/(2.0*pow((double) delr,(int)2)))+(delt/(((delr*(i+1-1))+r_0)*4.0*delr));}
     
     //Corners are different due to the 0 order boundary condition used
     
-    DiagDUr[0]=-(delt/(2.0*pow(delr,2)))-(delt/(((delr*(0))+r_0)*4.0*delr))
-    -(delt/(2.0*pow(delr,2)))+(delt/(((delr*(0))+r_0)*4.0*delr));
+    DiagDUz[0]=-(delt/(2.0*pow((double)delr,(int)2)))-(delt/(((delr*(1-1))+r_0)*4.0*delr))
+    -(delt/(2.0*pow((double)delr,(int)2)))+(delt/(((delr*(1-1))+r_0)*4.0*delr));
     
-    DiagDLr[int(Nr-2)]=-(delt/(2.0*pow(delr,2)))-(delt/(((delr*(int(Nr-2)))+r_0)*4.0*delr))
-    -(delt/(2.0*pow(delr,2)))+(delt/(((delr*(int(Nr-2)))+r_0)*4.0*delr));
+    DiagDLz[int(Nr-2)]=-(delt/(2.0*pow((double)delr,(int)2)))-(delt/(((delr*(int(Nr-1)))+r_0)*4.0*delr))
+    -(delt/(2.0*pow((double)delr,(int)2)))+(delt/(((delr*(int(Nr-1)))+r_0)*4.0*delr));
     
 }
 
-void D_Matrix_r(int ii,double *DiagDz,double *DiagDLz, double *DiagDUz){
+void D_Matrix_z(int ii,double *DiagDr,double *DiagDLr, double *DiagDUr){
     
     int j;
     
     for (j=0;j<=int(Nz-1);j++){
-        DiagDz[j]=0;}
+        DiagDr[j]=0;}
     for (j=0;j<=int(Nz-2);j++){
-        DiagDUz[j]=0;
-        DiagDLz[j]=0;}
+        DiagDUr[j]=0;
+        DiagDLr[j]=0;}
     
     
     for (j=0; j<=int(Nz-1); j++){
-        DiagDz[j]=1.0+delt/(pow((double)delz,(int)2));}
+        DiagDr[j]=1.0+delt/(pow((double)delz,(int)2));}
     for (j=1; j<=int(Nz-2); j++){
-        DiagDUz[j]=-delt/(2.0*pow((double)delz,(int)2));}
+        DiagDUr[j]=-delt/(2.0*pow((double)delz,(int)2));}
     for (j=0; j<=int(Nz-3); j++){
-        DiagDLz[j]=-delt/(2.0*pow((double)delz,(int)2));}
+        DiagDLr[j]=-delt/(2.0*pow((double)delz,(int)2));}
     
-    DiagDUz[0]=2.0*DiagDUz[0];
-    DiagDLz[int(Nz-2)]=2.0*DiagDLz[int(Nz-2)];
+    DiagDUr[0]=2.0*DiagDUr[0];
+    DiagDLr[int(Nz-2)]=2.0*DiagDLr[int(Nz-2)];
     
 }
 
@@ -101,89 +101,89 @@ void qD_forward(){
     for (s=0;s<=int(ND-1);s++){
         
         for (j=0;j<=int(Nz-1);j++){
-            bDz[j]=0;}
+            bDr[j]=0;}
         
         /********************************scan over z***********************************************/
         for (i=0;i<=int(Nr-1);i++){
-            D_Matrix_r(i,DiagDz,DiagDLz,DiagDUz);
+            D_Matrix_z(i,DiagDr,DiagDLr,DiagDUr);
             if (i==0){
                 for (j=0;j<=int(Nz-1);j++){
-                    gamma=1.0-(delt/(pow(delr,2)))-((delt/2.0)*wD[i][j]);
-                    betaL=(delt/(2.0*pow(delr,2)))-(delt/(((i*delr)+(r_0))*4.0*delr));
-                    betaU=(delt/(2.0*pow(delr,2)))+(delt/(((i*delr)+(r_0))*4.0*delr));
-                    bDz[j]=gamma*qD_0[i][j]+betaU*qD_0[int(i+1)][j]+betaL*qD_0[int(i+1)][j];}
+                    gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wD[i][j]);
+                    betaL=(delt/(2.0*pow((double)delr,(int)2)))-(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    bDr[j]=gamma*qD_0[i][j]+betaU*qD_0[int(i+1)][j]+betaL*qD_0[int(i+1)][j];}
             }
             else if (i==int(Nr-1)){
                 for (j=0;j<=int(Nz-1);j++){
-                    gamma=1.0-(delt/(pow(delr,2)))-((delt/2.0)*wD[i][j]);
-                    betaL=(delt/(2.0*pow(delr,2)))-(delt/(((i*delr)+(r_0))*4.0*delr));
-                    betaU=(delt/(2.0*pow(delr,2)))+(delt/(((i*delr)+(r_0))*4.0*delr));
-                    bDz[j]=gamma*qD_0[i][j]+betaU*qD_0[int(i-1)][j]+betaL*qD_0[int(i-1)][j];}
+                    gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wD[i][j]);
+                    betaL=(delt/(2.0*pow((double)delr,(int)2)))-(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    bDr[j]=gamma*qD_0[i][j]+betaU*qD_0[int(i-1)][j]+betaL*qD_0[int(i-1)][j];}
             }
             else {
                 for (j=0;j<=int(Nz-1);j++){
-                    gamma=1.0-(delt/(pow(delr,2)))-((delt/2.0)*wD[i][j]);
-                    betaL=(delt/(2.0*pow(delr,2)))-(delt/(((i*delr)+(r_0))*4.0*delr));
-                    betaU=(delt/(2.0*pow(delr,2)))+(delt/(((i*delr)+(r_0))*4.0*delr));
-                    bDz[j]=gamma*qD_0[i][j]+betaU*qD_0[int(i+1)][j]+betaL*qD_0[int(i-1)][j];}
+                    gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wD[i][j]);
+                    betaL=(delt/(2.0*pow((double)delr,(int)2)))-(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    bDr[j]=gamma*qD_0[i][j]+betaU*qD_0[int(i+1)][j]+betaL*qD_0[int(i-1)][j];}
             }
             for (j=0;j<=int(Nz-1);j++){
-                DiagDzdz[j]=DiagDz[j];}
+                DiagDrdr[j]=DiagDr[j];}
             for (j=0;j<=int(Nz-2);j++){
-                DiagDUzdz[j]=DiagDUz[j];
-                DiagDLzdz[j]=DiagDLz[j];}
+                DiagDUrdr[j]=DiagDUr[j];
+                DiagDLrdr[j]=DiagDLr[j];}
             
-            TDMA(Nz,DiagDLzdz,DiagDzdz,DiagDUzdz,bDz);
+            TDMA(Nz,DiagDLrdr,DiagDrdr,DiagDUrdr,bDr);
             
             for (j=0; j<=int(Nz-1); j++){
-                qD[i][j][s]=bDz[j];}
+                qD[i][j][s]=bDr[j];}
         }
         
         for (j=0;j<=int(Nz-1);j++){
-            bDz[j]=0;}
+            bDr[j]=0;}
         
         for (i=0;i<=(Nr-1);i++){
             for (j=0; j<=int(Nz-1); j++){
                 qD_0[i][j]=qD[i][j][s];}}
         
         for (i=0;i<=int(Nr-1);i++){
-            bDr[i]=0;}
+            bDz[i]=0;}
         
         /***********************************scan over r***************************************************/
         for (j=0;j<=int(Nz-1);j++){
-            D_Matrix_z(j,DiagDr,DiagDLr,DiagDUr);
+            D_Matrix_r(j,DiagDz,DiagDLz,DiagDUz);
             if (j==0){
                 for (i=0;i<=int(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bDr[i]=gamma*qD_0[i][j]+beta*qD_0[i][int(j+1)]+beta*qD_0[i][int(j+1)];}
+                    bDz[i]=gamma*qD_0[i][j]+beta*qD_0[i][int(j+1)]+beta*qD_0[i][int(j+1)];}
             }
             else if (j==int(Nz-1)){
                 for (i=0;i<=int(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bDr[i]=gamma*qD_0[i][j]+beta*qD_0[i][int(j-1)]+beta*qD_0[i][int(j-1)];}
+                    bDz[i]=gamma*qD_0[i][j]+beta*qD_0[i][int(j-1)]+beta*qD_0[i][int(j-1)];}
             }
             else {
                 for (i=0;i<=int(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bDr[i]=gamma*qD_0[i][j]+beta*qD_0[i][int(j+1)]+beta*qD_0[i][int(j-1)];}
+                    bDz[i]=gamma*qD_0[i][j]+beta*qD_0[i][int(j+1)]+beta*qD_0[i][int(j-1)];}
             }
             for (i=0;i<=int(Nr-1);i++){
-                DiagDrdr[i]=DiagDr[i];}
+                DiagDzdz[i]=DiagDz[i];}
             for (i=0;i<=int(Nr-2);i++){
-                DiagDUrdr[i]=DiagDUr[i];
-                DiagDLrdr[i]=DiagDLr[i];}
+                DiagDUzdz[i]=DiagDUz[i];
+                DiagDLzdz[i]=DiagDLz[i];}
             
-            TDMA(Nr,DiagDLrdr,DiagDrdr,DiagDUrdr,bDr);
+            TDMA(Nr,DiagDLzdz,DiagDzdz,DiagDUzdz,bDz);
             
             for (i=0; i<=int(Nr-1); i++){
-                qD[i][j][s]=bDr[i];}
+                qD[i][j][s]=bDz[i];}
         }
         
         for (i=0;i<=int(Nr-1);i++){
-            bDr[i]=0;
+            bDz[i]=0;
         }
         
         for (i=0;i<=int(Nr-1);i++){

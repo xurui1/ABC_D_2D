@@ -1,54 +1,55 @@
 
 
-void C_Matrix_z(int ii,double *DiagCr, double *DiagCLr, double *DiagCUr){
+
+void C_Matrix_r(int ii,double *DiagCz, double *DiagCLz, double *DiagCUz){
     
     
     int i;
     
     for (i=0;i<=int(Nr-1);i++){
-        DiagCr[i]=0;}
+        DiagCz[i]=0;}
     for (i=0;i<=int(Nr-2);i++){
-        DiagCUr[i]=0;
-        DiagCLr[i]=0;}
+        DiagCUz[i]=0;
+        DiagCLz[i]=0;}
     
     
     for (i=0; i<=int(Nr-1); i++){
-        DiagCr[i]=1.0+(delt/(pow(delr,2)))+((delt/4.0)*wC[i][ii]);}
+        DiagCz[i]=1.0+(delt/(pow((double)delr,(int)2)))+((delt/2.0)*wC[i][ii]);}
     for (i=1; i<=int(Nr-2);i++){
-        DiagCUr[i]=-(delt/(2.0*pow(delr,2)))-(delt/(((delr*i)+r_0)*4.0*delr));}
+        DiagCUz[i]=-(delt/(2.0*pow((double)delr,(int)2)))-(delt/(((delr*(i-1))+r_0)*4.0*delr));}
     for (i=0; i<=int(Nr-3);i++){
-        DiagCLr[i]=-(delt/(2.0*pow((double) delr,(int)2)))+(delt/(((delr*i)+r_0)*4.0*delr));}
+        DiagCLz[i]=-(delt/(2.0*pow((double) delr,(int)2)))+(delt/(((delr*(i+1-1))+r_0)*4.0*delr));}
     
     //Corners are different due to the 0 order boundary condition used
     
-    DiagCUr[0]=-(delt/(2.0*pow(delr,2)))-(delt/(((delr*(0))+r_0)*4.0*delr))
-    -(delt/(2.0*pow(delr,2)))+(delt/(((delr*(0))+r_0)*4.0*delr));
+    DiagCUz[0]=-(delt/(2.0*pow((double)delr,(int)2)))-(delt/(((delr*(-1))+r_0)*4.0*delr))
+    -(delt/(2.0*pow((double)delr,(int)2)))+(delt/(((delr*(-1))+r_0)*4.0*delr));
     
-    DiagCLr[Nr-2]=-(delt/(2.0*pow(delr,2)))-(delt/(((delr*(int(Nr-2)))+r_0)*4.0*delr))
-    -(delt/(2.0*pow(delr,2)))+(delt/(((delr*(int(Nr-2)))+r_0)*4.0*delr));
+    DiagCLz[Nr-2]=-(delt/(2.0*pow((double)delr,(int)2)))-(delt/(((delr*(int(Nr-2)))+r_0)*4.0*delr))
+    -(delt/(2.0*pow((double)delr,(int)2)))+(delt/(((delr*(int(Nr-2)))+r_0)*4.0*delr));
 
 }
 
-void C_Matrix_r(int ii,double *DiagCz, double *DiagCLz, double *DiagCUz){
+void C_Matrix_z(int ii,double *DiagCr, double *DiagCLr, double *DiagCUr){
     
     int j;
     
     for (j=0;j<=int(Nz-1);j++){
-        DiagCz[j]=0;}
+        DiagCr[j]=0;}
     for (j=0;j<=int(Nz-2);j++){
-        DiagCUz[j]=0;
-        DiagCLz[j]=0;}
+        DiagCUr[j]=0;
+        DiagCLr[j]=0;}
     
     
     for (j=0; j<=int(Nz-1); j++){
-        DiagCz[j]=1.0+delt/(pow((double)delz,(int)2));}
+        DiagCr[j]=1.0+delt/(pow((double)delz,(int)2));}
     for (j=1; j<=int(Nz-2); j++){
-        DiagCUz[j]=-delt/(2.0*pow((double)delz,(int)2));}
+        DiagCUr[j]=-delt/(2.0*pow((double)delz,(int)2));}
     for (j=0; j<=int(Nz-3); j++){
-        DiagCLz[j]=-delt/(2.0*pow((double)delz,(int)2));}
+        DiagCLr[j]=-delt/(2.0*pow((double)delz,(int)2));}
     
-    DiagCUz[0]=2.0*DiagCUz[0];
-    DiagCLz[int(Nz-2)]=2.0*DiagCLz[int(Nz-2)];
+    DiagCUr[0]=2.0*DiagCUr[0];
+    DiagCLr[int(Nz-2)]=2.0*DiagCLr[int(Nz-2)];
     
 }
 
@@ -104,46 +105,46 @@ void qC_forward(){
     for (s=0;s<=int(NC-1);s++){
         
         for (j=0;j<=int(Nz-1);j++){
-            bCz[j]=0;}
+            bCr[j]=0;}
         
         /********************************scan over z***********************************************/
         for (i=0;i<=int(Nr-1);i++){
-            C_Matrix_r(i,DiagCz,DiagCLz,DiagCUz);
+            C_Matrix_z(i,DiagCr,DiagCLr,DiagCUr);
             if (i==0){
                 for (j=0;j<=int(Nz-1);j++){
-                    gamma=1.0-(delt/(pow(delr,2)))-((delt/2.0)*wC[i][j]);
-                    betaL=(delt/(2.0*pow(delr,2)))-(delt/(((i*delr)+(r_0))*4.0*delr));
-                    betaU=(delt/(2.0*pow(delr,2)))+(delt/(((i*delr)+(r_0))*4.0*delr));
-                    bCz[j]=gamma*qC_0[i][j]+betaU*qC_0[int(i+1)][j]+betaL*qC_0[int(i+1)][j];}
+                    gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wC[i][j]);
+                    betaL=(delt/(2.0*pow((double)delr,(int)2)))-(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    bCr[j]=gamma*qC_0[i][j]+betaU*qC_0[int(i+1)][j]+betaL*qC_0[int(i+1)][j];}
             }
             else if (i==(Nr-1)){
                 for (j=0;j<=int(Nz-1);j++){
-                    gamma=1.0-(delt/(pow(delr,2)))-((delt/2.0)*wC[i][j]);
-                    betaL=(delt/(2.0*pow(delr,2)))-(delt/(((i*delr)+(r_0))*4.0*delr));
-                    betaU=(delt/(2.0*pow(delr,2)))+(delt/(((i*delr)+(r_0))*4.0*delr));
-                    bCz[j]=gamma*qC_0[i][j]+betaU*qC_0[int(i-1)][j]+betaL*qC_0[int(i-1)][j];}
+                    gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wC[i][j]);
+                    betaL=(delt/(2.0*pow((double)delr,(int)2)))-(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    bCr[j]=gamma*qC_0[i][j]+betaU*qC_0[int(i-1)][j]+betaL*qC_0[int(i-1)][j];}
             }
             else {
                 for (j=0;j<=int(Nz-1);j++){
-                    gamma=1.0-(delt/(pow(delr,2)))-((delt/2.0)*wC[i][j]);
-                    betaL=(delt/(2.0*pow(delr,2)))-(delt/(((i*delr)+(r_0))*4.0*delr));
-                    betaU=(delt/(2.0*pow(delr,2)))+(delt/(((i*delr)+(r_0))*4.0*delr));
-                    bCz[j]=gamma*qC_0[i][j]+betaU*qC_0[int(i+1)][j]+betaL*qC_0[int(i-1)][j];}
+                    gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wC[i][j]);
+                    betaL=(delt/(2.0*pow((double)delr,(int)2)))-(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    bCr[j]=gamma*qC_0[i][j]+betaU*qC_0[int(i+1)][j]+betaL*qC_0[int(i-1)][j];}
             }
             for (j=0;j<=int(Nz-1);j++){
-                DiagCzdz[j]=DiagCz[j];}
+                DiagCrdr[j]=DiagCr[j];}
             for (j=0;j<=int(Nz-2);j++){
-                DiagCUzdz[j]=DiagCUz[j];
-                DiagCLzdz[j]=DiagCLz[j];}
+                DiagCUrdr[j]=DiagCUr[j];
+                DiagCLrdr[j]=DiagCLr[j];}
             
-            TDMA(Nz,DiagCLzdz,DiagCzdz,DiagCUzdz,bCz);
+            TDMA(Nz,DiagCLrdr,DiagCrdr,DiagCUrdr,bCr);
             
             for (j=0; j<=int(Nz-1); j++){
-                qC[i][j][s]=bCz[j];}
+                qC[i][j][s]=bCr[j];}
             
         }
         for (j=0;j<=int(Nz-1);j++){
-            bCz[j]=0;
+            bCr[j]=0;
         }
         
         for (i=0;i<=int(Nr-1);i++){
@@ -152,43 +153,43 @@ void qC_forward(){
         }
         
         for (i=0;j<=int(Nr-1);i++){
-            bCr[i]=0;
+            bCz[i]=0;
         }
         /***********************************scan over r***************************************************/
         for (j=0;j<=int(Nz-1);j++){
-            C_Matrix_z(j,DiagCr,DiagCLr,DiagCUr);
+            C_Matrix_r(j,DiagCz,DiagCLz,DiagCUz);
             if (j==0){
                 for (i=0;i<=int(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bCr[i]=gamma*qC_0[i][j]+beta*qC_0[i][int(j+1)]+beta*qC_0[i][int(j+1)];}
+                    bCz[i]=gamma*qC_0[i][j]+beta*qC_0[i][int(j+1)]+beta*qC_0[i][int(j+1)];}
             }
             else if (j==int(Nz-1)){
                 for (i=0;i<=int(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bCr[i]=gamma*qC_0[i][j]+beta*qC_0[i][int(j-1)]+beta*qC_0[i][int(j-1)];}
+                    bCz[i]=gamma*qC_0[i][j]+beta*qC_0[i][int(j-1)]+beta*qC_0[i][int(j-1)];}
             }
             else {
                 for (i=0;i<=int(Nr-1);i++){
                     gamma=1.0-(delt/(pow((double)delz,(int)2)));
                     beta=(delt/(2.0*pow((double)delz,(int)2)));
-                    bCr[i]=gamma*qC_0[i][j]+beta*qC_0[i][int(j+1)]+beta*qC_0[i][int(j-1)];}
+                    bCz[i]=gamma*qC_0[i][j]+beta*qC_0[i][int(j+1)]+beta*qC_0[i][int(j-1)];}
             }
             for (i=0;i<=int(Nr-1);i++){
-                DiagCrdr[i]=DiagCr[i];}
+                DiagCzdz[i]=DiagCz[i];}
             for (i=0;i<=int(Nr-2);i++){
-                DiagCUrdr[i]=DiagCUr[i];
-                DiagCLrdr[i]=DiagCLr[i];}
+                DiagCUzdz[i]=DiagCUz[i];
+                DiagCLzdz[i]=DiagCLz[i];}
             
-            TDMA(Nr,DiagCLrdr,DiagCrdr,DiagCUrdr,bCr);
+            TDMA(Nr,DiagCLzdz,DiagCzdz,DiagCUzdz,bCz);
             
             for (i=0; i<=int(Nr-1); i++){
-                qC[i][j][s]=bCr[i];}
+                qC[i][j][s]=bCz[i];}
         }
         
         for (i=0;i<=int(Nr-1);i++){
-            bCr[i]=0;
+            bCz[i]=0;
         }
         
         for (i=0;i<=int(Nr-1);i++){
@@ -258,57 +259,57 @@ void qdagC_forward(){
     
     for (i=0;i<=int(Nr-1);i++){
         for (j=0;j<=int(Nz-1);j++){
-            qdagC[i][j][0]=qA[i][j][NA]*qB[i][j][NB];
-            qdagC_0[i][j]=(qA[i][j][NA])*(qB[i][j][NB]);
+            qdagC[i][j][0]=qA[i][j][int(NA-1)]*qB[i][j][int(NB-1)];
+            qdagC_0[i][j]=(qA[i][j][int(NA-1)])*(qB[i][j][int(NB-1)]);
         }
     }
     
     for (s=0;s<=int(NC-1);s++){
         
         for (j=0;j<=int(Nz-1);j++){
-            bCz[j]=0;
+            bCr[j]=0;
             
         }
         
         /********************************scan over z***********************************************/
         for (i=0;i<=int(Nr-1);i++){
-            C_Matrix_r(i,DiagCz,DiagCLz,DiagCUz);
+            C_Matrix_z(i,DiagCr,DiagCLr,DiagCUr);
             if (i==0){
                 for (j=0;j<=int(Nz-1);j++){
-                    gamma=1.0-(delt/(pow(delr,2)))-((delt/2.0)*wC[i][j]);
-                    betaL=(delt/(2.0*pow(delr,2)))-(delt/(((i*delr)+(r_0))*4.0*delr));
-                    betaU=(delt/(2.0*pow(delr,2)))+(delt/(((i*delr)+(r_0))*4.0*delr));
-                    bCz[j]=gamma*qdagC_0[i][j]+betaU*qdagC_0[int(i+1)][j]+betaL*qdagC_0[int(i+1)][j];}
+                    gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wC[i][j]);
+                    betaL=(delt/(2.0*pow((double)delr,(int)2)))-(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    bCr[j]=gamma*qdagC_0[i][j]+betaU*qdagC_0[int(i+1)][j]+betaL*qdagC_0[int(i+1)][j];}
             }
             else if (i==int(Nr-1)){
                 for (j=0;j<=int(Nz-1);j++){
-                    gamma=1.0-(delt/(pow(delr,2)))-((delt/2.0)*wC[i][j]);
-                    betaL=(delt/(2.0*pow(delr,2)))-(delt/(((i*delr)+(r_0))*4.0*delr));
-                    betaU=(delt/(2.0*pow(delr,2)))+(delt/(((i*delr)+(r_0))*4.0*delr));
-                    bCz[j]=gamma*qdagC_0[i][j]+betaU*qdagC_0[int(i-1)][j]+betaL*qdagC_0[int(i-1)][j];}
+                    gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wC[i][j]);
+                    betaL=(delt/(2.0*pow((double)delr,(int)2)))-(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    bCr[j]=gamma*qdagC_0[i][j]+betaU*qdagC_0[int(i-1)][j]+betaL*qdagC_0[int(i-1)][j];}
             }
             else {
                 for (j=0;j<=int(Nz-1);j++){
-                    gamma=1.0-(delt/(pow(delr,2)))-((delt/2.0)*wC[i][j]);
-                    betaL=(delt/(2.0*pow(delr,2)))-(delt/(((i*delr)+(r_0))*4.0*delr));
-                    betaU=(delt/(2.0*pow(delr,2)))+(delt/(((i*delr)+(r_0))*4.0*delr));
-                    bCz[j]=gamma*qdagC_0[i][j]+betaU*qdagC_0[int(i+1)][j]+betaL*qdagC_0[int(i-1)][j];}
+                    gamma=1.0-(delt/(pow((double)delr,(int)2)))-((delt/2.0)*wC[i][j]);
+                    betaL=(delt/(2.0*pow((double)delr,(int)2)))-(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    betaU=(delt/(2.0*pow((double)delr,(int)2)))+(delt/((((i-1)*delr)+(r_0))*4.0*delr));
+                    bCr[j]=gamma*qdagC_0[i][j]+betaU*qdagC_0[int(i+1)][j]+betaL*qdagC_0[int(i-1)][j];}
             }
             for (j=0;j<=int(Nz-1);j++){
-                DiagCzdz[j]=DiagCz[j];}
+                DiagCrdr[j]=DiagCr[j];}
             for (j=0;j<=int(Nz-2);j++){
-                DiagCUzdz[j]=DiagCUz[j];
-                DiagCLzdz[j]=DiagCLz[j];}
+                DiagCUrdr[j]=DiagCUr[j];
+                DiagCLrdr[j]=DiagCLr[j];}
             
-            TDMA(Nz,DiagCLzdz,DiagCzdz,DiagCUzdz,bCz);
+            TDMA(Nz,DiagCLrdr,DiagCrdr,DiagCUrdr,bCr);
             
             for (j=0; j<=int(Nz-1); j++){
-                qdagC[i][j][s]=bCz[j];}
+                qdagC[i][j][s]=bCr[j];}
             
         }
         
         for (i=0;i<=int(Nr-1);i++){
-            bCz[j]=0;
+            bCr[j]=0;
         }
         
         for (i=0;i<=int(Nr-1);i++){
@@ -318,43 +319,43 @@ void qdagC_forward(){
     }
     
     for (i=0;i<=int(Nr-1);i++){
-        bCr[i]=0;
+        bCz[i]=0;
     }
     /***********************************scan over r***************************************************/
     for (j=0;j<=int(Nz-1);j++){
-        C_Matrix_z(j,DiagCr,DiagCLr,DiagCUr);
+        C_Matrix_r(j,DiagCz,DiagCLz,DiagCUz);
         if (j==0){
             for (i=0;i<=int(Nr-1);i++){
                 gamma=1.0-(delt/(pow((double)delz,(int)2)));
                 beta=(delt/(2.0*pow((double)delz,(int)2)));
-                bCr[i]=gamma*qdagC_0[i][j]+beta*qdagC_0[i][int(j+1)]+beta*qdagC_0[i][int(j+1)];}
+                bCz[i]=gamma*qdagC_0[i][j]+beta*qdagC_0[i][int(j+1)]+beta*qdagC_0[i][int(j+1)];}
         }
         else if (j==int(Nz-1)){
             for (i=0;i<=int(Nz-1);i++){
                 gamma=1.0-(delt/(pow((double)delz,(int)2)));
                 beta=(delt/(2.0*pow((double)delz,(int)2)));
-                bCr[i]=gamma*qdagC_0[i][j]+beta*qdagC_0[i][int(j-1)]+beta*qdagC_0[i][int(j-1)];}
+                bCz[i]=gamma*qdagC_0[i][j]+beta*qdagC_0[i][int(j-1)]+beta*qdagC_0[i][int(j-1)];}
         }
         else {
             for (i=0;i<=int(Nr-1);i++){
                 gamma=1.0-(delt/(pow((double)delz,(int)2)));
                 beta=(delt/(2.0*pow((double)delz,(int)2)));
-                bCr[i]=gamma*qdagC_0[i][j]+beta*qdagC_0[i][int(j+1)]+beta*qdagC_0[i][int(j-1)];}
+                bCz[i]=gamma*qdagC_0[i][j]+beta*qdagC_0[i][int(j+1)]+beta*qdagC_0[i][int(j-1)];}
         }
         for (i=0;i<=int(Nr-1);i++){
-            DiagCrdr[i]=DiagCr[i];}
+            DiagCzdz[i]=DiagCz[i];}
         for (i=0;i<=int(Nr-2);i++){
-            DiagCUrdr[i]=DiagCUr[i];
-            DiagCLrdr[i]=DiagCLr[i];}
+            DiagCUzdz[i]=DiagCUz[i];
+            DiagCLzdz[i]=DiagCLz[i];}
         
-        TDMA(Nr,DiagCLrdr,DiagCrdr,DiagCUrdr,bCr);
+        TDMA(Nr,DiagCLzdz,DiagCzdz,DiagCUzdz,bCz);
         
         for (i=0; i<=int(Nr-1); i++){
-            qdagC[i][j][s]=bCr[i];}
+            qdagC[i][j][s]=bCz[i];}
     }
     
     for (i=0;i<=int(Nr-1);i++){
-        bCr[i]=0;
+        bCz[i]=0;
     }
     
     for (i=0;i<=int(Nr-1);i++){

@@ -1,0 +1,19 @@
+5.0 
+11.0                  # D_r,D_z
+50 
+50                          # Nr, Nz
+50 
+50 
+100                      # NA,NB,NC
+50                             # ND
+0.05 
+0.05                  # sig sig2 these are conv
+30.0 
+0.0 
+30.0            # xAB,xAC,xAD
+30.0 
+0.0                   # xBC,xBD
+0.0 
+30.0                   # xCD
+0.0  
+-4.596                # muAB muC
